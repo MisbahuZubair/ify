@@ -29,8 +29,28 @@ class Welcome extends CI_Controller {
     public function show($id)
     {   
         $data['bill'] = $this->Bill->get($id);
+        $data['comments'] =$this->Bill->get_comments('Bill_'.$id.'_Comments');
+        if ($this->session->userdata('logged')==TRUE)
+        {
+            $data['user_id'] = $this->session->userdata('id');
+            $this->load->helper('form');
+        if($_POST)
+        {
+                    
+            $comment = $this->input->post('comment');
+            
+            $new_data['comment'] = $comment;
+            
+            
+            $this->Bill->addComment($new_data, $id);
+            
+        }
+        }
+        
+        //add user detail, votes and comments
         $this->load->view('billDetail',$data);
     }
+
     
 
     /*public function edit($id)

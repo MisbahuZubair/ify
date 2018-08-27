@@ -14,6 +14,12 @@ class Bill extends CI_Model
         return $query->row_array();
     }
     
+    public function get_comments($id)
+    {
+        $query = $this->db->query("SELECT * from ".$id."");
+        return $query->result();
+    }
+    
     public function update($id,$new_data)
     {
         $this->db->where(['id' => $id]);
@@ -36,4 +42,8 @@ class Bill extends CI_Model
         $result_set =$this->db->get('bills');
         return $result_set->result_array(); 
     }
+     public function addComment($new_data, $id)
+    {
+        $this->db->insert('Bill_'.$id.'_Comments', $new_data);
+     }
 }

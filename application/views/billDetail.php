@@ -36,8 +36,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="card-body"><?php echo $bill['bill_summary']?> </div>
                 <div class="card-body"><?php echo $bill['bill_facts']?> </div>
               </div>
+        </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-success active btn-block"> Yes</button>
+        </div>
+        <div class="col-lg-6 ">
+            <button type="button" class="btn btn-danger disabled btn-block">No</button>
+        </div>
+    </div>
+    
+     <?php echo form_open_multipart(''); ?>
+    <div class="form-group">
+    <label for="inputlg">Comment</label>
+    <input class="form-control input-lg" id="comment" type="text">
+  </div>
+    <div class="form-group">
+        <input class="button" type="submit" value="Save"/>
+
     </div>
     <br/>
+    
   </div>
 </body>
 </html>

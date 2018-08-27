@@ -29,18 +29,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div> --> 
 <div class="container">
     
-    <?php 
-        echo form_open();
-    echo form_label('Usernsame');
-    echo form_input('username');
-    echo '<br/>';
-    echo form_label('Password');
-    echo form_input('password');
-    echo '<br/>';
-    echo form_submit('login', 'Login');
-    echo form_close();
-    ?>
-
+    <?php if (isset($_SESSION['success'])) { ?>
+    <div class="alert alert-success"> <?php echo $_SESSION['success']; ?> </div>
+    <?php } ?>
+    
+    <?php echo validation_errors('<div class="alert alert-danger">', '</div>');?> 
+    <form action="" method="POST">
+    
+    <div class ="form-group">
+        <label for="username" class="label-default">Username:</label>
+        <input class="form-control" name="username" id="username" type="text">
+    </div>
+    
+    <div class ="form-group">
+        <label for="password" class="label-default">Password:</label>
+        <input class="form-control" name="password" id="password" type="password">
+    </div>
+        
+    <div class ="text-center">
+        <button class="btn btn-primary" name='register' >Login</button>
+    </div>
+    
+    </form>
 </div>
 </body>
 </html>

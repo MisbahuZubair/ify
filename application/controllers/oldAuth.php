@@ -3,57 +3,32 @@ class Auth extends CI_Controller
 {
     public function login()
     {
-        $validation = array(
-            array('field' => 'username', 'rules' => 'required'),
-            array('field' => 'password', 'rules' => 'required'),
-        );
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
         
-        $this->form_validation->set_rules($validation);
-        if($this->form_validation->run() == true){
-            $user_post =$this->input->post('username');
-            $pass_post =$this->input->post('password');
+        if($this->form_validation->run() ==TRUE){
+            $username = $_POST['username'];
+            $password = $_POST['password'];
             
-            if($this->resolve_user_login($user_post, $pass_post)){
-                $id = $this->_get_user_ID_from_username($user_post);
-                $name =$this->_get_name_from_username($user_post);
+            $this->db->select('*');
+        $this->db->where('username', $username);
+        $this->db->where('pwd', $password);
+        $query = $this->db->get('users');
+        $num = $query->num_rows();
+        if($query->num_rows == 1)
+        {
+          $row = $query->row();
+            $this->session->set_flashdata("success", "You are logged in");
                 
-                $create_session = array(
-                    'logged' => TRUE,
-                    'id' => $id,
-                    'name' => $name);
+                $_SESSION['user_logged']= TRUE;
+                $_SESSION['username']=$user->username;
                 
-                
-                $this->session->set_userdata($create_session);
-                redirect('user/profile');
-                
+               redirect("user/profile", "refresh"); 
+            } else {
+            $this->session->set_flashdata("error", "No such account exists") ; 
             }
-        }
-         
+            }
         $this->load->view('login');
-    }
-    
-    private function  resolve_user_login($username, $password){
-        $this->db->where('username', $username);
-        $hash = $this->db->get('users')->row('pwd');
-        return $this->verify_password_hash($password,$hash);
-    }
-    
-    private function _get_user_ID_from_username($username){
-        $this->db->select('id');
-        $this->db->from('users');
-        $this->db->where('username', $username);
-        return $this->db->get()->row('id');
-    }
-    
-     private function _get_name_from_username($username){
-        $this->db->select('firstname');
-        $this->db->from('users');
-        $this->db->where('username', $username);
-        return $this->db->get()->row('firstname');
-    }
-    
-    private function verify_password_hash($password, $hash){
-        return password_verify($password, $hash);
     }
     
     public function register()
@@ -74,7 +49,7 @@ class Auth extends CI_Controller
                 
                 $data =array(
                     'username' => $_POST['username'],
-                    'pwd' => password_hash($_POST['password'], PASSWORD_BCRYPT),
+                    'pwd' => md5($_POST['password']),
                     'email' => $_POST['email'],
                     'firstname' => $_POST['firstname'],
                     'lastname' => $_POST['lastname'],

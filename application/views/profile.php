@@ -29,11 +29,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div> --> 
 <div class="container">
     
-    <?php if (isset($_SESSION['success'])) { ?>
-    <div class="alert alert-success"> <?php echo $_SESSION['success']; ?> </div>
+    <?php if ($this->session->userdata('logged')==TRUE) { ?>
+    <div class="alert alert-success">  </div>
     <?php } ?>
     
-    Hello, <?php echo $_SESSION['username'];?>
+    Hello, <?php echo $this->session->userdata('id'); echo '</br>'; echo $this->session->userdata('name'); ?>
     
     
 </div>

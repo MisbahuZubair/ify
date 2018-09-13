@@ -11,35 +11,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  
+  <style>
+  img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  padding:0;
+	}
+</style>
 </head>
 <body> 
- <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow" style="box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);">
-      <h5 class="my-0 mr-md-auto font-weight-normal">Assemblify</h5>
-      <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#">Bills</a>
-        <a class="p-2 text-dark" href="#">Senate</a>
-        <a class="p-2 text-dark" href="#">House</a>
-        <a class="p-2 text-dark" href="#">Issues</a>
-      </nav>
-      <a class="btn btn-outline-success" href="#">Log In</a>
+<nav class="navbar navbar-expand-md  navbar-dark bg-success" style="margin-bottom: 20px;">
+  <a class="navbar-brand" href="#">Assemblify Admin Dashboard </a>
+</nav>
+<div class="container">
+    <?php echo form_open_multipart(''); ?>
+    <div class="form-group">
+        <label>Username</label>
+        <input type = "text" class ="form-control " name="username" required/>
+    </div>
+    
+    <div class="form-group">
+        <label>Password</label>
+        <input type = "password" class ="form-control " name="password" required/>
     </div>
 
-    <!--<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h4 class="display-4">Make your voice heard</h4>
-    </div> --> 
-<div class="container">
-    
-    <?php 
-        echo form_open();
-    echo form_label('Usernsame');
-    echo form_input('username');
-    echo '<br/>';
-    echo form_label('Password');
-    echo form_input('password');
-    echo '<br/>';
-    echo form_submit('login', 'Login');
-    echo form_close();
-    ?>
+       <button type="submit" class="btn btn-success">Login</button>
 
 </div>
 </body>

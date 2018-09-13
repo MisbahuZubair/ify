@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php foreach ($pair as $item) { ?>
             <div class="card">
                 <div class="card-body"> <img src ="<?php echo site_url('application/uploads/').$item['bill_img']?>" /></div>
-                <div class="card-body"><?php echo $item['bill_number']?> <?php echo $item['bill_title']?><hr/> <span class= "sponsor"><?php echo $item['bill_sponsor']?> </span></div>
+                <div class="card-body"><?php echo $item['bill_number']?> <?php echo $item['bill_title']?><hr/> <span class= "sponsor"><?php echo $item['name']?> </span></div>
                 
                  
                 <a class=" btn btn-success"  href="<?php echo site_url('Welcome/show/'.$item['id']);?>" role="button">Link</a>

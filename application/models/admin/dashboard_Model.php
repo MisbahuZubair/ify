@@ -1,11 +1,27 @@
 <?php
-class Manage_Bill extends CI_Model
+class dashboard_Model extends CI_Model
 {
     public function __construct()
     {
         parent::__construct();
         $this->db = $this->load->database('default', TRUE);
     }
+    
+    
+    public function delete($id, $name){
+        unlink('./application/uploads/'.$name.'.jpg');
+        $sql = "DELETE from bills 
+                WHERE bills.id=".$id."";
+        $query = $this->db->query($sql);
+        
+        redirect('/admin/dashboard', 'refresh');
+    }
+    
+    
+    public function getLegistlators() { 
+        $result = $this->db->select('id, name')->get('legistlators')->result_array(); 
+        return $result; 
+    }     
     
     public function get($id)
     {
@@ -18,24 +34,18 @@ class Manage_Bill extends CI_Model
     {
         $this->db->where(['id' => $id]);
         $this->db->update('bills', $new_data);
+        redirect('/admin/dashboard', 'refresh');
     }
     
      public function addComment($new_data, $id)
     {
         $this->db->insert('Bill_'.$id.'_Comments', $new_data);
      }
+    
      public function add($new_data)
     {
         $this->db->insert('bills', $new_data);
-        $billid = $this->db->insert_id();
-        
-        $sql = "CREATE TABLE `assemblify`.`Bill_".$billid."_Comments` (
-           `user_fname` text NOT NULL,
-  `user_lname` text NOT NULL,
-  `comment` text,
-  `vote` tinyint(1) DEFAULT NULL,
-  `id` int(11) NOT NULL)";
-        $query = $this->db->query($sql);
+        redirect('/admin/dashboard', 'refresh');
     }
     
      public function edit($new_data)

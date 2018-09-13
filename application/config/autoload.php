@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Bill', 'ahrammomi/Manage_Bill');
+$autoload['model'] = array('bills_Model', 'admin/dashboard_Model');

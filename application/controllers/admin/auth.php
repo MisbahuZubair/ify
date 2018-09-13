@@ -1,5 +1,5 @@
 <?php
-class Auth extends CI_Controller
+class auth extends CI_Controller
 {
     public function login()
     {
@@ -12,31 +12,34 @@ class Auth extends CI_Controller
         if($this->form_validation->run() == true){
             $user_post =$this->input->post('username');
             $pass_post =$this->input->post('password');
-            
             if($this->resolve_user_login($user_post, $pass_post)){
                 $id = $this->_get_user_ID_from_username($user_post);
                 $name =$this->_get_name_from_username($user_post);
-                
                 $create_session = array(
                     'logged' => TRUE,
-                    'id' => $id,
-                    'name' => $name);
+                    'name' => $username);
                 
                 
                 $this->session->set_userdata($create_session);
-                redirect('user/profile');
+                redirect('admin/dashboard');
                 
             }
         }
-         
+        
         $this->load->view('login');
     }
+     private function  resolve_user_login($username, $password){
+        $this->db->where('username', $username);
+        $pass = $this->db->get('users')->row('pwd');
+        if($pass == $password)return true;
+        else return false;
+    }
     
-    private function  resolve_user_login($username, $password){
+    /*private function  resolve_user_login($username, $password){
         $this->db->where('username', $username);
         $hash = $this->db->get('users')->row('pwd');
         return $this->verify_password_hash($password,$hash);
-    }
+    }*/
     
     private function _get_user_ID_from_username($username){
         $this->db->select('id');
@@ -92,6 +95,13 @@ class Auth extends CI_Controller
         }
         $this->load->view('register');
     }
+    
+    public function logout(){
+        $this->session->unset_userdata('logged');
+        $this->session->unset_userdata('id');
+        $this->session->unset_userdata('name');
+        $this->session->sess_destroy();
+        redirect('bills');
+    }
 }
- 
 ?>

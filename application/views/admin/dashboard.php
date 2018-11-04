@@ -75,11 +75,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
 
     
-    </div>
+    </div></div>
     <br/>
     <?php } ?>
 
-  </div>
+  
     </div>
     
     <footer class="footer" style="bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;">

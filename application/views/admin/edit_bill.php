@@ -70,6 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     
         <select class ="form-control" name="billSponsor" id="billSponsor" >
+<option disabled selected value> </option>
           <?php foreach($legistlators as $rep):?>
               <option value="<?php echo $rep['id']?>" <?php if ($bill['bill_sponsor']==$rep['id']) echo "selected" ?>>
                   <?php echo $rep['name']?>
@@ -123,8 +124,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="form-group">
         <label>Status</label>
          <select class ="form-control" name="billStatus" id="billStatus">
-              <option value="Passed" <?php if ($bill['bill_status']=='Passed') echo "selected" ?>>Passed</option>
              <option value="In consideration" <?php if ($bill['bill_status']=='In consideration') echo "selected" ?>>In Consideration</option>
+              <option value="Passed" <?php if ($bill['bill_status']=='Passed') echo "selected" ?>>Passed</option>
              <option value="Thrown out"<?php if ($bill['bill_status']=='Thrown out') echo "selected" ?>>Thrown Out</option>
         </select>
     </div>
@@ -142,7 +143,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         
     <div class="form-group">
         <label>Reffered to:</label>
-        <input type = "textarea" name="billCommittee" value ="<?php echo $bill['bill_committee']?>"/>
+       <select class ="form-control" name="billCommittee" id="billCommittee">
+          <?php foreach($committees as $com):?>
+              <option value="<?php echo $com['id']?>" <?php if ($bill['bill_committee']==$com['id']) echo "selected" ?>>
+                  <?php echo $com['com_name']?>
+              </option>
+          <?php endforeach;?>
+        </select>
     </div>
     
     <div class="form-group">

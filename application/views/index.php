@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b8c4e19f365de0011fdf5a3&product=inline-share-buttons' async='async'></script>
   <title>Assemblify</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,31 +48,84 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!--<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h4 class="display-4">Make your voice heard</h4>
     </div> --> 
+
 <div class="container">
-    <?php foreach(array_chunk($bills, 2) as $pair) { ?>
-	<div class="row" style="margin-bottom: 20px">
-        <div class="col-lg-6">
-             <div class="card-deck" style ="text-align:center">
-                <?php foreach ($pair as $item) { ?>
-                    <div class="card">
-                        <div class="card-body" style="padding:0"> <img src ="<?php echo site_url('application/uploads/').$item['bill_img']?>" /></div>
-                        <div class="card-body" style="padding:0"> <?php echo $item['bill_question']?></div> <hr/> 
-                        <div class="card-body" style="padding:0"> <?php echo $item['bill_number']?> <?php echo $item['bill_title']?>" </div>
-                        <a class=" btn btn-success"  href="<?php echo site_url('bills/display/'.$item['id']);?>" role="button">Link</a>
-                      </div>
-                <?php } ?> 
-            </div>
-        </div>
-    </div>
-    <?php } ?>
-    </div>	  
+    <div id="load_data"></div>
+    <div id="load_data_message"></div>
+</div>	  
+
 	
-<footer class="footer" style="bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;">
+<footer class="footer" style="bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;text-align:center">
       <div class="container">
-        <span class="text-muted">© 2018 Copyright: Assemblify.</span>
-		<span class="text-muted" style="float:right">Powered by Tinqe</span>
+        <P class="text-muted" style="float:center">© 2018 Assemblify. Powered by Tinqe</p>
       </div>
 </footer>
 
 </body>
+    <script>
+  $(document).ready(function(){
+
+    var limit = 8;
+    var start = 0;
+    var action = 'inactive';
+
+    function lazzy_loader(limit)
+    {
+      var output = '';
+      for(var count=0; count<limit; count++)
+      {
+        output += '<div class="post_data">';
+        output += '<p><span class="content-placeholder" style="width:100%; height: 30px;">&nbsp;</span></p>';
+        output += '<p><span class="content-placeholder" style="width:100%; height: 100px;">&nbsp;</span></p>';
+        output += '</div>';
+      }
+      $('#load_data_message').html(output);
+    }
+
+    lazzy_loader(limit);
+
+    function load_data(limit, start)
+    {
+      $.ajax({
+        url:"<?php echo base_url(); ?>bills/fetch",
+        method:"POST",
+        data:{limit:limit, start:start},
+        cache: false,
+        success:function(data)
+        {
+          if(data == '')
+          {
+            $('#load_data_message').html('<h3>No More Result Found</h3>');
+            action = 'active';
+          }
+          else
+          {
+            $('#load_data').append(data);
+            $('#load_data_message').html("");
+            action = 'inactive';
+          }
+        }
+      })
+    }
+
+    if(action == 'inactive')
+    {
+      action = 'active';
+      load_data(limit, start);
+    }
+
+    $(window).scroll(function(){
+      if($(window).scrollTop() + $(window).height() > $("#load_data").height() && action == 'inactive')
+      {
+        lazzy_loader(limit);
+        action = 'active';
+        start = start + limit;
+        setTimeout(function(){
+          load_data(limit, start);
+        }, 1000);
+      }
+    });
+
+  });
+</script>
 </html>

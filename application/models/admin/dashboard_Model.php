@@ -1,5 +1,5 @@
 <?php
-class dashboard_Model extends CI_Model
+class Dashboard_Model extends CI_Model
 {
     public function __construct()
     {
@@ -19,10 +19,21 @@ class dashboard_Model extends CI_Model
     
     
     public function getLegistlators() { 
-        $result = $this->db->select('id, name')->get('legistlators')->result_array(); 
-        return $result; 
+         $sql = "SELECT id, name 
+           FROM legistlators 
+           ORDER by name";
+    $query = $this->db->query($sql)->result_array(); ;
+        return $query; 
     }     
     
+    public function getCommittees() { 
+         $sql = "SELECT id, com_name 
+           FROM committees 
+           ORDER by com_name";
+    $query = $this->db->query($sql)->result_array(); ;
+        return $query; 
+    }
+
     public function get($id)
     {
         $this->db->where(['id' => $id]);

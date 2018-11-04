@@ -1,5 +1,5 @@
 <?php
-class bills_Model extends CI_Model
+class Bills_Model extends CI_Model
 {
     public function __construct()
     {
@@ -12,6 +12,8 @@ class bills_Model extends CI_Model
         $sql= "SELECT * FROM bills
                 INNER JOIN legistlators
                 ON bills.bill_sponsor=legistlators.id
+                INNER JOIN committees
+                ON bills.bill_committee=committees.id
                 WHERE bills.id =".$bill_ID." ;";
          
         $query = $this->db->query($sql);

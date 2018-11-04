@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class dashboard extends CI_Controller {
+class Dashboard extends CI_Controller {
     
     public function __construct()
     {
@@ -20,7 +20,7 @@ class dashboard extends CI_Controller {
 	}
     
     public function deleteBill($id, $name){
-        $this->dashboard_Model->delete($id, $name);
+        $this->Dashboard_Model->delete($id, $name);
     }
     
     
@@ -47,6 +47,8 @@ class dashboard extends CI_Controller {
             $new_data['bill_fulltext'] = $this->input->post('billFulltext');
             $new_data['bill_impact'] = $this->input->post('billImpact');
             $new_data['bill_topic1'] = $this->input->post('billTopic1');
+            $new_data['bill_topic2'] = $this->input->post('billTopic2');
+            $new_data['bill_topic3'] = $this->input->post('billTopic3');
             $new_data['bill_news'] = $this->input->post('billNews');
             $new_data['bill_status'] = $this->input->post('billStatus');
             $new_data['bill_firstreading'] = $this->input->post('billFirstreading');
@@ -62,10 +64,11 @@ class dashboard extends CI_Controller {
                 $new_data['bill_img'] = $image;
             }
             
-            $this->dashboard_Model->add($new_data);
+            $this->Dashboard_Model->add($new_data);
             
         }
-        $data['legistlators'] = $this->dashboard_Model->getLegistlators(); 
+$data['committees'] = $this->Dashboard_Model->getCommittees(); 
+        $data['legistlators'] = $this->Dashboard_Model->getLegistlators(); 
         $this->load->view('admin/add_bill', $data);
     }
     
@@ -108,6 +111,8 @@ class dashboard extends CI_Controller {
             $new_data['bill_fulltext'] = $this->input->post('billFulltext');
             $new_data['bill_impact'] = $this->input->post('billImpact');
             $new_data['bill_topic1'] = $this->input->post('billTopic1');
+            $new_data['bill_topic2'] = $this->input->post('billTopic2');
+            $new_data['bill_topic3'] = $this->input->post('billTopic3');
             $new_data['bill_news'] = $this->input->post('billNews');
             $new_data['bill_status'] = $this->input->post('billStatus');
             $new_data['bill_firstreading'] = $this->input->post('billFirstreading');
@@ -118,10 +123,11 @@ class dashboard extends CI_Controller {
             $new_data['bill_remarks'] = $this->input->post('billRemarks');
             $new_data['bill_question'] = $this->input->post('billQuestion');
             
-            $this->dashboard_Model->update($id, $new_data);       
+            $this->Dashboard_Model->update($id, $new_data);       
         }
         
         $data['bill'] = $this->bills_Model->getBill($id);
+$data['committees'] = $this->dashboard_Model->getCommittees();
         $data['legistlators'] = $this->dashboard_Model->getLegistlators();
         $this->load->view('admin/edit_bill',$data);
     }

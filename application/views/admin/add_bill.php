@@ -123,8 +123,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="form-group">
         <label>Status</label>
          <select class ="form-control" name="billStatus" id="billStatus">
-              <option value="passed">Passed</option>
              <option value="in consideration">In Consideration</option>
+              <option value="passed">Passed</option>
              <option value="thrown out">Thrown Out</option>
         </select>
     </div>
@@ -142,7 +142,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         
     <div class="form-group">
         <label>Reffered to:</label>
-        <input type = "textarea" name="billCommittee"/>
+        <select class ="form-control" name="billCommittee" id="billCommittee">
+          <?php foreach($committees as $com):?>
+              <option value="<?php echo $com['id']?>">
+                  <?php echo $com['com_name']?>
+              </option>
+          <?php endforeach;?>
+        </select>
     </div>
     
     <div class="form-group">

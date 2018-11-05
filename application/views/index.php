@@ -39,15 +39,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <li class="nav-item">
         <a class="nav-link" href="#">House Bills</a>
       </li>    
-    </ul>
-      
+    </ul>  
   </div>  
 </nav>
-
-
-    <!--<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h4 class="display-4">Make your voice heard</h4>
-    </div> --> 
 
 <div class="container">
     <div id="load_data"></div>

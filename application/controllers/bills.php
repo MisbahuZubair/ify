@@ -5,9 +5,9 @@ class Bills extends CI_Controller {
 
 	public function index()
 	{
+        //index is loaded, the js funcion there calls fetch through a model which loads bills on scroll
         $this->load->helper('url');
-		$data['bills'] = $this->bills_Model->allBills();             //get all bills from db
-        $this->load->view('index', $data);                    //display in index view
+        $this->load->view('index');                    
 	}
     
     public function display($bill_ID)

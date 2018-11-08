@@ -24,7 +24,7 @@ class Dashboard extends CI_Controller {
     }
     
     public function addLegistlator(){
-        $this->load->view('admin/manage_legistlators');
+        $this->load->view('admin/add_legistlator');
     }
     
     public function addBill()
@@ -79,6 +79,18 @@ $data['committees'] = $this->Dashboard_Model->getCommittees();
     {   
         $data['id'] = $id;
         $this->load->view('show',$data);
+    }
+    
+    public function manageLegistlators(){
+        $this->load->helper('url');
+		$data['legistlators'] = $this->dashboard_Model->allLegistlators();
+        $this->load->view('admin/manage_legistlators', $data);
+    }
+    
+    public function editLegistlator($id){
+        $this->load->helper('url');
+        $data['legistlator'] = $this->dashboard_Model->getLegistlator($id);
+        $this->load->view('admin/edit_legistlator',$data);
     }
     
     public function editBill($id)

@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <a class="nav-link active" href="<?php echo site_url('admin/dashboard/addLegistlator');?>">Add Legistlator</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"></a>
+        <a class="nav-link" href="<?php echo site_url('admin/dashboard/manageLegistlators');?>">Manage Legistlators</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"></a>

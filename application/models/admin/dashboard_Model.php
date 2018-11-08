@@ -17,6 +17,13 @@ class Dashboard_Model extends CI_Model
         redirect('/admin/dashboard', 'refresh');
     }
     
+     public function getLegistlator($bill_ID)
+    {
+        $sql= "SELECT * FROM legistlators";
+         
+        $query = $this->db->query($sql);
+        return $query->row_array();
+    }
     
     public function getLegistlators() { 
          $sql = "SELECT id, name 
@@ -72,6 +79,12 @@ class Dashboard_Model extends CI_Model
     public function allBills()
     {
         $result_set =$this->db->get('bills');
+        return $result_set->result_array(); 
+    }
+    
+    public function allLegistlators()
+    {
+        $result_set =$this->db->get('legistlators');
         return $result_set->result_array(); 
     }
 }

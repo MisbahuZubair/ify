@@ -45,94 +45,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </nav>
     
 <div class="container">
-<!--<form method ="post"> -->
-<?php echo form_open_multipart(''); ?>
-    <div class="form-group">
-        <label>Chamber</label>
-        <div class="radio">
-            <label><input type="radio" class ="form-control" name="chamber" value ="House" checked>House</label>
-            <br>
-            <label><input type="radio" class ="form-control" name="chamber" value ="Senate">Senate</label>
+    <?php foreach($legistlators as $item) { ?>
+    <div class="card" style="margin-bottom: 20px">
+        <div class="bg-light">
+            <p><?php echo $item['name']?></p>
         </div>
-    </div>
-    
-    <div class="form-group">
-        <label>Name</label>
-        <input type = "text" class ="form-control" name="name" required/>
-    </div>
-    
-    <div class="form-group">
-        <label>Party</label>
-        <input type = "text" class ="form-control" name="party" required/>
-    </div>
-    
-    <div class="form-group">
-        <label>State</label>
-         <select class ="form-control" name="state" id="state">
-            <option value="in consideration">Abia</option>
-            <option value="passed">Adamawa</option>
-            <option value="thrown out">Bauchi</option>
-            <option value="thrown out">Benin</option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-            <option value="thrown out"></option>
-        </select>
-    </div>
-    
-    <div class="form-group">
-        <label>Constituency</label>
-        <input type = "text" class ="form-control" name="party" required/>
-    </div>
-    
-    <div class="form-group">
-        <label>Commitee</label>
-        <input type = "text" class ="form-control" name="party" required/>
-    </div>
-    
-    <div class="form-group">
-        <label>Active</label>
-        <div class="radio">
-            <label><input type="radio" class ="form-control" name="active" value ="yes" checked>Yes</label>
-            <br>
-            <label><input type="radio" class ="form-control" name="active" value ="no">No</label>
+        <div>
+            <p><?php echo $item['state']?></p>
         </div>
-    </div>
+        <div class ='bg-light'>
+            <p><?php echo $item['constituency']?></p>
+        </div>
     
-    <input class="button" class="form-control" type="submit" value="Save"/>
+        <div>
+            <a href ="<?php echo site_url('admin/dashboard/editLegistlator/'.$item['id']);?>" class ="btn btn-secondary" role="button">Edit</a>
+            <a href ="<?php echo site_url('admin/dashboard/deleteBill/'.$item['id']);?>" class ="btn btn-danger float-right" role="button">Delete</a>
+        </div>
 
-  </div>
+    
+    </div>
+    <br/>
+    <?php } ?>
+
+</div>
     <footer class="footer" style="bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;">
       <div class="container">
         <span class="text-muted">© 2018 Copyright: Assemblify.</span>

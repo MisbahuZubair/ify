@@ -63,7 +63,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			  <div class="card-header"><h6>Title</h6><p style="margin:0"><i><?php echo $bill['bill_title']?></i></p></div>
 			
-			  <div class="card-header"><h6>Sponsor</h6><p><?php echo $bill['name']?></p></div>
+               <div class="card-header"><h6>Sponsor</h6><p><a href ="<?php echo site_url('bills/legistlatorBills/'.$bill['id']);?>"> <?php echo $bill['name']?> </a></p></div>
 			  <div class="card-header"><h6>Topic(s)</h6><p><?php echo $bill['bill_topic1'].", " .$bill['bill_topic2'].", " .$bill['bill_topic3']?></p></div>
 			  
 			  <div class="card-header"><h6>Summary</h6><p><?php echo $bill['bill_summary']?></p></div>

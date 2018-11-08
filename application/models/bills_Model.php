@@ -26,6 +26,13 @@ class Bills_Model extends CI_Model
         $this->db->update('bills', $new_data);
     }
     
+    public function getLegistlatorBills($id){
+         $sql= "SELECT * FROM bills
+                WHERE bills.bill_sponsor =".$id." ;";
+         
+        $query = $this->db->query($sql);
+        return $query->row_array();
+    }
     
     public function allBills()
     {

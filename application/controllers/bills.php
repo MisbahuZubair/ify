@@ -16,6 +16,11 @@ class Bills extends CI_Controller {
         $this->load->view('bill_detail',$data);             //display bill detail in bill detail view
     }
     
+    public function legistlatorBills($id){
+        $data['bills'] = $this->bills_Model->getLegistlatorBills($id);         //get bill info through Bill model
+        $this->load->view('legistlator_bills',$data);             //display bill detail in bill detail view
+    }
+    
     public function fetch()
     {
         $output = '';

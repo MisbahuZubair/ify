@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="collapse justify-content-between navbar-collapse navbar-right" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link active" href="#"></a>
+        <a class="nav-link active" href="<?php echo site_url('admin/dashboard/addLegistlator');?>">Add Legistlator</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"></a>
@@ -49,6 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
     <div><a href ="<?php echo site_url('admin/dashboard/addBill');?>" class ="btn btn-success btn-large" role="button">Add Bill</a>
     </div>
+    
     <br/>
     
     

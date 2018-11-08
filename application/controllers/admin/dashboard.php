@@ -23,6 +23,9 @@ class Dashboard extends CI_Controller {
         $this->Dashboard_Model->delete($id, $name);
     }
     
+    public function addLegistlator(){
+        $this->load->view('admin/manage_legistlators');
+    }
     
     public function addBill()
     {

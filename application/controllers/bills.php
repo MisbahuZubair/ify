@@ -9,7 +9,7 @@ class Bills extends CI_Controller {
         $this->load->helper('url');
         $this->load->view('index');                    
 	}
-    
+        
     public function display($bill_ID)
     {   
         $data['bill'] = $this->bills_Model->getBill($bill_ID);         //get bill info through Bill model

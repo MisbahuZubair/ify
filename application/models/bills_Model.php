@@ -45,4 +45,18 @@ class Bills_Model extends CI_Model
     {
         $this->db->insert('Bill_'.$id.'_Comments', $new_data);
      }
+    
+    
+ function fetch_data($limit, $start, $tag)
+ {
+
+  $this->db->select("*");
+  $this->db->from("bills");
+  $this->db->where("bill_tag1='".$tag."' OR bill_tag2='".$tag."' OR bill_tag3='".$tag."'");
+  $this->db->order_by("id", "ASC");
+  $this->db->limit($limit, $start);
+  $query = $this->db->get();
+  return $query;
+ }
+
 }

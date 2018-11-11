@@ -23,6 +23,30 @@ class Bills extends CI_Controller {
         $this->load->view('legistlator_bills',$data);             //display bill detail in bill detail view
     }
     
+    public function tagBills($tag){
+      $data['tag'] = $tag;
+        $this->load->view('tag_bills',$data);
+    }
+    
+      public function fetch__($tag)
+    {
+        $output = '';
+        $this->load->model('bills_Model');
+        $data = $this->bills_Model->fetch_data($this->input->post('limit'), $this->input->post('start'), $tag);
+        if($data->num_rows() > 0)
+      {
+            foreach(array_chunk($data->result(), 2) as $pair) {
+                $output .='<div class="row">';
+                foreach ($pair as $row)
+       {
+        $output .= '<div class="col-lg-6"><div class="card" style ="text-align:center;margin-bottom: 20px;"><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/> <div class="card-header" style="padding:0"><h5>'.$row->bill_question.'</h5></div><div class="card-header" style="padding:0">'.$row->bill_number.''.$row->bill_title.'</div><a class=" btn btn-success"  href="'.site_url('bills/display/').$row->id.'" role="button">View Details</a></div></div>';
+       }
+                $output .='</div>';
+            }
+      }
+      echo $output;
+    }  
+    
     public function fetch_($id)
     {
         $output = '';

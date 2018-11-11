@@ -64,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  <div class="card-header"><h6>Title</h6><p style="margin:0"><i><?php echo $bill['bill_title']?></i></p></div>
 			
                <div class="card-header"><h6>Sponsor</h6><p><a href ="<?php echo site_url('bills/legistlatorBills/'.$bill['bill_sponsor']);?>"> <?php echo $bill['name']?> </a></p></div>
-			  <div class="card-header"><h6>Topic(s)</h6><p><?php echo $bill['bill_topic1'].", " .$bill['bill_topic2'].", " .$bill['bill_topic3']?></p></div>
+			  <div class="card-header"><h6>Tag(s)</h6><p><?php if ($bill['bill_tag1']!="") {echo "<a href=".site_url('bills/tagBills/'.$bill['bill_tag1']).">#".$bill['bill_tag1']."</a>";} if ($bill['bill_tag2']!="") {echo "<a href=".site_url('bills/tagBills/'.$bill['bill_tag2'])."> #".$bill['bill_tag2']."</a>";} if ($bill['bill_tag3']!="") {echo "<a href=".site_url('bills/tagBills/'.$bill['bill_tag3'])."> #".$bill['bill_tag3']."</a>";}?></p></div>
 			  
 			  <div class="card-header"><h6>Summary</h6><p><?php echo $bill['bill_summary']?></p></div>
 			  

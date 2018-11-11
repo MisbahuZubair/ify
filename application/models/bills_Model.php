@@ -28,10 +28,12 @@ class Bills_Model extends CI_Model
     
     public function getLegistlatorBills($id){
          $sql= "SELECT * FROM bills
-                WHERE bills.bill_sponsor =".$id." ;";
+                WHERE bill_sponsor =".$id."
+                INNER JOIN bills.bill_sponsor=legistlators.id;";
          
-        $query = $this->db->query($sql);
-        return $query->row_array();
+       $query = $this->db->query($sql);
+        return $query->result_array();
+        
     }
     
     public function allBills()

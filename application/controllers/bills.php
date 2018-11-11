@@ -17,9 +17,31 @@ class Bills extends CI_Controller {
     }
     
     public function legistlatorBills($id){
-        $data['bills'] = $this->bills_Model->getLegistlatorBills($id);         //get bill info through Bill model
+        //$data['bills'] = $this->bills_Model->getLegistlatorBills(306);         //get bill info through Bill model
+        $this->load->model('legistlatorbills_Model');
+        $data['legistlator'] = $this->legistlatorbills_Model->getLegistlator($id);
         $this->load->view('legistlator_bills',$data);             //display bill detail in bill detail view
     }
+    
+    public function fetch_($id)
+    {
+        $output = '';
+        $this->load->model('legistlatorbills_Model');
+        $data = $this->legistlatorbills_Model->fetch_data($this->input->post('limit'), $this->input->post('start'), $id);
+        if($data->num_rows() > 0)
+      {
+            foreach(array_chunk($data->result(), 2) as $pair) {
+                $output .='<div class="row">';
+                foreach ($pair as $row)
+       {
+        $output .= '<div class="col-lg-6"><div class="card" style ="text-align:center;margin-bottom: 20px;"><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/> <div class="card-header" style="padding:0"><h5>'.$row->bill_question.'</h5></div><div class="card-header" style="padding:0">'.$row->bill_number.''.$row->bill_title.'</div><a class=" btn btn-success"  href="'.site_url('bills/display/').$row->id.'" role="button">View Details</a></div></div>';
+       }
+                $output .='</div>';
+            }
+      }
+      echo $output;
+    }
+    
     
     public function fetch()
     {

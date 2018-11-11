@@ -17,8 +17,30 @@ class Dashboard_Model extends CI_Model
         redirect('/admin/dashboard', 'refresh');
     }
     
+    public function deleteLegistlator($id){
+        $sql = "SELECT *
+           FROM bills
+           WHERE bill_sponsor = ".$id."";
+        $query = $this->db->query($sql)->row_array();
+        if(empty($query)){
+            $sql = "DELETE from legistlators 
+                WHERE id=".$id."";
+            $query = $this->db->query($sql);
+            echo '<script language="javascript">';
+            echo 'alert("Successfully deleted")';
+            echo '</script>';
+        }        
+        else{
+            echo '<script language="javascript">';
+            echo 'alert("Cannot delete a legistlator attached as a sponsor to at least one bill")';
+            echo '</script>';
+        }
+        redirect('/admin/dashboard/manageLegistlators', 'refresh');
+    }
+    
      public function getLegistlator($bill_ID)
     {
+        
         $sql= "SELECT * FROM legistlators";
          
         $query = $this->db->query($sql);
@@ -29,13 +51,44 @@ class Dashboard_Model extends CI_Model
          $sql = "SELECT id, name 
            FROM legistlators 
            ORDER by name";
+    $query = $this->db->query($sql)->result_array(); 
+        return $query; 
+    } 
+    
+    public function editLegistlator($id) { 
+         $sql = "SELECT * 
+           FROM legistlators
+           WHERE id =".$id."
+           ORDER by name";
+    $query = $this->db->query($sql)->row_array(); ;
+        return $query; 
+    }
+    
+    public function updateLegistlator($id, $new_data) { 
+        $this->db->where(['id' => $id]);
+        $this->db->update('legistlators', $new_data);
+        redirect('/admin/dashboard/manageLegistlators', 'refresh');
+    }
+        
+    public function addLegistlator($new_data)
+    {
+       $this->db->insert('legistlators', $new_data);
+        redirect('/admin/dashboard/manageLegistlators', 'refresh'); 
+    }
+    
+    public function getSenateCommittees() { 
+         $sql = "SELECT id, com_name 
+           FROM committees
+           WHERE chamber = 'senate'
+           ORDER by com_name";
     $query = $this->db->query($sql)->result_array(); ;
         return $query; 
-    }     
+    }
     
-    public function getCommittees() { 
+    public function getHouseCommittees() { 
          $sql = "SELECT id, com_name 
-           FROM committees 
+           FROM committees
+           WHERE chamber = 'house'
            ORDER by com_name";
     $query = $this->db->query($sql)->result_array(); ;
         return $query; 

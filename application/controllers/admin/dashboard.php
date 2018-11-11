@@ -20,10 +20,27 @@ class Dashboard extends CI_Controller {
 	}
     
     public function deleteBill($id, $name){
-        $this->Dashboard_Model->delete($id, $name);
+        $this->dashboard_Model->delete($id, $name);
+    }
+    
+    public function deleteLegistlator($id){
+        $this->dashboard_Model->deleteLegistlator($id);
     }
     
     public function addLegistlator(){
+        $this->load->helper('url');
+        $this->load->helper('form');
+        if($_POST)
+        {        
+            $new_data['name'] = $this->input->post('name');
+            $new_data['chamber'] = $this->input->post('chamber');
+            $new_data['party']= $this->input->post('party');
+            $new_data['state']= ($this->input->post('state'));
+            $new_data['constituency']= ($this->input->post('constituency'));
+            $new_data['active']= $this->input->post('active');
+             
+            $this->dashboard_Model->addLegistlator($new_data);       
+        }
         $this->load->view('admin/add_legistlator');
     }
     
@@ -89,8 +106,22 @@ $data['committees'] = $this->Dashboard_Model->getCommittees();
     
     public function editLegistlator($id){
         $this->load->helper('url');
-        $data['legistlator'] = $this->dashboard_Model->getLegistlator($id);
-        $this->load->view('admin/edit_legistlator',$data);
+        $this->load->helper('form');
+         if($_POST)
+        {        
+            
+            $new_data['name'] = $this->input->post('name');
+            $new_data['chamber'] = $this->input->post('chamber');
+            $new_data['party']= $this->input->post('party');
+            $new_data['state']= ($this->input->post('state'));
+            $new_data['constituency']= ($this->input->post('constituency'));
+            $new_data['active']= $this->input->post('active');
+             
+            $this->dashboard_Model->updateLegistlator($id, $new_data);       
+        }
+        
+        $data['legistlator'] = $this->dashboard_Model->editLegistlator($id);
+        $this->load->view('admin/add_legistlator',$data);
     }
     
     public function editBill($id)

@@ -59,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
         <div>
             <a href ="<?php echo site_url('admin/dashboard/editLegistlator/'.$item['id']);?>" class ="btn btn-secondary" role="button">Edit</a>
-            <a href ="<?php echo site_url('admin/dashboard/deleteBill/'.$item['id']);?>" class ="btn btn-danger float-right" role="button">Delete</a>
+            <a href ="<?php echo site_url('admin/dashboard/deleteLegistlator/'.$item['id']);?>" class ="btn btn-danger float-right" role="button">Delete</a>
         </div>
 
     

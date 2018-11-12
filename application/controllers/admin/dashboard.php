@@ -23,6 +23,11 @@ class Dashboard extends CI_Controller {
         $this->dashboard_Model->delete($id, $name);
     }
     
+    public function publishBill($id, $initial){
+        if($initial == 1){$new_data['publish'] =0;} else {$new_data['publish'] =1;}
+        $this->dashboard_Model->update($id, $new_data);
+    }
+    
     public function deleteLegistlator($id){
         $this->dashboard_Model->deleteLegistlator($id);
     }

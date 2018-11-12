@@ -43,7 +43,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       
   </div>  
 </nav>
-    
+<div class="container">
+    <?php echo form_open_multipart('');?>
+    <div class="form-group">
+     <div class="radio" class ="form-control" name="chamber" onload ="" onchange="updateLegistlators()">
+      <input type="radio" name="gender" value="male"> All
+      <input type="radio" name="gender" value="female"> All Senate
+      <input type="radio" name="gender" value="other"> Active Senate
+         <input type="radio" name="gender" value="male"> Inactive Senate
+      <input type="radio" name="gender" value="female"> All House
+      <input type="radio" name="gender" value="other"> Inactive House
+        </div>  
+</div>
+    </div>
 <div class="container">
     <?php foreach($legistlators as $item) { ?>
     <div class="card" style="margin-bottom: 20px">

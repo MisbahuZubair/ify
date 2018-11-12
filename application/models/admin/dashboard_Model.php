@@ -108,6 +108,14 @@ class Dashboard_Model extends CI_Model
         redirect('/admin/dashboard', 'refresh');
     }
     
+     public function publishBill($id,$inital)
+    {
+        
+        $this->db->where(['id' => $id]);
+        $this->db->update('bills', $new_data);
+        redirect('/admin/dashboard', 'refresh');
+    }
+    
      public function addComment($new_data, $id)
     {
         $this->db->insert('Bill_'.$id.'_Comments', $new_data);

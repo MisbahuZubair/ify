@@ -56,7 +56,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php foreach($bills as $item) { ?>
     <div class="card" style="margin-bottom: 20px">
         <div class="card-header">
-            <p><?php echo $item['bill_question']?></p>
+            <div class = 'row'>
+                <div class='col-9'>
+                    <p><?php echo $item['bill_question']?></p>
+                </div>
+                <div class='col-3'>
+                    <a href ="<?php echo site_url('admin/dashboard/publishBill/'.$item['id'].'/'.$item['publish']);?>" class ="btn <?php if ($item['publish']==1){echo 'btn-warning';} else {echo 'btn-primary';} ?> float-right" role="button"><?php if ($item['publish']==0){echo 'Publish';} else {echo 'Unpublish';} ?></a>
+                </div>
+            </div>
         </div>
         
         <div class="card-body">

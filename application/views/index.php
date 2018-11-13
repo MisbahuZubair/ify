@@ -10,10 +10,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   
   <style>
+.nopadding {
+   padding: 0 !important;
+}
   img {
   width: 100%;
   height: 200px;
@@ -22,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}
 </style>
 </head>
-<body> 
+<body style="backgrod: #f8f9f9ff"> 
 <nav class="navbar navbar-expand-md  navbar-dark bg-success" style="margin-bottom: 20px;">
   <a class="navbar-brand" href="#">Assemblify</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">

@@ -78,7 +78,7 @@ class Bills extends CI_Controller {
                 $output .='<div class="row">';
                 foreach ($pair as $row)
        {
-        $output .= '<div class="col-lg-6"><div class="card" style ="text-align:center;margin-bottom: 20px;"><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/> <div class="card-header" style="padding:0"><h5>'.$row->bill_question.'</h5></div><div class="card-header" style="padding:0">'.$row->bill_number.''.$row->bill_title.'</div><a class=" btn btn-success"  href="'.site_url('bills/display/').$row->id.'" role="button">View Details</a></div></div>';
+        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 bg-white rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;"><div class="card-header" style="padding:0; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0"><div class="row"><div class ="col-md-auto">'.$row->bill_number.'</div><div class ="col">#'.$row->bill_tag1.' #'.$row->bill_tag2.' #'.$row->bill_tag3.'</div><div class ="col-md-auto float-right"><i class="fa fa-ban" style="color:red;"></i></div></div></div><a class=" btn" style="background:#4ecdc4; color:white" href="'.site_url('bills/display/').$row->id.'" role="button">View Details</a></div></div>';
        }
                 $output .='</div>';
             }

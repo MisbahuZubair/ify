@@ -7,13 +7,24 @@ class Bills extends CI_Controller {
 	{
         //index is loaded, the js funcion there calls fetch through a model which loads bills on scroll
         $this->load->helper('url');
-        $this->load->view('index');                    
+        $data['page'] = "index";        //get bill info through Bill model
+        $data['source'] ="all";
+        $data['filter'] = "all";
+        $this->load->view('index', $data);                    
 	}
-        
+    
     public function display($bill_ID)
     {   
         $data['bill'] = $this->bills_Model->getBill($bill_ID);         //get bill info through Bill model
         $this->load->view('bill_detail',$data);             //display bill detail in bill detail view
+    }
+    
+    public function getBills($chamber, $filter)
+    {   
+        $data['page'] = "".$chamber."-".$filter."";         //get bill info through Bill model
+        $data['source'] = "".$chamber."";
+        $data['filter'] = "".$filter."";
+        $this->load->view('index',$data);             //display bill detail in bill detail view
     }
     
     public function legistlatorBills($id){
@@ -67,11 +78,11 @@ class Bills extends CI_Controller {
     }
     
     
-    public function fetch()
+    public function fetch($source, $filter)
     {
         $output = '';
         $this->load->model('scroll_pagination_model');
-        $data = $this->scroll_pagination_model->fetch_data($this->input->post('limit'), $this->input->post('start'));
+        $data = $this->scroll_pagination_model->fetch_data($this->input->post('limit'), $this->input->post('start'), $source, $filter);
         if($data->num_rows() > 0)
       {
             foreach(array_chunk($data->result(), 2) as $pair) {

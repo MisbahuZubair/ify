@@ -31,12 +31,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="container">
 
 <nav class="navbar navbar-expand-xl navbar-light shadow-sm p-3 mb-5 bg-white rounded">
-  <a class="navbar-brand" href="#">Assemblify</a>
+    <a class="navbar-left" href="#">
+    <img src="<?php echo site_url('application/views/logo.png'); ?>" style="max-height:32px;"alt="">
+  </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarsExample05">
+      <div class="collapse navbar-collapse float-right" id="navbarsExample05">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active dropdown">
             <a class="nav-link  dropdown-toggle" href="#" id="dropdownBills" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bills <span class="sr-only">(current)</span></a>

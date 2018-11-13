@@ -27,25 +27,71 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </style>
 </head>
 <body style="backgrod: #f8f9f9ff"> 
-<nav class="navbar navbar-expand-md  navbar-dark bg-success" style="margin-bottom: 20px;">
+
+    <div class="container">
+
+<nav class="navbar navbar-expand-xl navbar-light shadow-sm p-3 mb-5 bg-white rounded">
   <a class="navbar-brand" href="#">Assemblify</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse justify-content-between navbar-collapse navbar-right" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Senate Bills</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">House Bills</a>
-      </li>    
-    </ul>  
-  </div>  
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample05">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active dropdown">
+            <a class="nav-link  dropdown-toggle" href="#" id="dropdownBills" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bills <span class="sr-only">(current)</span></a>
+              <div class="dropdown-menu" aria-labelledby="dropdownBills">
+              <a class="dropdown-item" href="#">All</a>
+              <a class="dropdown-item" href="#">Passed</a>
+              <a class="dropdown-item" href="#">In Consideration</a>
+                <a class="dropdown-item" href="#">Thrown Out</a>
+            </div>
+          </li>
+            
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownSen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Senate Bills</a>
+               <div class="dropdown-menu" aria-labelledby="dropdownSen">
+              <a class="dropdown-item" href="#">All</a>
+              <a class="dropdown-item" href="#">Passed</a>
+              <a class="dropdown-item" href="#">In Consideration</a>
+                <a class="dropdown-item" href="#">Thrown Out</a>
+            </div>
+          </li>
+            
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownHouse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">House Bills</a>
+               <div class="dropdown-menu" aria-labelledby="dropdownHouse">
+              <a class="dropdown-item" href="#">All</a>
+              <a class="dropdown-item" href="#">Passed</a>
+              <a class="dropdown-item" href="#">In Consideration</a>
+                <a class="dropdown-item" href="#">Thrown Out</a>
+            </div>
+          </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownLeg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Legistlators</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownLeg">
+              <a class="dropdown-item" href="#">All</a>
+              <a class="dropdown-item" href="#">House</a>
+              <a class="dropdown-item" href="#">Senate</a>
+            </div>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Legistlative Process</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li> 
+        </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input class="form-control" type="text" placeholder="Search">
+        </form>
+      </div>
 </nav>
+    </div>
+
 
 <div class="container">
     <div id="load_data"></div>

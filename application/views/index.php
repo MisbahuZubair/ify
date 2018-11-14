@@ -14,6 +14,9 @@ else if($page_=='House-all'){$page_title="Assemblify | All house bills";}
 else if($page_=='House-Passed'){$page_title="Assemblify | Passed house bills";}
 else if($page_=='House-In consideration'){$page_title="Assemblify | House bills in consideration";}
 else if($page_=='House-Thrown out'){$page_title="Assemblify | House thrown out bills";}
+else if($page_=='legistlators-all'){$page_title="Assemblify | All legistlators";}
+else if($page_=='legistlators-House'){$page_title="Assemblify | House Members";}
+else if($page_=='legistlators-Senate'){$page_title="Assemblify | House Senate";}
 else{$title_page="Assemblify";}
 ?>
 
@@ -27,7 +30,7 @@ else{$title_page="Assemblify";}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   
@@ -41,6 +44,12 @@ else{$title_page="Assemblify";}
   object-fit: cover;
   padding:0;
 	}
+
+      hr{
+          padding:0;
+          margin:0;
+          background:white;
+      }
 </style>
 </head>
 <body style="backgrod: #f8f9f9ff"> 
@@ -89,9 +98,9 @@ else{$title_page="Assemblify";}
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdownLeg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Legistlators</a>
             <div class="dropdown-menu" aria-labelledby="dropdownLeg">
-              <a class="dropdown-item" href="#">All</a>
-              <a class="dropdown-item" href="#">House</a>
-              <a class="dropdown-item" href="#">Senate</a>
+              <a class="dropdown-item" href="<?php echo site_url('legistlators/getLegistlators/legistlators/all'); ?>">All</a>
+              <a class="dropdown-item" href="<?php echo site_url('legistlators/getLegistlators/legistlators/House'); ?>">House</a>
+              <a class="dropdown-item" href="<?php echo site_url('legistlators/getLegistlators/legistlators/Senate'); ?>">Senate</a>
             </div>
           </li>
             <li class="nav-item">
@@ -127,10 +136,14 @@ else{$title_page="Assemblify";}
 </body>
     <script>
   $(document).ready(function(){
-
-    var limit = 8;
-    var start = 0;
+       var start = 0;
     var action = 'inactive';
+    var fetch_url=""
+      var source = '<?php echo $source;?>';
+    if(source=="legistlators"){fetch_url ="<?php echo base_url(); ?>legistlators/fetch/<?php echo $source.'/'.$filter?>" ; var limit = 16;}
+    else{ fetch_url ="<?php echo base_url(); ?>bills/fetch/<?php echo $source.'/'.$filter;?>"; var limit = 8;}
+    
+   
 
     function lazzy_loader(limit)
     {
@@ -146,11 +159,14 @@ else{$title_page="Assemblify";}
     }
 
     lazzy_loader(limit);
-
+    
+     
+      
+      
     function load_data(limit, start)
     {
       $.ajax({
-        url:"<?php echo base_url(); ?>bills/fetch/<?php echo $source.'/'.$filter; ?>",
+        url:fetch_url,
         method:"POST",
         data:{limit:limit, start:start},
         cache: false,

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Assemblify</title>
+  <title>Assemblify | <?php echo $legistlator['name']; ?></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -13,6 +13,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   
   <style>
+      .nopadding {
+   padding: 0 !important;
+}
   img {
   width: 100%;
   height: 200px;
@@ -22,20 +25,75 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </style>
 </head>
 <body> 
-<nav class="navbar navbar-expand-md  navbar-dark bg-success" style="margin-bottom: 20px;">
-  <a class="navbar-brand" href="#">Assemblify Admin Dashboard </a>
-</nav>
 <div class="container">
-    
-<div class="card">
-        
-  <div class="card-body">
-    <h5 class="card-title"> <?php echo $legistlator['name']; ?></h5>
-    <p class="card-text">Representing <?php echo $legistlator['constituency'].", ".$legistlator['state'].". "; ?></p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
+
+<nav class="navbar navbar-expand-xl navbar-light shadow-sm p-3 mb-5 bg-white rounded">
+    <a class="navbar-left" href="#">
+        <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.png'); ?>" style="max-height:32px;"alt=""></a>
+  </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse float-right" id="navbarsExample05">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active dropdown">
+            <a class="nav-link  dropdown-toggle" href="#" id="dropdownBills" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bills <span class="sr-only">(current)</span></a>
+              <div class="dropdown-menu" aria-labelledby="dropdownBills">
+              <a class="dropdown-item" href="<?php echo site_url('bills/getBills/all/all'); ?>">All</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/getBills/all/Passed'); ?>">Passed</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/getBills/all/In consideration'); ?>">In Consideration</a>
+                <a class="dropdown-item" href="<?php echo site_url('bills/getBills/all/Thrown out'); ?>">Thrown Out</a>
+            </div>
+          </li>
+            
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownSen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Senate Bills</a>
+               <div class="dropdown-menu" aria-labelledby="dropdownSen">
+              <a class="dropdown-item" href="<?php echo site_url('bills/getBills/Senate/all'); ?>">All</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/getBills/Senate/Passed'); ?>">Passed</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/getBills/Senate/In consideration'); ?>">In Consideration</a>
+                <a class="dropdown-item" href="<?php echo site_url('bills/getBills/Senate/Thrown out'); ?>">Thrown Out</a>
+            </div>
+          </li>
+            
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownHouse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">House Bills</a>
+               <div class="dropdown-menu" aria-labelledby="dropdownHouse">
+                <a class="dropdown-item" href="<?php echo site_url('bills/getBills/House/all'); ?>">All</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/getBills/House/Passed'); ?>">Passed</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/getBills/House/In consideration'); ?>">In Consideration</a>
+            <a class="dropdown-item" href="<?php echo site_url('bills/getBills/House/Thrown out'); ?>">Thrown Out</a>
+            </div>
+          </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownLeg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Legistlators</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownLeg">
+              <a class="dropdown-item" href="<?php echo site_url('legistlators/getLegistlators/legistlators/all'); ?>">All</a>
+              <a class="dropdown-item" href="<?php echo site_url('legistlators/getLegistlators/legistlators/House'); ?>">House</a>
+              <a class="dropdown-item" href="<?php echo site_url('legistlators/getLegistlators/legistlators/Senate'); ?>">Senate</a>
+            </div>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Legistlative Process</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li> 
+        </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input class="form-control" type="text" placeholder="Search">
+        </form>
+      </div>
+</nav>
+    </div>
+<div class="container">  
+<div class='row'><div class='col-md-6' style='margin:auto'><div class="nopadding card shadow-sm p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:#F5FCFB"><div class="card-header" style="padding:0; background:#ffffff"><h5> <?php echo $legistlator['name']; ?></h5></div ><div class="card-body">Representing <?php echo $legistlator['constituency'].", ".$legistlator['state'].". "; ?> State</div></div></div></div>
 </div>
-</div>    
+   
     <br/>
     <div class="container">
     <div id="load_data"></div>

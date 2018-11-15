@@ -17,7 +17,8 @@ else if($page_=='House-Thrown out'){$page_title="Assemblify | House thrown out b
 else if($page_=='legistlators-all'){$page_title="Assemblify | All legistlators";}
 else if($page_=='legistlators-House'){$page_title="Assemblify | House Members";}
 else if($page_=='legistlators-Senate'){$page_title="Assemblify | House Senate";}
-else{$title_page="Assemblify";}
+else if($page_=='tag'){$page_title="Assemblify | #".$tag;}
+else{$page_title="Assemblify";}
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +55,7 @@ else{$title_page="Assemblify";}
 </head>
 <body style="backgrod: #f8f9f9ff"> 
 
-    <div class="container">
+<div class="container">
 
 <nav class="navbar navbar-expand-xl navbar-light shadow-sm p-3 mb-5 bg-white rounded">
     <a class="navbar-left" href="#">
@@ -120,7 +121,9 @@ else{$title_page="Assemblify";}
 </nav>
     </div>
 
-
+<?php if($page=="legistlator bills"){
+    echo '<div class="container"><div class="row"><div class="col-md-6" style="margin:auto"><div class="nopadding card shadow-sm p-3 mb-5 rounded" style="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:#F5FCFB"><div class="card-header" style="padding:0; background:#ffffff"><h5>'.$legistlator['name'].'</h5></div ><div class="card-body">Representing '.$legistlator['constituency'].', '.$legistlator['state'].' State</div></div></div></div></div>';
+}?>
 <div class="container">
     <div id="load_data"></div>
     <div id="load_data_message"></div>
@@ -136,12 +139,14 @@ else{$title_page="Assemblify";}
 </body>
     <script>
   $(document).ready(function(){
-       var start = 0;
+    var start = 0;
     var action = 'inactive';
     var fetch_url=""
-      var source = '<?php echo $source;?>';
+    var source = '<?php echo $source;?>';
     if(source=="legistlators"){fetch_url ="<?php echo base_url(); ?>legistlators/fetch/<?php echo $source.'/'.$filter?>" ; var limit = 16;}
-    else{ fetch_url ="<?php echo base_url(); ?>bills/fetch/<?php echo $source.'/'.$filter;?>"; var limit = 8;}
+    else if(source=="legistlator bills"){fetch_url ="<?php echo base_url(); ?>bills/fetchByLegistlator/<?php echo $filter?>" ; var limit = 8;}
+    else if(source=="tag"){fetch_url ="<?php echo base_url(); ?>bills/fetchByTag/<?php echo $filter?>" ; var limit = 8;}
+    else{ fetch_url ="<?php echo base_url(); ?>bills/fetchDefault/<?php echo $source.'/'.$filter;?>"; var limit = 8;}
     
    
 

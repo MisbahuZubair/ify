@@ -22,23 +22,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </style>
 </head>
 <body> 
-<nav class="navbar navbar-expand-md  navbar-dark bg-success" style="margin-bottom: 20px;">
-  <a class="navbar-brand" href="#">Assemblify Admin Dashboard </a>
-</nav>
 <div class="container">
+
+<nav class="navbar navbar-expand-xl shadow-sm p-3 mb-5 navbar-dark bg-secondary rounded" style="background-color:#EDE3E4">
+    <a class="navbar-left" href="#">
+        <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.png'); ?>" style="max-height:32px;"alt=""></a>
+  </a>
+
+      <div class="navbar-left" style="margin-left:20px; color:white">
+         <h6>Assemblify</h6>
+            </div>
+</nav>
+    </div>
+<div class="container" >
     <?php echo form_open_multipart(''); ?>
+    <div class="row"><div class="col-md-4" style="margin: 0 auto">
+    <div class="card shadow-sm p-3 mb-5 rounded">
     <div class="form-group">
         <label>Username</label>
         <input type = "text" class ="form-control " name="username" required/>
     </div>
-    
     <div class="form-group">
         <label>Password</label>
         <input type = "password" class ="form-control " name="password" required/>
     </div>
-
-       <button type="submit" class="btn btn-success">Login</button>
-
+    <button type="submit" class="btn btn-secondary">Login</button>
+        </div>
+</div></div>
 </div>
 </body>
 </html>

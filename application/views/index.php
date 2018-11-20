@@ -137,7 +137,7 @@ else{$page_title="Assemblify";}
 </footer>
 
 </body>
-    <script>
+<script>
   $(document).ready(function(){
     var start = 0;
     var action = 'inactive';

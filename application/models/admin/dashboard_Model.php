@@ -93,6 +93,14 @@ class Dashboard_Model extends CI_Model
     $query = $this->db->query($sql)->result_array(); ;
         return $query; 
     }
+    
+     public function getCommittees() { 
+         $sql = "SELECT id, com_name 
+           FROM committees
+           ORDER by com_name";
+    $query = $this->db->query($sql)->result_array(); ;
+        return $query; 
+    }
 
     public function get($id)
     {

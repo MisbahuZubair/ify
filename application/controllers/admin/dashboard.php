@@ -15,9 +15,38 @@ class Dashboard extends CI_Controller {
     public function index()
 	{
         $this->load->helper('url');
-		$data['bills'] = $this->bills_Model->allBills();
+		$data['page'] = 'manage_bills';
         $this->load->view('admin/dashboard', $data); 
 	}
+    
+     public function fetchbills()
+	{
+        $output = '';
+        $this->load->model('scroll_pagination_model');
+        $data = $this->scroll_pagination_model->fetch_data($this->input->post('limit'), $this->input->post('start'), 'all', 'all');
+        if($data->num_rows() > 0)
+      {
+            foreach(array_chunk($data->result(), 2) as $pair) {
+                $output .='<div class="row">';
+                foreach ($pair as $row)
+       {
+         $tags="";
+        if($row->bill_tag1!=""){$tags.="<a href='".site_url('bills/tag/'.$row->bill_tag1)."'>#".$row->bill_tag1."</a> ";}
+        if($row->bill_tag2!=""){$tags.="<a href='".site_url('bills/tag/'.$row->bill_tag2)."'>#".$row->bill_tag2."</a> ";}
+        if($row->bill_tag3!=""){$tags.="<a href='".site_url('bills/tag/'.$row->bill_tag3)."'>#".$row->bill_tag3."</a> ";}
+        
+        $status="";
+        if($row->bill_status=="Passed"){$status.='Passed <i class="fas fa-check-circle" style="color:green;"></i> on '.$row->bill_thirdreading;}
+        else if($row->bill_status=="In consideration"){$status.='In Consideration <i class="fa fa-clock" style="color:orange;"></i>';}
+        else if($row->bill_status=="Thrown out"){$status.='Thrown out <i class="fa fa-ban" style="color:red;"></i>';}
+                    
+        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;"><div class="card-header" style="padding:0; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0;">'.$row->bill_number.', introduced on '.$row->bill_firstreading.'</div><hr/><div>'.$tags.'</div><hr/><div>'.$status.'</div><hr/><div class="row btn-group"><div class="col-sm-3"><a class=" btn bg-secondary " style="color:white" href="'.site_url('bills/display/').$row->id.'" role="button">View</a></div><div class="col-sm-3"><a class="btn bg-info" style=" color:white" href="'.site_url('admin/dashboard/editBill/').$row->id.'" role="button">Edit</a></div><div class="col-sm-3"><a class="btn bg-danger" style="color:white" href="'.site_url('admin/dashboard/deleteBill/').$row->id.'" role="button">Delete</a></div><div class="col-sm-3"><a class="btn bg-success" style=" color:white" href="'.site_url('admin/dashboard/publishBill/').$row->id.'" role="button">Publish</a></div></div></div></div>';
+       }
+                 $output .='</div>';
+            }
+      }
+        echo $output;
+    }
     
     public function deleteBill($id, $name){
         $this->dashboard_Model->delete($id, $name);
@@ -178,7 +207,7 @@ $data['committees'] = $this->Dashboard_Model->getCommittees();
         }
         
         $data['bill'] = $this->bills_Model->getBill($id);
-$data['committees'] = $this->dashboard_Model->getCommittees();
+        $data['committees'] = $this->dashboard_Model->getCommittees();
         $data['legistlators'] = $this->dashboard_Model->getLegistlators();
         $this->load->view('admin/edit_bill',$data);
     }

@@ -60,126 +60,122 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
 <!--<form method ="post"> -->
 <?php echo form_open_multipart(''); ?>
-    <div class="form-group">
-        <label>Number</label>
-        <input type = "text" class ="form-control" name="billNumber" required/>
-    </div>
-    
-    <div class="form-group">
-        <label>Question</label>
-        <input type = "text" class ="form-control" name="billQuestion" required/>
-    </div>
-    
-    <div class="form-group">
-        <label>Title</label>
-        <input type = "text" class ="form-control" name="billTitle" required/>
-    </div>
-    
-    <div class="form-group">
-        <div class="radio">
-          <label><input type="radio" class ="form-control" name="origin" value ="House" checked>House</label>
-<br>
-          <label><input type="radio" class ="form-control" name="origin" value ="Senate">Senate</label>
+    <div class ="row">
+        <div class="col-md-4">
+            <div class="form-check form-check-inline">
+              <label style="padding-right:20px">House<input type="radio" class ="form-control" name="origin" value ="House"></label>
+                <br>
+              <label>Senate<input type="radio" class ="form-control" name="origin" value ="Senate"></label>
+            </div>
+            
+            <div class="form-group">
+                <label>Number</label> <input type = "text" class ="form-control" name="billNumber" required/>
+            </div>
+            
+            <div class="form-group">Sponsor
+                <select class ="form-control" name="billSponsor" id="billSponsor">
+                  <?php foreach($legistlators as $rep):?>
+                      <option value="<?php echo $rep['id']?>">
+                          <?php echo $rep['name']?>
+                      </option>
+                  <?php endforeach;?>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Full Text</label>
+                <input type = "text" class ="form-control" name="billFulltext" required/>
+            </div>        
+             <div class="form-group">
+                <label>Topic 1</label>
+                <input type = "text" class ="form-control" name="billTopic1" id="billTopic1" required/>
+            </div>
+
+            <div class="form-group">
+                <label>Topic 2</label>
+                <input type = "text" class ="form-control" name="billTopic2" id="billTopic2"/>
+            </div>
+
+            <div class="form-group">
+                <label>Topic 3</label>
+                <input type = "text" class ="form-control" name="billTopic3" id="billTopic3"/>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                 <select class ="form-control" name="billStatus" id="billStatus">
+                     <option value="in consideration">In Consideration</option>
+                      <option value="passed">Passed</option>
+                     <option value="thrown out">Thrown Out</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>First Reading</label>
+                <input type = "date" class ="form-control" name="billFirstreading" required/>
+            </div>
+
+
+            <div class="form-group">
+                <label>Second Reading</label>
+                <input type = "date" class ="form-control" name="billSecondreading"/>
+            </div>
+
+            <div class="form-group">
+                <label>Reffered to:</label>
+                <select class ="form-control" name="billCommittee" id="billCommittee">
+                  <?php foreach($committees as $com):?>
+                      <option value="<?php echo $com['id']?>">
+                          <?php echo $com['com_name']?>
+                      </option>
+                  <?php endforeach;?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Report out of Committee</label>
+                <input type = "date" class ="form-control" name="billReportoutofcommittee"/>
+            </div>
+
+
+            <div class="form-group">
+                <label>Third Reading</label>
+                <input type = "date" class ="form-control" name="billThirdreading"/>
+            </div>
         </div>
-    
-        <select class ="form-control" name="billSponsor" id="billSponsor">
-          <?php foreach($legistlators as $rep):?>
-              <option value="<?php echo $rep['id']?>">
-                  <?php echo $rep['name']?>
-              </option>
-          <?php endforeach;?>
-        </select>
+        
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Question</label><input type = "text" class ="form-control" name="billQuestion" required/>
+            </div>
+            <div class="form-group">
+                <label>Title</label><input type = "text" class ="form-control" name="billTitle" required/>
+            </div>
+                <div class="form-group">
+                    <label>Summary</label>
+                    <textarea class ="form-control" name="billSummary" rows='6' required> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional Info</label>
+                    <textarea class ="form-control" name="billAdditionalinfo" rows='6'> </textarea>
+                </div>
+                <div class="form-group">
+                    <label>Impact</label>
+                     <textarea class ="form-control" name="billImpact" rows='6' required> </textarea>
+                </div>
+                <div class="form-group">
+                    <label>News</label>
+                    <textarea class ="form-control" name="billNews" rows='6'> </textarea>
+                </div>        
+                <div class="form-group">
+                    <label>Remarks</label>
+                    <textarea class ="form-control" name="billRemarks" rows='6'> </textarea>
+                </div>
+        </div>
     </div>
 
     
-    <div class="form-group">
-        <label>Summary</label>
-        <textarea class ="form-control" name="billSummary" rows='6' required> </textarea>
-    </div>
     
-    <div class="form-group">
-        <label>Additional Info</label>
-        <textarea class ="form-control" name="billAdditionalinfo" rows='6'> </textarea>
-    </div>
-    
-    <div class="form-group">
-        <label>Full Text</label>
-        <input type = "text" class ="form-control" name="billFulltext" required/>
-    </div>
-    
-     <div class="form-group">
-        <label>Impact</label>
-         <textarea class ="form-control" name="billImpact" rows='6' required> </textarea>
-    </div>
-        
-     <div class="form-group">
-        <label>Topic 1</label>
-        <input type = "text" class ="form-control" name="billTopic1" id="billTopic1" required/>
-    </div>
-    
-    <div class="form-group">
-        <label>Topic 2</label>
-        <input type = "text" class ="form-control" name="billTopic2" id="billTopic2"/>
-    </div>
-    
-    <div class="form-group">
-        <label>Topic 3</label>
-        <input type = "text" class ="form-control" name="billTopic3" id="billTopic3"/>
-    </div>
-    
-    
-    <div class="form-group">
-        <label>News</label>
-        <textarea class ="form-control" name="billNews" rows='6'> </textarea>
-    </div>
-    
-    <div class="form-group">
-        <label>Status</label>
-         <select class ="form-control" name="billStatus" id="billStatus">
-             <option value="in consideration">In Consideration</option>
-              <option value="passed">Passed</option>
-             <option value="thrown out">Thrown Out</option>
-        </select>
-    </div>
-    
-    <div class="form-group">
-        <label>First Reading</label>
-        <input type = "date" class ="form-control" name="billFirstreading" required/>
-    </div>
-    
-        
-    <div class="form-group">
-        <label>Second Reading</label>
-        <input type = "date" class ="form-control" name="billSecondreading"/>
-    </div>
-        
-    <div class="form-group">
-        <label>Reffered to:</label>
-        <select class ="form-control" name="billCommittee" id="billCommittee">
-          <?php foreach($committees as $com):?>
-              <option value="<?php echo $com['id']?>">
-                  <?php echo $com['com_name']?>
-              </option>
-          <?php endforeach;?>
-        </select>
-    </div>
-    
-    <div class="form-group">
-        <label>Report out of Committee</label>
-        <input type = "date" class ="form-control" name="billReportoutofcommittee"/>
-    </div>
-    
-    
-    <div class="form-group">
-        <label>Third Reading</label>
-        <input type = "date" class ="form-control" name="billThirdreading"/>
-    </div>
-    
-        
-    <div class="form-group">
-        <label>Remarks</label>
-        <textarea class ="form-control" name="billRemarks" rows='6'> </textarea>
-    </div>
     
     
     <div class="form-group">

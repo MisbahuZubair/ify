@@ -100,9 +100,9 @@ class Dashboard extends CI_Controller {
             $new_data['bill_sponsor'] = $this->input->post('billSponsor');
             $new_data['bill_fulltext'] = $this->input->post('billFulltext');
             $new_data['bill_impact'] = $this->input->post('billImpact');
-            $new_data['bill_topic1'] = $this->input->post('billTopic1');
-            $new_data['bill_topic2'] = $this->input->post('billTopic2');
-            $new_data['bill_topic3'] = $this->input->post('billTopic3');
+            $new_data['bill_tag1'] = $this->input->post('billTag1');
+            $new_data['bill_tag2'] = $this->input->post('billTopic2');
+            $new_data['bill_tag3'] = $this->input->post('billTopic3');
             $new_data['bill_news'] = $this->input->post('billNews');
             $new_data['bill_status'] = $this->input->post('billStatus');
             $new_data['bill_firstreading'] = $this->input->post('billFirstreading');
@@ -118,11 +118,11 @@ class Dashboard extends CI_Controller {
                 $new_data['bill_img'] = $image;
             }
             
-            $this->Dashboard_Model->add($new_data);
+            $this->dashboard_Model->add($new_data);
             
         }
-$data['committees'] = $this->Dashboard_Model->getCommittees(); 
-        $data['legistlators'] = $this->Dashboard_Model->getLegistlators(); 
+$data['committees'] = $this->dashboard_Model->getCommittees(); 
+        $data['legistlators'] = $this->dashboard_Model->getLegistlators(); 
         $this->load->view('admin/add_bill', $data);
     }
     
@@ -181,18 +181,20 @@ $data['committees'] = $this->Dashboard_Model->getCommittees();
             }
            
             
+             
             $new_data['bill_number'] = $this->input->post('billNumber');
+            $new_data['bill_imagename'] = $img_name;
             $new_data['bill_title'] = $this->input->post('billTitle');
             $new_data['bill_sponsor']= $this->input->post('billSponsor');
-            $new_data['bill_summary']= trim($this->input->post('billSummary'));
-            $new_data['bill_additionalinfo']= trim($this->input->post('billAdditionalinfo'));
+            $new_data['bill_summary']= $this->input->post('billSummary');
+            $new_data['bill_additionalinfo']= $this->input->post('billAdditionalinfo');
             $new_data['bill_origin']= $this->input->post('origin');
             $new_data['bill_sponsor'] = $this->input->post('billSponsor');
             $new_data['bill_fulltext'] = $this->input->post('billFulltext');
             $new_data['bill_impact'] = $this->input->post('billImpact');
-            $new_data['bill_topic1'] = $this->input->post('billTopic1');
-            $new_data['bill_topic2'] = $this->input->post('billTopic2');
-            $new_data['bill_topic3'] = $this->input->post('billTopic3');
+            $new_data['bill_tag1'] = $this->input->post('billTag1');
+            $new_data['bill_tag2'] = $this->input->post('billTopic2');
+            $new_data['bill_tag3'] = $this->input->post('billTopic3');
             $new_data['bill_news'] = $this->input->post('billNews');
             $new_data['bill_status'] = $this->input->post('billStatus');
             $new_data['bill_firstreading'] = $this->input->post('billFirstreading');
@@ -203,7 +205,7 @@ $data['committees'] = $this->Dashboard_Model->getCommittees();
             $new_data['bill_remarks'] = $this->input->post('billRemarks');
             $new_data['bill_question'] = $this->input->post('billQuestion');
             
-            $this->Dashboard_Model->update($id, $new_data);       
+            $this->dashboard_Model->update($id, $new_data);       
         }
         
         $data['bill'] = $this->bills_Model->getBill($id);

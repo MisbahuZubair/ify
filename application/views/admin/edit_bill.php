@@ -63,12 +63,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">      
         <div class="col-md-4">
          <div class="form-group">
-             <div class="form-group">Origin<br/>
+             
+    <div class="form-group">Origin<br/>
         <div class="form-check form-check-inline">
           <label style="padding-right:10px"><input class="form-check-input"  type="radio" class ="form-control" name="origin" value ="House"  <?php if ($bill['bill_origin']=='House') echo "checked" ?>>House    </label>
           <label><input class="form-check-input"  type="radio" class ="form-control" name="origin" value ="Senate" <?php if ($bill['bill_origin']=='Senate') echo "checked" ?>>Senate</label>
         </div>
-                 <br/>
+        <br/>       
         <div class="form-check form-check-inline">
             <label style="padding-right:10px"><input class="form-check-input"  type="radio" class ="form-control" name="origin" value ="House to Senate"  <?php if ($bill['bill_origin']=="House to Senate") echo "checked" ?>>House to Senate</label>
           <label style="padding-right:10px"><input class="form-check-input"  type="radio" class ="form-control" name="origin" value = "Senate to House"  <?php if ($bill['bill_origin']=="Senate to House") echo "checked" ?>>Senate to House</label>
@@ -110,16 +111,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
             <div class="form-group">
         <label>Tag 1</label>
-        <input type = "text" class ="form-control" name="billtag1" id="billTopic1" value ="<?php echo $bill['bill_tag1']?>" required/>
+        <input type = "text" class ="form-control" name="billTag1" id="billTopic1" value ="<?php echo $bill['bill_tag1']?>" required/>
     </div>
     
     <div class="form-group">
         <label>Tag 2</label>
-        <input type = "text" class ="form-control" name="billtag2" id="billTopic2" value ="<?php echo $bill['bill_tag2']?>"/>
+        <input type = "text" class ="form-control" name="billTag2" id="billTopic2" value ="<?php echo $bill['bill_tag2']?>"/>
     
     <div class="form-group">
         <label>Tag 3</label>
-        <input type = "text" class ="form-control" name="billtag3" id="billTopic3 value ="<?php echo $bill['bill_tag3']?>""/>
+        <input type = "text" class ="form-control" name="billTag3" id="billTopic3 value ="<?php echo $bill['bill_tag3']?>""/>
     </div>
             <div class="form-group">
         <label>Full Text</label>

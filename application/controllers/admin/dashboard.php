@@ -97,6 +97,7 @@ class Dashboard extends CI_Controller {
             $new_data['bill_summary']= $this->input->post('billSummary');
             $new_data['bill_additionalinfo']= $this->input->post('billAdditionalinfo');
             $new_data['bill_origin']= $this->input->post('origin');
+            $new_data['bill_trans'] = $this->input->post('trans');
             $new_data['bill_sponsor'] = $this->input->post('billSponsor');
             $new_data['bill_fulltext'] = $this->input->post('billFulltext');
             $new_data['bill_impact'] = $this->input->post('billImpact');
@@ -121,7 +122,8 @@ class Dashboard extends CI_Controller {
             $this->dashboard_Model->add($new_data);
             
         }
-$data['committees'] = $this->dashboard_Model->getCommittees(); 
+        $data['page'] = 0;
+        $data['committees'] = $this->dashboard_Model->getCommittees(); 
         $data['legistlators'] = $this->dashboard_Model->getLegistlators(); 
         $this->load->view('admin/add_bill', $data);
     }
@@ -207,11 +209,11 @@ $data['committees'] = $this->dashboard_Model->getCommittees();
             
             $this->dashboard_Model->update($id, $new_data);       
         }
-        
+        $data['page'] = 1;
         $data['bill'] = $this->bills_Model->getBill($id);
         $data['committees'] = $this->dashboard_Model->getCommittees();
         $data['legistlators'] = $this->dashboard_Model->getLegistlators();
-        $this->load->view('admin/edit_bill',$data);
+        $this->load->view('admin/add_bill',$data);
     }
     
     public function do_upload($name)

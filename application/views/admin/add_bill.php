@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Assemblify</title>
+  <title>Assemblify | <?php if($page==1){echo "Edit";} ?></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -62,14 +62,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php echo form_open_multipart(''); ?>
     <div class ="row">
         <div class="col-md-4">
+            <div class="form-group">Chamber<br/>
             <div class="form-check form-check-inline">
-              <label style="padding-right:20px">House<input type="radio" class ="form-control" name="origin" value ="House"></label>
+              <label style="padding-right:20px">House<input type="radio" class ="form-control" name="origin" value ="House" <?php if($page==1){if($bill['bill_origin']=='House') {echo 'checked' ;}} ?>></label>
                 <br>
-              <label>Senate<input type="radio" class ="form-control" name="origin" value ="Senate"></label>
+              <label>Senate<input type="radio" class ="form-control" name="origin" value ="Senate" <?php if($page==1){if($bill['bill_origin']=='Senate') {echo 'checked' ;}}?>></label>
+            </div>
+            </div>
+            
+            <div class="form-group">Transmitted into chamber<br/>
+            <div class="form-check form-check-inline">
+              <label style="padding-right:20px">True<input type="radio" class ="form-control" name="trans" value =true <?php if($page==1){if($bill['bill_trans']==true) {echo 'checked' ;}}?>></label>
+                <br>
+              <label>False<input type="radio" class ="form-control" name="trans" value =false <?php if($page==1){if($bill['bill_trans']==false) {echo 'checked' ;}}?>></label>
+            </div>
             </div>
             
             <div class="form-group">
-                <label>Number</label> <input type = "text" class ="form-control" name="billNumber" required/>
+                <label>Number</label> <input type = "text" class ="form-control" name="billNumber" value="<?php if($page==1){echo $bill['bill_number'] ;}?>" required/>
+            </div>
+            
+            <div class="form-group">Sponsor Status<br/>
+            <div class="form-check form-check-inline">
+              <label style="padding-right:20px">True<input type="radio" class ="form-control" name="active" value =true></label>
+                <br>
+              <label>False<input type="radio" class ="form-control" name="active" value =false></label>
+            </div>
             </div>
             
             <div class="form-group">Sponsor
@@ -84,11 +102,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             
             <div class="form-group">
                 <label>Full Text</label>
-                <input type = "text" class ="form-control" name="billFulltext" required/>
+                <input type = "text" class ="form-control" name="billFulltext" value="<?php if($page==1){echo $bill['bill_fulltext'] ;}?>" required/>
             </div>        
              <div class="form-group">
                 <label>Topic 1</label>
-                <input type = "text" class ="form-control" name="billTopic1" id="billTopic1" required/>
+                <input type = "text" class ="form-control" name="billTag1" id="billTag1" value="<?php if($page==1){echo $bill['bill_tag1'] ;}?>" required/>
             </div>
 
             <div class="form-group">
@@ -111,7 +129,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <div class="form-group">
                 <label>First Reading</label>
-                <input type = "date" class ="form-control" name="billFirstreading" required/>
+                <input type = "date" class ="form-control" name="billFirstreading" value="<?php if($page==1){echo $bill['bill_firstreading'] ;}?>"required/>
             </div>
 
 
@@ -145,10 +163,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         
         <div class="col-md-8">
             <div class="form-group">
-                <label>Question</label><input type = "text" class ="form-control" name="billQuestion" required/>
+                <label>Question</label><input type = "text" class ="form-control" name="billQuestion" value="<?php if($page==1){echo $bill['bill_question'] ;}?>"required/>
             </div>
             <div class="form-group">
-                <label>Title</label><input type = "text" class ="form-control" name="billTitle" required/>
+                <label>Title</label><input type = "text" class ="form-control" name="billTitle" value="<?php if($page==1){echo $bill['bill_title'] ;}?>" required/>
             </div>
                 <div class="form-group">
                     <label>Summary</label>

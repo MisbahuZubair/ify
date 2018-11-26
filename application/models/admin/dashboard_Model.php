@@ -55,6 +55,15 @@ class Dashboard_Model extends CI_Model
         return $query; 
     } 
     
+    public function getTermLegistlators($term) { 
+         $sql = "SELECT id, name 
+           FROM legistlators
+           WHERE term ='".$term."'";
+           //ORDER by name";
+        $query = $this->db->query($sql)->result_array(); 
+        return $query; 
+    } 
+    
     public function editLegistlator($id) { 
          $sql = "SELECT * 
            FROM legistlators
@@ -67,7 +76,7 @@ class Dashboard_Model extends CI_Model
     public function updateLegistlator($id, $new_data) { 
         $this->db->where(['id' => $id]);
         $this->db->update('legistlators', $new_data);
-        redirect('/admin/dashboard/manageLegistlators', 'refresh');
+        //redirect('/admin/dashboard/manageLegistlators', 'refresh');
     }
         
     public function addLegistlator($new_data)
@@ -94,7 +103,20 @@ class Dashboard_Model extends CI_Model
         return $query; 
     }
     
-     public function getCommittees() { 
+    public function getInfo() { 
+        $this->db->select('assemblies');
+        $this->db->where(['id' => 0]);
+        $query = $this->db->get('info');
+        //return $query->result_array();
+        $result = $query->row_array();
+        
+        $myString = $result['assemblies'];
+    
+        $myArray = explode(',', $myString);
+        return array_reverse($myArray);
+    }
+    
+    public function getCommittees() { 
          $sql = "SELECT id, com_name 
            FROM committees
            ORDER by com_name";

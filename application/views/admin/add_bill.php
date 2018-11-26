@@ -21,9 +21,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}
 </style>
 </head>
-<body> 
+<body onload ="getTermLegistlators()"> 
 <div class="container">
-
 <nav class="navbar navbar-expand-xl navbar-dark shadow-sm p-3 mb-5 bg-secondary rounded">
     <a class="navbar-left" href="#">
         <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.png'); ?>" style="max-height:32px;"alt=""></a>
@@ -55,13 +54,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </form>
       </div>
 </nav>
-    </div>
+</div>
     
-<div class="container">
+<div class="container" >
 <!--<form method ="post"> -->
 <?php echo form_open_multipart(''); ?>
     <div class ="row">
         <div class="col-md-4">
+            <div class="form-group">Assembly<br/>
+                <select class ="form-control" name="billTerm" id="billTerm"  onchange="getTermLegistlators()">
+                <?php  foreach($info as $rep):?>
+                      <option value="<?php echo $rep?>" <?php if($page==1){if($bill['bill_term']==$rep) {echo 'selected' ;}}?>>
+                          <?php echo $rep?>
+                      </option>
+                  <?php endforeach;?>
+                </select>
+            </div>
+            
             <div class="form-group">Chamber<br/>
             <div class="form-check form-check-inline">
               <label style="padding-right:20px">House<input type="radio" class ="form-control" name="origin" value ="House" <?php if($page==1){if($bill['bill_origin']=='House') {echo 'checked' ;}} ?>></label>
@@ -82,21 +91,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <label>Number</label> <input type = "text" class ="form-control" name="billNumber" value="<?php if($page==1){echo $bill['bill_number'] ;}?>" required/>
             </div>
             
-            <div class="form-group">Sponsor Status<br/>
-            <div class="form-check form-check-inline">
-              <label style="padding-right:20px">True<input type="radio" class ="form-control" name="active" value =true></label>
-                <br>
-              <label>False<input type="radio" class ="form-control" name="active" value =false></label>
-            </div>
-            </div>
             
-            <div class="form-group">Sponsor
+            <div class="form-group"> Sponsor
                 <select class ="form-control" name="billSponsor" id="billSponsor">
-                  <?php foreach($legistlators as $rep):?>
-                      <option value="<?php echo $rep['id']?>">
-                          <?php echo $rep['name']?>
-                      </option>
-                  <?php endforeach;?>
+                  
                 </select>
             </div>
             
@@ -201,13 +199,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     
         <input class="button" class="form-control" type="submit" value="Save"/>
-
-  </div>
+<div class="container">
+    <div id="load_data"></div>
+    <div id="load_data_message">
+    </div></div>
     <footer class="footer" style="bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;">
       <div class="container">
         <span class="text-muted">© 2018 Copyright: Assemblify.</span>
 		<span class="text-muted" style="float:right">Powered by Tinqe</span>
       </div>
 </footer>
+    </div>
 </body>
+    
+    <script type="text/javascript">
+    function getTermLegistlators()
+    {
+        var term = $("#billTerm option:selected" ).text();
+        term= $.trim(term);
+        var sponsor =""+<?php if ($page==1){echo '"'.$bill['bill_sponsor'].'"';} else echo '""'?>;
+        var chamber ="";
+        if($("input:radio[name=origin]").is(":checked")){
+          chamber =$("input:radio[name=chamber]").val()
+        console.log("inside");}
+        console.log("its:"+chamber)
+        if (chamber!=""){
+        $.ajax({
+        url:"<?php echo base_url(); ?>admin/dashboard/getTermLegistlators/",
+        method:"POST",
+        data:{term: term, sponsor: sponsor},
+        cache: false,
+        success:function(data){
+            if(data == '')
+          {
+            $('#load_data_message').html('<h3>No More Result Found</h3>');
+            action = 'active';
+          }
+          else
+          {
+            console.log(data);
+            console.log('data');
+               $('#billSponsor').html("");
+             $('#billSponsor').append(data);
+            action = 'inactive';}
+        }})}}
+          
+    </script>
 </html>

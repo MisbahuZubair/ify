@@ -71,11 +71,12 @@ class Dashboard extends CI_Controller {
             $new_data['party']= $this->input->post('party');
             $new_data['state']= ($this->input->post('state'));
             $new_data['constituency']= ($this->input->post('constituency'));
-            $new_data['active']= $this->input->post('active');
+            $new_data['term'] = $this->input->post('legistlator_term');
              
             $this->dashboard_Model->addLegistlator($new_data);       
         }
-        $this->load->view('admin/add_legistlator');
+        $data['info'] = $this->dashboard_Model->getInfo();
+        $this->load->view('admin/add_legistlator',$data);
     }
     
     public function addBill()
@@ -91,6 +92,7 @@ class Dashboard extends CI_Controller {
             }
             
             $new_data['bill_number'] = $this->input->post('billNumber');
+            $new_data['bill_term'] = $this->input->post('billTerm');
             $new_data['bill_imagename'] = $img_name;
             $new_data['bill_title'] = $this->input->post('billTitle');
             $new_data['bill_sponsor']= $this->input->post('billSponsor');
@@ -122,6 +124,8 @@ class Dashboard extends CI_Controller {
             $this->dashboard_Model->add($new_data);
             
         }
+        
+        $data['info'] = $this->dashboard_Model->getInfo();
         $data['page'] = 0;
         $data['committees'] = $this->dashboard_Model->getCommittees(); 
         $data['legistlators'] = $this->dashboard_Model->getLegistlators(); 
@@ -151,15 +155,31 @@ class Dashboard extends CI_Controller {
             $new_data['party']= $this->input->post('party');
             $new_data['state']= ($this->input->post('state'));
             $new_data['constituency']= ($this->input->post('constituency'));
-            $new_data['active']= $this->input->post('active');
+             $new_data['term'] = $this->input->post('legistlator_term');
              
             $this->dashboard_Model->updateLegistlator($id, $new_data);       
         }
         
         $data['legistlator'] = $this->dashboard_Model->editLegistlator($id);
+         $data['info'] = $this->dashboard_Model->getInfo();
         $this->load->view('admin/add_legistlator',$data);
     }
     
+    public function getTermLegistlators(){
+        $options='';
+            $legistlators=$this->dashboard_Model->getTermLegistlators($this->input->post('term'));
+            $sponsor = $this->input->post('sponsor');
+            foreach($legistlators as $rep):
+                
+                if($rep['id']==$sponsor){
+                    $options.= "<option value='".$rep['id']."' selected>".$rep['name'].". </option>";
+                }
+        else{
+            $options.= "<option value='".$rep['id']."'>".$rep['name'].". </option>";
+        }
+            endforeach;
+        echo ($options);
+    }
     public function editBill($id)
     {   
         $this->load->helper('form');
@@ -185,7 +205,7 @@ class Dashboard extends CI_Controller {
             
              
             $new_data['bill_number'] = $this->input->post('billNumber');
-            $new_data['bill_imagename'] = $img_name;
+            $new_data['bill_term'] = $this->input->post('billTerm');
             $new_data['bill_title'] = $this->input->post('billTitle');
             $new_data['bill_sponsor']= $this->input->post('billSponsor');
             $new_data['bill_summary']= $this->input->post('billSummary');
@@ -209,6 +229,7 @@ class Dashboard extends CI_Controller {
             
             $this->dashboard_Model->update($id, $new_data);       
         }
+         $data['info'] = $this->dashboard_Model->getInfo();
         $data['page'] = 1;
         $data['bill'] = $this->bills_Model->getBill($id);
         $data['committees'] = $this->dashboard_Model->getCommittees();

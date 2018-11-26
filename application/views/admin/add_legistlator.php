@@ -62,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class ='row'>
         <div class='col'>
              <div class="form-group">
-                <label>Chamber</label>
+                <label><b>Chamber</b></label>
                 <div class="radio" name="chamber" onload ="" onchange="updateCommittee()">
                     <label><input type="radio" name="chamber" id="h" value="house" 
                                   <?php if(isset($legistlator)){if ($legistlator['chamber']=="house"){echo "checked";}}?>>
@@ -76,7 +76,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div class='col-md-4'>
             <div class="form-group">
-                <label>State</label>
+                <label><b>State</b></label>
                  <select class ="form-control" name="state" id="state"  value="<?php if(isset($legistlator)){echo $legistlator['constituency'];} ?>" onchange='updateConstituency()'>
                     <option value="Abia" <?php if(isset($legistlator)){if($legistlator['state']=="Abia"){echo "selected";} }?>>Abia</option>
                     <option value="Adamawa" <?php if(isset($legistlator)){if($legistlator['state']=="Adamawa"){echo "selected";} }?>>Adamawa</option>
@@ -120,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div class='col-md-4'>
             <div class="form-group">
-                <label>Constituency</label>
+                <label><b>Constituency</b></label>
                 <select class ="form-control" name="constituency" id="constituency" value= "Kano-South"> </select>
             </div>
         </div>
@@ -129,13 +129,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class ='row'>
         <div class="col-md-9">
             <div class="form-group">
-                <label>Name</label>
+                <label><b>Name</b></label>
                 <input type = "text" class ="form-control" name="name"  <?php if(isset($legistlator)){echo "value='".$legistlator['name']."'";}?> required/>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label>Party</label>
+                <label><b>Party</b></label>
                 <input type = "text" class ="form-control" name="party" <?php if(isset($legistlator)){echo "value='".$legistlator['party']."'";}?> required/>
             </div>
         </div>
@@ -143,11 +143,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">
         <div class="col-md">
     <div class="form-group">
-    <label>Term(s) </label><br/>
+        <label><b>Term(s)</b></label><br/>
         <input type="hidden" id="legistlator_term" name="legistlator_term" value="new">
-         <?php $terms = explode(',', $legistlator['term']);foreach($info as $rep):?>
+        
+         <?php if(isset($legistlator)){$terms = explode(',', $legistlator['term']);} ?>
+         <?php foreach($info as $rep):?>
              <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name='term' onchange='updateTerms()' id="<?php echo $rep?>" value="<?php echo $rep?>" <?php foreach($terms as $term){if($term == $rep) {echo 'checked';}} ?>>
+                  <input class="form-check-input" type="checkbox" name='term' onchange='updateTerms()' id="<?php echo $rep?>" value="<?php echo $rep?>" <?php  if(isset($legistlator)){foreach($terms as $term){if($term == $rep) {echo 'checked';}}} ?>>
                  <label class="form-check-label" for="<?php echo $rep?>"><?php echo $rep?></label>
                  </div>
                   <?php endforeach;?>
@@ -156,10 +158,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 
     
-    <input class="button" class="form-control" type="submit" value="Save"/>
+    <input class="btn btn-secondary" type="submit" value="Save"/>
 
   </div>
-    <footer class="footer" style="bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;">
+    <footer class="footer" style="position: fixed;left: 0;bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;">
       <div class="container">
         <span class="text-muted">© 2018 Copyright: Assemblify.</span>
 		<span class="text-muted" style="float:right">Powered by Tinqe</span>
@@ -184,12 +186,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     function clearOptions(select_name)
     {
-        var select = document.getElementById(select_name);
-        var length = select.options.length;
-        for (i = 0; i < length; i++) {
-            select.options[i] = null;
-        }
-        console.log("cleared"+select_name);
+        $('#constituency').empty();
     }
     
     function updateAll(){
@@ -200,10 +197,13 @@ function updateConstituency() {
     cons = '<?php if(isset($legistlator)){echo $legistlator['constituency'];}?>';
     var x = document.getElementById("state").value;
     var y = document.getElementById("constituency");
+    clearOptions('constituency');
+    updateConsOptions(x,y);}
+    
+function updateConsOptions(x,y){  
     if (x=="Abia") {
         if(document.getElementById("s").checked == true)
             {
-                
                 var option1= document.createElement("option");
                 option1.text = "Abia-Central";
                 option1.value ="abia-central";
@@ -221,7 +221,6 @@ function updateConstituency() {
                 var option1= document.createElement("option");
                 option1.text = "Kano-Central";
                 option1.value ="Kano-Central";
-                
                 y.add(option1);
                 
                 var option2= document.createElement("option");

@@ -205,16 +205,162 @@ function updateConsOptions(x,y){
         if(document.getElementById("s").checked == true)
             {
                 var option1= document.createElement("option");
-                option1.text = "Abia-Central";
-                option1.value ="abia-central";
+                option1.text = "Abia Central";
+                option1.value ="Abia Central";
                 y.add(option1);
                 
                 var option2= document.createElement("option");
-                option2.text = "Abia-South";
-                option2.value ="abia-south";
+                option2.text = "Abia North";
+                option2.value ="Abia North";
                 y.add(option2);
+                
+                var option3= document.createElement("option");
+                option3.text = "Abia South";
+                option3.value ="Abia South";
+                y.add(option3);
             }
     }
+    
+    else if (x=="Adamawa") {
+        if(document.getElementById("s").checked == true)
+            {
+                var option1= document.createElement("option");
+                option1.text = "Adamawa Central";
+                option1.value ="Adamawa Central";
+                y.add(option1);
+                
+                var option2= document.createElement("option");
+                option2.text = "Adamawa North";
+                option2.value ="Adamawa North";
+                y.add(option2);
+                
+                var option3= document.createElement("option");
+                option3.text = "Adamawa South";
+                option3.value ="Adamawa south";
+                y.add(option3);
+            }
+    }
+    
+    else if (x=="Akwa-Ibom") {
+        if(document.getElementById("s").checked == true)
+            {
+                var option1= document.createElement("option");
+                option1.text = "Akwa-Ibom North East";
+                option1.value ="Akwa-Ibom North East";
+                y.add(option1);
+                
+                var option2= document.createElement("option");
+                option2.text = "Akwa-Ibom West";
+                option2.value ="Akwa-Ibom West";
+                y.add(option2);
+                
+                var option3= document.createElement("option");
+                option3.text = "Akwa-Ibom South";
+                option3.value ="Akwa-Ibom South";
+                y.add(option3);
+            }
+    }
+    
+    else if (x=="Anambra") {
+        if(document.getElementById("s").checked == true)
+            {
+                var option1= document.createElement("option");
+                option1.text = "Anambra Central";
+                option1.value ="Anambra Central";
+                y.add(option1);
+                
+                var option2= document.createElement("option");
+                option2.text = "Anambra North";
+                option2.value ="Anambra North";
+                y.add(option2);
+                
+                var option3= document.createElement("option");
+                option3.text = "Anambra South";
+                option3.value ="Anambra South";
+                y.add(option3);
+            }
+    }
+    
+    else if (x=="Bauchi") {
+        if(document.getElementById("s").checked == true)
+            {
+                var option1= document.createElement("option");
+                option1.text = "Bauchi Central";
+                option1.value ="Bauchi Central";
+                y.add(option1);
+                
+                var option2= document.createElement("option");
+                option2.text = "Bauchi North";
+                option2.value ="Bauchi North";
+                y.add(option2);
+                
+                var option3= document.createElement("option");
+                option3.text = "Bauchi South";
+                option3.value ="Bauchi South";
+                y.add(option3);
+            }
+    }
+    
+    else if (x=="Bayelsa") {
+        if(document.getElementById("s").checked == true)
+            {
+                var option1= document.createElement("option");
+                option1.text = "Bayelsa Central";
+                option1.value ="Bayelsa Central";
+                y.add(option1);
+                
+                var option2= document.createElement("option");
+                option2.text = "Bayelsa East";
+                option2.value ="Bayelsa East";
+                y.add(option2);
+                
+                var option3= document.createElement("option");
+                option3.text = "Bayelsa West";
+                option3.value ="Bayelsa West";
+                y.add(option3);
+            }
+    }
+    
+    else if (x=="Benue") {
+        if(document.getElementById("s").checked == true)
+            {
+                var option1= document.createElement("option");
+                option1.text = "Benue South";
+                option1.value ="Benue South";
+                y.add(option1);
+                
+                var option2= document.createElement("option");
+                option2.text = "Benue East";
+                option2.value ="Benue East";
+                y.add(option2);
+                
+                var option3= document.createElement("option");
+                option3.text = "Benue West";
+                option3.value ="Benue West";
+                y.add(option3);
+            }
+    }
+    
+    else if(x=="Borno") {
+        if(document.getElementById("s").checked == true)
+            {
+                var option1= document.createElement("option");
+                option1.text = "Borno Central";
+                option1.value ="Borno Central";
+                y.add(option1);
+                
+                var option2= document.createElement("option");
+                option2.text = "Borno South";
+                option2.value ="Borno South";
+                y.add(option2);
+                
+                var option3= document.createElement("option");
+                option3.text = "Borno North";
+                option3.value ="Borno North";
+                y.add(option3);
+            } 
+    }
+    
     else if(x=="Kano") {
         if(document.getElementById("s").checked == true)
             {

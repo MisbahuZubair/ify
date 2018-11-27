@@ -61,7 +61,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php echo form_open_multipart(''); ?>
     <div class ="row">
         <div class="col-md-4">
-            <div class="form-group">Assembly<br/>
+            <div class="form-group">
+                <label><b>Assembly</b></label>
                 <select class ="form-control" name="billTerm" id="billTerm"  onchange="getTermLegistlators()">
                 <?php  foreach($info as $rep):?>
                       <option value="<?php echo $rep?>" <?php if($page==1){if($bill['bill_term']==$rep) {echo 'selected' ;}}?>>
@@ -71,20 +72,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </select>
             </div>
             
-            <div class="form-group">Chamber<br/>
-            <div class="form-check form-check-inline">
-              <label style="padding-right:20px">House<input type="radio" class ="form-control" name="origin" value ="House" <?php if($page==1){if($bill['bill_origin']=='House') {echo 'checked' ;}} ?>></label>
-                <br>
-              <label>Senate<input type="radio" class ="form-control" name="origin" value ="Senate" <?php if($page==1){if($bill['bill_origin']=='Senate') {echo 'checked' ;}}?>></label>
+            <div class="form-group">
+                <label><b>Chamber</b></label>
+                <div class="radio" name="origin" >
+                    <label><input type="radio" name="origin" id="h" value="house" 
+                                  <?php if($page==1){if($bill['bill_origin']=='House') {echo 'checked' ;}} ?>>
+                                  House</label>
+
+                    <label><input type="radio"name="origin" id="s" value="senate"
+                        <?php if($page==1){if($bill['bill_origin']=='Senate') {echo 'checked' ;}}?>>
+                        Senate</label>
+                </div>
             </div>
-            </div>
+
             
-            <div class="form-group">Transmitted into chamber<br/>
-            <div class="form-check form-check-inline">
-              <label style="padding-right:20px">True<input type="radio" class ="form-control" name="trans" value =true <?php if($page==1){if($bill['bill_trans']==true) {echo 'checked' ;}}?>></label>
-                <br>
-              <label>False<input type="radio" class ="form-control" name="trans" value =false <?php if($page==1){if($bill['bill_trans']==false) {echo 'checked' ;}}?>></label>
-            </div>
+            <div class="form-group">
+                <label><b>Transmitted</b></label>
+                <div class="radio" name="trans" >
+                    <label><input type="radio" name="trans" value=true
+                                  <?php if($page==1){if($bill['bill_trans']==true) {echo 'checked' ;}}?>>
+                                  True</label>
+
+                    <label><input type="radio" name="trans" value=false
+                       <?php if($page==1){if($bill['bill_trans']==false) {echo 'checked' ;}}?>>
+                        False</label>
+                </div>
             </div>
             
             <div class="form-group">

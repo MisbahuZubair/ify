@@ -71,8 +71,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <br/>       
         <div class="form-check form-check-inline">
-            <label style="padding-right:10px"><input class="form-check-input"  type="radio" class ="form-control" name="origin" value ="House to Senate"  <?php if ($bill['bill_origin']=="House to Senate") echo "checked" ?>>House to Senate</label>
-          <label style="padding-right:10px"><input class="form-check-input"  type="radio" class ="form-control" name="origin" value = "Senate to House"  <?php if ($bill['bill_origin']=="Senate to House") echo "checked" ?>>Senate to House</label>
+            <label style="padding-right:10px"><input class="form-check-input"  type="radio"  name="origin" value ="House to Senate"  <?php if ($bill['bill_origin']=="House to Senate") echo "checked" ?>>House to Senate</label>
+          <label style="padding-right:10px"><input type="radio" class ="form-control" name="origin" value = "Senate to House"  <?php if ($bill['bill_origin']=="Senate to House") echo "checked" ?>>Senate to House</label>
         </div>
     </div>             
              

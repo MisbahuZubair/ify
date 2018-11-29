@@ -104,8 +104,8 @@ class Dashboard extends CI_Controller {
             $new_data['bill_fulltext'] = $this->input->post('billFulltext');
             $new_data['bill_impact'] = $this->input->post('billImpact');
             $new_data['bill_tag1'] = $this->input->post('billTag1');
-            $new_data['bill_tag2'] = $this->input->post('billTopic2');
-            $new_data['bill_tag3'] = $this->input->post('billTopic3');
+            $new_data['bill_tag2'] = $this->input->post('billTag2');
+            $new_data['bill_tag3'] = $this->input->post('billTag3');
             $new_data['bill_news'] = $this->input->post('billNews');
             $new_data['bill_status'] = $this->input->post('billStatus');
             $new_data['bill_firstreading'] = $this->input->post('billFirstreading');
@@ -167,19 +167,74 @@ class Dashboard extends CI_Controller {
     
     public function getTermLegistlators(){
         $options='';
-            $legistlators=$this->dashboard_Model->getTermLegistlators($this->input->post('term'));
+            $legistlators=$this->dashboard_Model->getTermLegistlators($this->input->post('term'),$this->input->post('chamber'));
             $sponsor = $this->input->post('sponsor');
             foreach($legistlators as $rep):
                 
                 if($rep['id']==$sponsor){
-                    $options.= "<option value='".$rep['id']."' selected>".$rep['name'].". </option>";
+                    $options.= "<option value='".$rep['id']."' selected>".$rep['name']."</option>";
                 }
         else{
-            $options.= "<option value='".$rep['id']."'>".$rep['name'].". </option>";
+            $options.= "<option value='".$rep['id']."'>".$rep['name']."</option>";
         }
             endforeach;
         echo ($options);
     }
+    
+    public function getTags(){
+        $options='';
+        $tags=$this->dashboard_Model->getTags($this->input->post('tag_column'));
+        $selected_tag = $this->input->post('selected_tag');
+        foreach($tags as $rep):
+                
+                if($rep==$selected_tag){
+                    $options.= "<option value='".$rep."' selected>".$rep."</option>";
+                }
+        else{
+            $options.= "<option value='".$rep."'>".$rep."</option>";
+        }
+            endforeach;
+        echo ($options);
+
+    }
+    
+    public function getCons(){
+            $options='';
+            $state = $this->input->post('state');
+            $chamber_cons = $this->input->post('chamber_cons');
+            $conss=$this->dashboard_Model->getCons($state, $chamber_cons);
+            echo "<script> console.log('".$state."'); </script>";
+            $cons = $this->input->post('cons');
+            foreach($conss as $rep):
+                
+                if($rep==$cons){
+                    $options.= "<option value='".$rep."' selected>".$rep." </option>";
+                }
+        else{
+            $options.= "<option value='".$rep."'>".$rep." </option>";
+        }
+            endforeach;
+        echo ($options);
+        
+    }
+    
+    public function getStates(){
+            $options='';
+            $states=$this->dashboard_Model->getStates();
+            $state = $this->input->post('state');
+            foreach($states as $rep):
+                
+                if($rep['state']==$state){
+                    $options.= "<option value='".$rep['state']."' selected>".$rep['state']." </option>";
+                }
+        else{
+            $options.= "<option value='".$rep['state']."'>".$rep['state']." </option>";
+        }
+            endforeach;
+        echo ($options);
+        
+    }
+    
     public function editBill($id)
     {   
         $this->load->helper('form');
@@ -215,8 +270,8 @@ class Dashboard extends CI_Controller {
             $new_data['bill_fulltext'] = $this->input->post('billFulltext');
             $new_data['bill_impact'] = $this->input->post('billImpact');
             $new_data['bill_tag1'] = $this->input->post('billTag1');
-            $new_data['bill_tag2'] = $this->input->post('billTopic2');
-            $new_data['bill_tag3'] = $this->input->post('billTopic3');
+            $new_data['bill_tag2'] = $this->input->post('billTag2');
+            $new_data['bill_tag3'] = $this->input->post('billTag3');
             $new_data['bill_news'] = $this->input->post('billNews');
             $new_data['bill_status'] = $this->input->post('billStatus');
             $new_data['bill_firstreading'] = $this->input->post('billFirstreading');

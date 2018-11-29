@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}
 </style>
 </head>
-<body onload ="updateAll()"> 
+<body> 
 <div class="container">
 <nav class="navbar navbar-expand-xl navbar-dark shadow-sm p-3 mb-5 bg-secondary rounded">
     <a class="navbar-left" href="#">
@@ -77,44 +77,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class='col-md-4'>
             <div class="form-group">
                 <label><b>State</b></label>
-                 <select class ="form-control" name="state" id="state"  value="<?php if(isset($legistlator)){echo $legistlator['constituency'];} ?>" onchange='updateConstituency()'>
-                    <option value="Abia" <?php if(isset($legistlator)){if($legistlator['state']=="Abia"){echo "selected";} }?>>Abia</option>
-                    <option value="Adamawa" <?php if(isset($legistlator)){if($legistlator['state']=="Adamawa"){echo "selected";} }?>>Adamawa</option>
-                    <option value="Akwa-ibom" <?php if(isset($legistlator)){if($legistlator['state']=="Akwa-Ibom"){echo "selected";} }?>>Akwa-Ibom</option>
-                    <option value="Anambra" <?php if(isset($legistlator)){if($legistlator['state']=="Anambra"){echo "selected";} }?>>Anambra</option>
-                    <option value="Bauchi" <?php if(isset($legistlator)){if($legistlator['state']=="Bauchi"){echo "selected";} }?>>Bauchi</option>
-                    <option value="Bayelsa" <?php if(isset($legistlator)){if($legistlator['state']=="Bayelsa"){echo "selected";} }?>>Bayelsa</option>
-                    <option value="Benue" <?php if(isset($legistlator)){if($legistlator['state']=="Benue"){echo "selected";} }?>>Benue</option>
-                    <option value="Borno" <?php if(isset($legistlator)){if($legistlator['state']=="Borno"){echo "selected";} }?>>Borno</option>
-                    <option value="Cross River" <?php if(isset($legistlator)){if($legistlator['state']=="Cross River"){echo "selected";} }?>>Cross River</option>
-                    <option value="Delta" <?php if(isset($legistlator)){if($legistlator['state']=="Delta"){echo "selected";} }?>>Delta</option>
-                    <option value="Ebonyi" <?php if(isset($legistlator)){if($legistlator['state']=="Ebonyi"){echo "selected";} }?>>Ebonyi</option>
-                    <option value="Edo" <?php if(isset($legistlator)){if($legistlator['state']=="Edo"){echo "selected";} }?>>Edo</option>
-                    <option value="Ekiti" <?php if(isset($legistlator)){if($legistlator['state']=="Ekiti"){echo "selected";} }?>>Ekiti</option>
-                    <option value="Enugu" <?php if(isset($legistlator)){if($legistlator['state']=="Enugu"){echo "selected";} }?>>Enugu</option>
-                    <option value="Gombe" <?php if(isset($legistlator)){if($legistlator['state']=="Gombe"){echo "selected";} }?>>Gombe</option>
-                    <option value="Imo" <?php if(isset($legistlator)){if($legistlator['state']=="Imo"){echo "selected";} }?>>Imo</option>
-                    <option value="Jigawa" <?php if(isset($legistlator)){if($legistlator['state']=="Jigawa"){echo "selected";} }?>>Jigawa</option>
-                    <option value="Kaduna" <?php if(isset($legistlator)){if($legistlator['state']=="Kaduna"){echo "selected";} }?>>Kaduna</option>
-                    <option value="Kano"<?php if(isset($legistlator)){if($legistlator['state']=="Kano"){echo "selected";} }?>>Kano</option>
-                    <option value="Katsina" <?php if(isset($legistlator)){if($legistlator['state']=="Katsina"){echo "selected";} }?>>Katsina</option>
-                    <option value="Kebbi" <?php if(isset($legistlator)){if($legistlator['state']=="Kebbi"){echo "selected";} }?>>Kebbi</option>
-                    <option value="Kogi" <?php if(isset($legistlator)){if($legistlator['state']=="Kogi"){echo "selected";} }?>>Kogi</option>
-                    <option value="Kwara" <?php if(isset($legistlator)){if($legistlator['state']=="Kwara"){echo "selected";} }?>>Kwara</option>
-                    <option value="Lagos" <?php if(isset($legistlator)){if($legistlator['state']=="Lagos"){echo "selected";} }?>>Lagos</option>
-                    <option value="Nasarawa" <?php if(isset($legistlator)){if($legistlator['state']=="Nasarawa"){echo "selected";} }?>>Nasarawa</option>
-                    <option value="Niger" <?php if(isset($legistlator)){if($legistlator['state']=="Niger"){echo "selected";} }?>>Niger</option>
-                    <option value="Ogun" <?php if(isset($legistlator)){if($legistlator['state']=="Ogun"){echo "selected";} }?>>Ogun</option>
-                    <option value="Ondo" <?php if(isset($legistlator)){if($legistlator['state']=="Ondo"){echo "selected";} }?>>Ondo</option>
-                    <option value="Osun" <?php if(isset($legistlator)){if($legistlator['state']=="Osun"){echo "selected";} }?>>Osun</option>
-                    <option value="Oyo" <?php if(isset($legistlator)){if($legistlator['state']=="Oyo"){echo "selected";} }?>>Oyo</option>
-                    <option value="Plateau" <?php if(isset($legistlator)){if($legistlator['state']=="Plateau"){echo "selected";} }?>>Plateau</option>
-                    <option value="Rivers" <?php if(isset($legistlator)){if($legistlator['state']=="Rivers"){echo "selected";} }?>>Rivers</option>
-                    <option value="Sokoto" <?php if(isset($legistlator)){if($legistlator['state']=="Sokoto"){echo "selected";} }?>>Sokoto</option>
-                    <option value="Taraba" <?php if(isset($legistlator)){if($legistlator['state']=="Taraba"){echo "selected";} }?>>Taraba</option>
-                    <option value="Yobe" <?php if(isset($legistlator)){if($legistlator['state']=="Yobe"){echo "selected";} }?>>Yobe</option>
-                    <option value="Zamfara" <?php if(isset($legistlator)){if($legistlator['state']=="Zamfara"){echo "selected";} }?>>Zamfara</option>
-                    <option value="Federal Capital Territory" <?php if(isset($legistlator)){if($legistlator['state']=="Federal Capital Territory"){echo "selected";} }?>>Federal Capital Territory</option>
+                 <select class ="form-control" name="state" id="state" onchange='updateCons()'>
+                    
                 </select>
             </div>
         </div>
@@ -169,7 +133,78 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </footer>
 
 <script type="text/javascript">
-    function updateTerms(){
+    $(document).ready(function() {
+        updateChamber();
+        getStates();
+    });
+    
+    $("#s").click(function(){
+    updateCons();
+});
+       $("#h").click(function(){
+    updateCons();
+});
+    
+    function getStates()
+    {
+        var state =""+<?php if (isset($legistlator)){echo '"'.$legistlator['state'].'"';} else echo '""'?>;
+        $.ajax({
+        url:"<?php echo base_url(); ?>admin/dashboard/getStates/",
+        method:"POST",
+        data:{state: state},
+        cache: false,
+        success:function(data){
+            if(data == '')
+          {
+            $('#load_data_message').html('<h3>No More Result Found</h3>');
+            action = 'active';
+          }
+          else
+          {
+             $('#state').html("");
+             $('#state').append(data);
+            action = 'inactive';}
+        }})
+        
+        if(state==""){state='Abia';}
+        updateCons(state);
+    }
+    
+    function updateChamber(){
+        if($('#s').is(':checked')||$('#h').is(':checked')) {} else {$('#h').attr('checked','checked');}
+    }
+    
+    function getSelectedChamber(){
+        if($('#h').is(':checked')){return 'house_constituencies'} else return 'senate_constituencies';
+    }
+    
+    
+    function updateCons(state){
+        if(state){}else{var state =$("#state option:selected").val();}
+        var chamber_cons = getSelectedChamber();
+        console.log($("#state option:selected").text());
+        var cons =""+<?php if (isset($legistlator)){echo '"'.$legistlator['constituency'].'"';} else echo '""'?>;
+        $.ajax({
+        url:"<?php echo base_url(); ?>admin/dashboard/getCons/",
+        method:"POST",
+        data:{cons: cons, chamber_cons: chamber_cons, state:state},
+        cache: false,
+        success:function(data){
+            if(data == '')
+          {
+            $('#load_data_message').html('<h3>No More Result Found</h3>');
+            action = 'active';
+          }
+          else
+          {
+            console.log(data);
+            console.log('data');
+            $('#constituency').html("");
+            $('#constituency').append(data);
+            action = 'inactive';}
+        }})
+    }
+        function updateTerms(){
         var termString='';
        var terms = document.getElementsByName("term");
         if (terms[0].checked == true){termString +=terms[0].value + ',';}
@@ -183,205 +218,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
        document.getElementById("legistlator_term").value = termString;
         console.log(termString);
     }
-
-    function clearOptions(select_name)
-    {
-        $('#constituency').empty();
-    }
-    
-    function updateAll(){
-        updateConstituency();
-    }
- 
-function updateConstituency() {
-    cons = '<?php if(isset($legistlator)){echo $legistlator['constituency'];}?>';
-    var x = document.getElementById("state").value;
-    var y = document.getElementById("constituency");
-    clearOptions('constituency');
-    updateConsOptions(x,y);}
-    
-function updateConsOptions(x,y){  
-    if (x=="Abia") {
-        if(document.getElementById("s").checked == true)
-            {
-                var option1= document.createElement("option");
-                option1.text = "Abia Central";
-                option1.value ="Abia Central";
-                y.add(option1);
-                
-                var option2= document.createElement("option");
-                option2.text = "Abia North";
-                option2.value ="Abia North";
-                y.add(option2);
-                
-                var option3= document.createElement("option");
-                option3.text = "Abia South";
-                option3.value ="Abia South";
-                y.add(option3);
-            }
-    }
-    
-    else if (x=="Adamawa") {
-        if(document.getElementById("s").checked == true)
-            {
-                var option1= document.createElement("option");
-                option1.text = "Adamawa Central";
-                option1.value ="Adamawa Central";
-                y.add(option1);
-                
-                var option2= document.createElement("option");
-                option2.text = "Adamawa North";
-                option2.value ="Adamawa North";
-                y.add(option2);
-                
-                var option3= document.createElement("option");
-                option3.text = "Adamawa South";
-                option3.value ="Adamawa south";
-                y.add(option3);
-            }
-    }
-    
-    else if (x=="Akwa-Ibom") {
-        if(document.getElementById("s").checked == true)
-            {
-                var option1= document.createElement("option");
-                option1.text = "Akwa-Ibom North East";
-                option1.value ="Akwa-Ibom North East";
-                y.add(option1);
-                
-                var option2= document.createElement("option");
-                option2.text = "Akwa-Ibom West";
-                option2.value ="Akwa-Ibom West";
-                y.add(option2);
-                
-                var option3= document.createElement("option");
-                option3.text = "Akwa-Ibom South";
-                option3.value ="Akwa-Ibom South";
-                y.add(option3);
-            }
-    }
-    
-    else if (x=="Anambra") {
-        if(document.getElementById("s").checked == true)
-            {
-                var option1= document.createElement("option");
-                option1.text = "Anambra Central";
-                option1.value ="Anambra Central";
-                y.add(option1);
-                
-                var option2= document.createElement("option");
-                option2.text = "Anambra North";
-                option2.value ="Anambra North";
-                y.add(option2);
-                
-                var option3= document.createElement("option");
-                option3.text = "Anambra South";
-                option3.value ="Anambra South";
-                y.add(option3);
-            }
-    }
-    
-    else if (x=="Bauchi") {
-        if(document.getElementById("s").checked == true)
-            {
-                var option1= document.createElement("option");
-                option1.text = "Bauchi Central";
-                option1.value ="Bauchi Central";
-                y.add(option1);
-                
-                var option2= document.createElement("option");
-                option2.text = "Bauchi North";
-                option2.value ="Bauchi North";
-                y.add(option2);
-                
-                var option3= document.createElement("option");
-                option3.text = "Bauchi South";
-                option3.value ="Bauchi South";
-                y.add(option3);
-            }
-    }
-    
-    else if (x=="Bayelsa") {
-        if(document.getElementById("s").checked == true)
-            {
-                var option1= document.createElement("option");
-                option1.text = "Bayelsa Central";
-                option1.value ="Bayelsa Central";
-                y.add(option1);
-                
-                var option2= document.createElement("option");
-                option2.text = "Bayelsa East";
-                option2.value ="Bayelsa East";
-                y.add(option2);
-                
-                var option3= document.createElement("option");
-                option3.text = "Bayelsa West";
-                option3.value ="Bayelsa West";
-                y.add(option3);
-            }
-    }
-    
-    else if (x=="Benue") {
-        if(document.getElementById("s").checked == true)
-            {
-                var option1= document.createElement("option");
-                option1.text = "Benue South";
-                option1.value ="Benue South";
-                y.add(option1);
-                
-                var option2= document.createElement("option");
-                option2.text = "Benue East";
-                option2.value ="Benue East";
-                y.add(option2);
-                
-                var option3= document.createElement("option");
-                option3.text = "Benue West";
-                option3.value ="Benue West";
-                y.add(option3);
-            }
-    }
-    
-    else if(x=="Borno") {
-        if(document.getElementById("s").checked == true)
-            {
-                var option1= document.createElement("option");
-                option1.text = "Borno Central";
-                option1.value ="Borno Central";
-                y.add(option1);
-                
-                var option2= document.createElement("option");
-                option2.text = "Borno South";
-                option2.value ="Borno South";
-                y.add(option2);
-                
-                var option3= document.createElement("option");
-                option3.text = "Borno North";
-                option3.value ="Borno North";
-                y.add(option3);
-            } 
-    }
-    
-    else if(x=="Kano") {
-        if(document.getElementById("s").checked == true)
-            {
-                var option1= document.createElement("option");
-                option1.text = "Kano-Central";
-                option1.value ="Kano-Central";
-                y.add(option1);
-                
-                var option2= document.createElement("option");
-                option2.text = "Kano-South";
-                option2.value ="Kano-South";
-                y.add(option2);
-                
-                var option3= document.createElement("option");
-                option3.text = "Kano-North";
-                option3.value ="Kano-North";
-                y.add(option3);
-            } 
-    }
-    y.value=cons;}
-    
+          
 </script>
     
     </body>

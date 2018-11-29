@@ -59,11 +59,11 @@ class Bills extends CI_Controller {
         if($row->bill_tag3!=""){$tags.="<a href='".site_url('bills/tag/'.$row->bill_tag3)."'>#".$row->bill_tag3."</a> ";}
         
         $status="";
-        if($row->bill_status=="Passed"){$status.='Passed <i class="fas fa-check-circle" style="color:green;"></i> on '.$row->bill_thirdreading;}
-        else if($row->bill_status=="In consideration"){$status.='In Consideration <i class="fa fa-clock" style="color:orange;"></i>';}
-        else if($row->bill_status=="Thrown out"){$status.='Thrown out <i class="fa fa-ban" style="color:red;"></i>';}
+        if($row->bill_status=="Passed"){$status.='<i class="fas fa-check-circle" style="color:green;"></i> on '.$row->bill_thirdreading;}
+        else if($row->bill_status=="In consideration"){$status.='<i class="fa fa-clock" style="color:orange;"></i>';}
+        else if($row->bill_status=="Thrown out"){$status.='<i class="fa fa-ban" style="color:red;"></i>';}
                     
-        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:#F5FCFB"><div class="card-header" style="padding:0; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0; background-color:#EEFAF9">'.$row->bill_number.', introduced on '.$row->bill_firstreading.'</div><hr/><div>'.$tags.'</div><hr/><div>'.$status.'</div><a class=" btn" style="background:#4ecdc4; color:white" href="'.site_url('bills/display/').$row->id.'" role="button">View Details</a></div></div>';
+        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:"><div class="card-header" style="padding:0; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0; background-color:">'.$status.' '.$row->bill_number.', introduced on '.$row->bill_firstreading.'<hr style="max-width:70%; margin:0 auto;background:#4ecdc4;"/></div><div>'.$tags.'</div><hr/><a class=" btn" style="background:#4ecdc4; color:white" href="'.site_url('bills/display/').$row->id.'" role="button">View Details</a></div></div>';
        }
                  $output .='</div>';
             }

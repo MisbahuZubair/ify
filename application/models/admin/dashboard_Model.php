@@ -55,13 +55,48 @@ class Dashboard_Model extends CI_Model
         return $query; 
     } 
     
-    public function getTermLegistlators($term) { 
+    public function getTermLegistlators($term,$chamber) { 
          $sql = "SELECT id, name 
            FROM legistlators
-           WHERE term ='".$term."'";
+           WHERE FIND_IN_SET('".$term."',term)>0
+           AND chamber ='".$chamber."'";
            //ORDER by name";
         $query = $this->db->query($sql)->result_array(); 
         return $query; 
+    } 
+    
+    public function getStates() { 
+         $sql = "SELECT state 
+           FROM constituencies";
+           //ORDER by name";
+        $query = $this->db->query($sql)->result_array(); 
+        return $query; 
+    } 
+    
+    public function getCons($state, $chamber_cons) { 
+         $sql = "SELECT *
+           FROM constituencies
+           WHERE state= '".$state."'";
+           //ORDER by name";
+        
+        $result = $this->db->query($sql)->row_array();
+        $myString = $result[$chamber_cons];
+        $myArray = explode(',', $myString);
+        print_r($myArray);
+        return $myArray;
+    } 
+
+    public function getTags($tag_column) { 
+         $sql = "SELECT *
+           FROM info
+           WHERE id= 0";
+           //ORDER by name";
+        
+        $result = $this->db->query($sql)->row_array();
+        $myString = $result[$tag_column];
+        $myArray = explode(',', $myString);
+        print_r($myArray);
+        return $myArray;
     } 
     
     public function editLegistlator($id) { 

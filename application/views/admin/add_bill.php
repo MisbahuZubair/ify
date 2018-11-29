@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Assemblify | <?php if($page==1){echo "Edit";} ?></title>
+  <title>Assemblify Dashboard | <?php if($page==1){echo "Edit";}else {{echo "Add bill";}} ?></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -60,7 +60,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!--<form method ="post"> -->
 <?php echo form_open_multipart(''); ?>
     <div class ="row">
-        <div class="col-md-4">
+        <div class ="col-md-3">
+            <div class="form-group">
+                <label><b>Chamber</b></label>
+                <div class="radio" name="origin" onchange="getTermLegistlators()" >
+                    <label><input type="radio" name="origin" id="h" value="house" 
+                                  <?php if($page==1){if($bill['bill_origin']=='House') {echo 'checked' ;}} ?>>
+                                  House</label>
+
+                    <label><input type="radio"name="origin" id="s" value="senate"
+                        <?php if($page==1){if($bill['bill_origin']=='Senate') {echo 'checked' ;}}?>>
+                        Senate</label>
+                </div>
+            </div>
+        </div>
+        <div class ="col-md-2">
+            <div class="form-group">
+                <label><b>Transmitted</b></label>
+                <div class="radio" name="trans" >
+                    <label><input type="radio" name="trans" id="trans_false" value=false
+                       <?php if($page==1){if($bill['bill_trans']==false) {echo 'checked' ;}}?>>
+                        False</label>
+                    
+                    <label><input type="radio" name="trans" id ="trans_true" value=true
+                                  <?php if($page==1){if($bill['bill_trans']==true) {echo 'checked' ;}}?>>
+                                  True</label>
+                </div>
+            </div>
+        </div>
+        <div class ="col-md-4">
             <div class="form-group">
                 <label><b>Assembly</b></label>
                 <select class ="form-control" name="billTerm" id="billTerm"  onchange="getTermLegistlators()">
@@ -71,85 +99,97 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <?php endforeach;?>
                 </select>
             </div>
-            
+        </div>
+        <div class ="col-md-3">
             <div class="form-group">
-                <label><b>Chamber</b></label>
-                <div class="radio" name="origin" >
-                    <label><input type="radio" name="origin" id="h" value="house" 
-                                  <?php if($page==1){if($bill['bill_origin']=='House') {echo 'checked' ;}} ?>>
-                                  House</label>
-
-                    <label><input type="radio"name="origin" id="s" value="senate"
-                        <?php if($page==1){if($bill['bill_origin']=='Senate') {echo 'checked' ;}}?>>
-                        Senate</label>
-                </div>
-            </div>
-
-            
-            <div class="form-group">
-                <label><b>Transmitted</b></label>
-                <div class="radio" name="trans" >
-                    <label><input type="radio" name="trans" value=true
-                                  <?php if($page==1){if($bill['bill_trans']==true) {echo 'checked' ;}}?>>
-                                  True</label>
-
-                    <label><input type="radio" name="trans" value=false
-                       <?php if($page==1){if($bill['bill_trans']==false) {echo 'checked' ;}}?>>
-                        False</label>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label>Number</label> <input type = "text" class ="form-control" name="billNumber" value="<?php if($page==1){echo $bill['bill_number'] ;}?>" required/>
-            </div>
-            
-            
-            <div class="form-group"> Sponsor
-                <select class ="form-control" name="billSponsor" id="billSponsor">
-                  
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label>Full Text</label>
-                <input type = "text" class ="form-control" name="billFulltext" value="<?php if($page==1){echo $bill['bill_fulltext'] ;}?>" required/>
-            </div>        
-             <div class="form-group">
-                <label>Topic 1</label>
-                <input type = "text" class ="form-control" name="billTag1" id="billTag1" value="<?php if($page==1){echo $bill['bill_tag1'] ;}?>" required/>
-            </div>
-
-            <div class="form-group">
-                <label>Topic 2</label>
-                <input type = "text" class ="form-control" name="billTopic2" id="billTopic2"/>
-            </div>
-
-            <div class="form-group">
-                <label>Topic 3</label>
-                <input type = "text" class ="form-control" name="billTopic3" id="billTopic3"/>
-            </div>
-            <div class="form-group">
-                <label>Status</label>
+                <label><b>Status</b></label>
                  <select class ="form-control" name="billStatus" id="billStatus">
                      <option value="in consideration">In Consideration</option>
                       <option value="passed">Passed</option>
                      <option value="thrown out">Thrown Out</option>
                 </select>
             </div>
-
+        </div>
+    </div>
+    
+    <div class ="row">
+        <div class ="col-md-4">
+            <div class="form-group"> 
+                <label><b>Sponsor</b></label>
+                <select class ="form-control" name="billSponsor" id="billSponsor">  
+                </select>
+            </div>
+        </div>
+        <div class ="col-md-4">
             <div class="form-group">
-                <label>First Reading</label>
+                <label><b>Number</b></label> <input type = "text" class ="form-control" name="billNumber" value="<?php if($page==1){echo $bill['bill_number'] ;}?>" required/>
+            </div>
+        </div>
+        <div class ="col-md-4">
+            <div class="form-group">
+                <label><b>Full Text</b></label>
+                <input type = "text" class ="form-control" name="billFulltext" value="<?php if($page==1){echo $bill['bill_fulltext'] ;}?>" required/>
+            </div>
+        </div>
+    </div>
+    
+    <div class ="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label><b>Question</b></label><textarea rows="4" cols="50" maxlength="200" class ="form-control" name="billQuestion" value=" "required><?php if($page==1){echo $bill['bill_question'] ;}?></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label><b>Title</b></label><textarea rows="4" cols="50" maxlength="250" class ="form-control" name="billTitle" value="" required><?php if($page==1){echo $bill['bill_title'] ;}?></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <div class ="row">
+        <div class ="col-md-4">
+           <div class="form-group">
+               <label><b>Tag 1</b></label>
+                <select class ="form-control" name="billTag1" id="billTag1" required ></select>
+            </div>
+        </div>
+        <div class ="col-md-4">
+            <div class="form-group">
+                <label><b>Tag 2</b></label>
+                <select class ="form-control" name="billTag2" id="billTag2"></select>
+            </div>
+        </div>
+        <div class ="col-md-4">
+            <div class="form-group">
+                <label><b>Tag 3</b></label>
+                <select class ="form-control" name="billTag3" id="billTag3"></select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <label><b>Summary</b></label>
+            <textarea class ="form-control" name="billSummary" rows='6' value="" required> <?php if($page==1){echo $bill['bill_summary'] ;}?></textarea>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label><b>First Reading</b></label>
                 <input type = "date" class ="form-control" name="billFirstreading" value="<?php if($page==1){echo $bill['bill_firstreading'] ;}?>"required/>
             </div>
-
-
+        </div>
+        <div class="col-md-4">
             <div class="form-group">
-                <label>Second Reading</label>
+                <label><b>Second Reading</b></label>
                 <input type = "date" class ="form-control" name="billSecondreading"/>
             </div>
-
+        </div>
+        <div class="col-md-4">
             <div class="form-group">
-                <label>Reffered to:</label>
+                <label><b>Reffered to:</b></label>
                 <select class ="form-control" name="billCommittee" id="billCommittee">
                   <?php foreach($committees as $com):?>
                       <option value="<?php echo $com['id']?>">
@@ -158,59 +198,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <?php endforeach;?>
                 </select>
             </div>
-
+        </div>
+    </div>
+    
+    <div class ="row">
+        <div class="col-md-3">
             <div class="form-group">
-                <label>Report out of Committee</label>
-                <input type = "date" class ="form-control" name="billReportoutofcommittee"/>
+                <label><b>Report out of Committee</b></label>
+                <input type = "date" class ="form-control" name="billReportoutofcommittee" value="<?php if($page==1){echo $bill['bill_committeereport'] ;}?>"/>
             </div>
-
-
+        </div>
+        <div class="col-md-3">
             <div class="form-group">
-                <label>Third Reading</label>
+                <label><b>Third Reading</b></label>
                 <input type = "date" class ="form-control" name="billThirdreading"/>
             </div>
         </div>
-        
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="form-group">
-                <label>Question</label><input type = "text" class ="form-control" name="billQuestion" value="<?php if($page==1){echo $bill['bill_question'] ;}?>"required/>
+                <label><b>Remarks</b></label>
+                <input type ="text" class ="form-control" name="billRemarks"/>
             </div>
-            <div class="form-group">
-                <label>Title</label><input type = "text" class ="form-control" name="billTitle" value="<?php if($page==1){echo $bill['bill_title'] ;}?>" required/>
-            </div>
-                <div class="form-group">
-                    <label>Summary</label>
-                    <textarea class ="form-control" name="billSummary" rows='6' required> </textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Additional Info</label>
-                    <textarea class ="form-control" name="billAdditionalinfo" rows='6'> </textarea>
-                </div>
-                <div class="form-group">
-                    <label>Impact</label>
-                     <textarea class ="form-control" name="billImpact" rows='6' required> </textarea>
-                </div>
-                <div class="form-group">
-                    <label>News</label>
-                    <textarea class ="form-control" name="billNews" rows='6'> </textarea>
-                </div>        
-                <div class="form-group">
-                    <label>Remarks</label>
-                    <textarea class ="form-control" name="billRemarks" rows='6'> </textarea>
-                </div>
         </div>
-    </div>
-
-    
-    
-    
+    </div>    
     
     <div class="form-group">
-        <input type="file" name="billimage"/>
-    </div>
-    
-        <input class="button" class="form-control" type="submit" value="Save"/>
+        <label><b>Bill Image</b></label><br/>
+        <input type="file" name="billimage" id="billimage"/>
+        <img id="image_upload_preview" src="<?php if($page==1){echo site_url('application/uploads/').$bill['bill_img'];}else{echo 'http://placehold.it/100x100';}?>" alt="your image" /> 
+    </div>    
+        
+<input class="btn btn-secondary" class="form-control" type="submit" value="Save"/>
 <div class="container">
     <div id="load_data"></div>
     <div id="load_data_message">
@@ -225,27 +243,62 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </body>
     
     <script type="text/javascript">
-    function getTermLegistlators()
+    function updateTags()
     {
-        var term = $("#billTerm option:selected" ).text();
-        term= $.trim(term);
-        var sponsor =""+<?php if ($page==1){echo '"'.$bill['bill_sponsor'].'"';} else echo '""'?>;
-        var chamber ="";
-        if($("input:radio[name=origin]").is(":checked")){
-          chamber =$("input:radio[name=chamber]").val()
-        console.log("inside");}
-        console.log("its:"+chamber)
-        if (chamber!=""){
+        var tag1 =""+<?php if ($page==1){echo '"'.$bill['bill_tag1'].'"';} else echo '""';?>;
+        getTags(tag1, 'billTag1', 'tag1');
+        var tag2 =""+<?php if ($page==1){echo '"'.$bill['bill_tag2'].'"';} else echo '""';?>;
+        getTags(tag2, 'billTag2', 'tag2');
+        var tag3 =""+<?php if ($page==1){echo '"'.$bill['bill_tag3'].'"';} else echo '""';?>;
+        getTags(tag3, 'billTag3','tag3');
+    }
+    
+    function getTags(selected_tag, tag_id, tag_column){
         $.ajax({
-        url:"<?php echo base_url(); ?>admin/dashboard/getTermLegistlators/",
+        url:"<?php echo base_url(); ?>admin/dashboard/getTags/",
         method:"POST",
-        data:{term: term, sponsor: sponsor},
+        data:{selected_tag: selected_tag,tag_id: tag_id, tag_column:tag_column},
         cache: false,
         success:function(data){
             if(data == '')
           {
             $('#load_data_message').html('<h3>No More Result Found</h3>');
             action = 'active';
+              console.log("no"+chamber);
+          }
+          else
+          {
+            console.log(data);
+            console.log('data');
+               $('#'+tag_id).html("");
+             $('#'+tag_id).append(data);
+            action = 'inactive';}
+        }})}
+        
+        
+    function getTermLegistlators()
+    {
+        var term = $("#billTerm option:selected" ).text();
+        term= $.trim(term);
+        var sponsor =""+<?php if ($page==1){echo '"'.$bill['bill_sponsor'].'"';} else echo '""'?>;
+        var chamber ="";
+        
+        if($('#s').is(':checked')){console.log("inside");  chamber="senate";}
+        else if ($('#h').is(':checked')){chamber="house";}
+        
+        console.log("its:"+chamber);
+        
+        $.ajax({
+        url:"<?php echo base_url(); ?>admin/dashboard/getTermLegistlators/",
+        method:"POST",
+        data:{term: term, sponsor: sponsor, chamber:chamber},
+        cache: false,
+        success:function(data){
+            if(data == '')
+          {
+            $('#load_data_message').html('<h3>No More Result Found</h3>');
+            action = 'active';
+              console.log("no"+chamber);
           }
           else
           {
@@ -254,7 +307,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                $('#billSponsor').html("");
              $('#billSponsor').append(data);
             action = 'inactive';}
-        }})}}
-          
+        }})}
+        
+        function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_upload_preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#billimage").change(function () {
+        readURL(this);
+    });
+        $(document).ready(function() {
+        updateChamber();
+            updateTrans();
+            updateTags();
+    });
+        function updateChamber(){
+        if($('#s').is(':checked')||$('#h').is(':checked')) {} else {$('#h').attr('checked','checked');}
+    }
+         function updateTrans(){
+        if($('#trans_true').is(':checked')||$('#trans_false').is(':checked')) {} else {$('#trans_false').attr('checked','checked');}
+    } 
     </script>
 </html>

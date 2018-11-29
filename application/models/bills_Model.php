@@ -24,6 +24,7 @@ class Bills_Model extends CI_Model
     {
         $this->db->where(['id' => $bill_ID]);
         $this->db->update('bills', $new_data);
+        echo "<script>alert('Bill updated');</script>";
     }
     
     public function getLegistlatorBills($id){

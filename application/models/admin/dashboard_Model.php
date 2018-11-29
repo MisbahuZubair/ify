@@ -111,12 +111,14 @@ class Dashboard_Model extends CI_Model
     public function updateLegistlator($id, $new_data) { 
         $this->db->where(['id' => $id]);
         $this->db->update('legistlators', $new_data);
+        echo "<script>alert('Legistlator data updated');</script>";
         //redirect('/admin/dashboard/manageLegistlators', 'refresh');
     }
         
     public function addLegistlator($new_data)
     {
-       $this->db->insert('legistlators', $new_data);
+        $this->db->insert('legistlators', $new_data);
+        echo "<script>alert('Legistlator created');</script>";
         redirect('/admin/dashboard/manageLegistlators', 'refresh'); 
     }
     
@@ -170,6 +172,7 @@ class Dashboard_Model extends CI_Model
     {
         $this->db->where(['id' => $id]);
         $this->db->update('bills', $new_data);
+        echo "<script>alert('Bill updated');</script>";
         redirect('/admin/dashboard', 'refresh');
     }
     
@@ -189,6 +192,7 @@ class Dashboard_Model extends CI_Model
      public function add($new_data)
     {
         $this->db->insert('bills', $new_data);
+         echo "<script>alert('Bill created');</script>";
         redirect('/admin/dashboard', 'refresh');
     }
     

@@ -48,18 +48,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="collapse navbar-collapse float-right" id="navbarsExample05">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
+            <a class="nav-link" style="color:white" href="<?php echo site_url('admin/dashboard');?>">Manage Bills</a>
+          </li>
+            <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url('admin/dashboard/addBill');?>">Add Bill</a>
           </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Manage Bills</a>
-          </li>
               <li class="nav-item">
-            <a class="nav-link" href="#">Add Legistlator</a>
+            <a class="nav-link" href="<?php echo site_url('admin/dashboard/addLegistlator');?>">Add Legistlator</a>
           </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Manage Legistlators</a>
-          </li><li class="nav-item">
-            <a class="nav-link" href="#">Manage Users</a>
+            <a class="nav-link" href="<?php echo site_url('admin/dashboard/manageLegistlators');?>">Manage Legistlators</a>
           </li>
          
         </ul>
@@ -80,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   
     </div>
     
-    <footer class="footer" style="bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;">
+    <footer class="footer" style="position:fixed; width:100%; bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;">
       <div class="container">
         <span class="text-muted">© 2018 Copyright: Assemblify.</span>
 		<span class="text-muted" style="float:right">Powered by Tinqe</span>
@@ -88,15 +86,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </footer>
 </body>
     <script>
+        
+
+    
+        
   $(document).ready(function(){
     var start = 0;
     var action = 'inactive';
     var fetch_url=""
     var page = '<?php echo $page;?>';
     if(page=="manage_bills"){fetch_url ="<?php echo base_url(); ?>admin/dashboard/fetchbills/" ; var limit = 20;}
-    else if(page=="manage_legistlators"){fetch_url ="<?php echo base_url(); ?>bills/fetchByLegistlator/" ; var limit = 20;} 
-
-    function lazzy_loader(limit)
+    else if(page=="manage_legistlators"){fetch_url ="<?php echo base_url(); ?>bills/fetchByLegistlator/" ; var limit = 20;}   
+      
+          function lazzy_loader(limit)
     {
       var output = '';
       for(var count=0; count<limit; count++)
@@ -110,9 +112,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
 
     lazzy_loader(limit);
-    
-     
-      
       
     function load_data(limit, start)
     {
@@ -125,7 +124,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         {
           if(data == '')
           {
-            $('#load_data_message').html('<h3>No More Result Found</h3>');
+            $('#load_data_message').html('<h6 style="text-align:center">you\'ve run out of bills</h6>');
             action = 'active';
           }
           else

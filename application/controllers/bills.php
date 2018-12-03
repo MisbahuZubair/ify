@@ -59,11 +59,14 @@ class Bills extends CI_Controller {
         if($row->bill_tag3!=""){$tags.="<a href='".site_url('bills/tag/'.$row->bill_tag3)."'>#".$row->bill_tag3."</a> ";}
         
         $status="";
-        if($row->bill_status=="Passed"){$status.='<i class="fas fa-check-circle" style="color:green;"></i> on '.$row->bill_thirdreading;}
+        if($row->bill_status=="Passed"){$status.='<i class="fas fa-check-circle" style="color:green;"></i>';}
         else if($row->bill_status=="In consideration"){$status.='<i class="fa fa-clock" style="color:orange;"></i>';}
         else if($row->bill_status=="Thrown out"){$status.='<i class="fa fa-ban" style="color:red;"></i>';}
+        
+        $theme ="#437F97";
+        if($row->bill_origin=="Senate"){$theme ="#F6511D";}
                     
-        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:"><div class="card-header" style="padding:0; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0; background-color:">'.$status.' '.$row->bill_number.', introduced on '.$row->bill_firstreading.'<hr style="max-width:70%; margin:0 auto;background:#4ecdc4;"/></div><div>'.$tags.'</div><hr/><a class=" btn" style="background:#4ecdc4; color:white" href="'.site_url('bills/display/').$row->id.'" role="button">View Details</a></div></div>';
+        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:"><div class="card-header" style="padding:2px; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0; background-color:">'.$status.' '.$row->bill_number.', introduced on '.$row->bill_firstreading.'<hr style="max-width:70%; margin:0 auto;background:'.$theme.';"/></div><div>'.$tags.'</div><hr/><a class=" btn" style="background:'.$theme.'; color:white" href="'.site_url('bills/display/').$row->id.'" role="button">View Details</a></div></div>';
        }
                  $output .='</div>';
             }
@@ -96,7 +99,7 @@ class Bills extends CI_Controller {
     {
         $output = '';
         $this->load->model('scroll_pagination_model');
-        $data = $this->scroll_pagination_model->fetch_data($this->input->post('limit'), $this->input->post('start'), $source, $filter);
+        $data = $this->scroll_pagination_model->fetch_homedata($this->input->post('limit'), $this->input->post('start'), $source, $filter);
         $output = $this->displayBill($data);
         echo $output;
     }

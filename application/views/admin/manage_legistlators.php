@@ -22,40 +22,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </style>
 </head>
 <body> 
-<nav class="navbar navbar-expand-md  navbar-dark bg-success" style="margin-bottom: 20px;">
-  <a class="navbar-brand" href="#">Assemblify Admin Dashboard</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse justify-content-between navbar-collapse navbar-right" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo site_url('admin/dashboard');?>">Dashboard</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo site_url('admin/dashboard/addBill');?>">Add Bill</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"></a>
-      </li>    
-    </ul>
-      <a class="btn btn-outline-light" href="<?php echo site_url('admin/auth/logout');?>">Log Out</a>
-      
-  </div>  
-</nav>
 <div class="container">
-    <?php echo form_open_multipart('');?>
-    <div class="form-group">
-     <div class="radio" class ="form-control" name="chamber" onload ="" onchange="updateLegistlators()">
-      <input type="radio" name="gender" value="male"> All
-      <input type="radio" name="gender" value="female"> All Senate
-      <input type="radio" name="gender" value="other"> Active Senate
-         <input type="radio" name="gender" value="male"> Inactive Senate
-      <input type="radio" name="gender" value="female"> All House
-      <input type="radio" name="gender" value="other"> Inactive House
-        </div>  
+<nav class="navbar navbar-expand-xl navbar-dark shadow-sm p-3 mb-5 bg-secondary rounded">
+    <a class="navbar-left" href="#">
+        <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.png'); ?>" style="max-height:32px;"alt=""></a>
+  </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse float-right" id="navbarsExample05">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo site_url('admin/dashboard');?>"> Manage Bills</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link"  href="<?php echo site_url('admin/dashboard/addBill');?>">Add Bill</a>
+          </li>
+              <li class="nav-item">
+            <a class="nav-link" href="<?php echo site_url('admin/dashboard/addLegistlator');?>">Add Legistlator</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:white" href="<?php echo site_url('admin/dashboard/manageLegistlators');?>">Manage Legistlators</a>
+          </li>         
+        </ul>
+      </div>
+</nav>
 </div>
-    </div>
+
 <div class="container">
     <?php foreach($legistlators as $item) { ?>
     <div class="card" style="margin-bottom: 20px">

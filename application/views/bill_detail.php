@@ -106,6 +106,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              </div>
 	</div>
     </div>
+    
+<?php $theme="#437F97"; $sub_theme="#EEFAF9"; if ($bill['bill_origin']=="Senate"){$theme = "#F6511D"; $sub_theme="#F9F7EF";}?>
+    
 <div class="sharethis-inline-share-buttons"></div>
     <br/>
     <br/>
@@ -114,41 +117,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  <div class="col-md-8" style="padding:0 30px 0 30px">
           <div class="row" >
            <div class="card shadow-sm p-3 mb-5 bg-white rounded nopadding" style="margin-bottom: 20px; width:100%">
-			  <div class="card-header text-white " style="text-align:center; background:#4ecdc4;"><h5>Bill Details</h5></div>
-			  <div class="card-header" style="background:#EEFAF9"><h6>Origin</h6><p style="margin:0"><i><?php echo $bill['bill_origin']?></i></p></div>
+			  <div class="card-header text-white " style="text-align:center; background-color:<?php echo $theme; ?>"><h5>Bill Details</h5></div>
+			  <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Origin</h6><p style="margin:0"><i><?php echo $bill['bill_origin']?></i></p></div>
 			  
-			  <div class="card-header" style="background:#EEFAF9"><h6>Title</h6><p style="margin:0"><i><?php echo $bill['bill_title']?></i></p></div>
+			  <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Title</h6><p style="margin:0"><i><?php echo $bill['bill_title']?></i></p></div>
 			
-               <div class="card-header" style="background:#EEFAF9"><h6>Sponsor</h6><p><a href ="<?php echo site_url('bills/legistlatorBills/'.$bill['bill_sponsor']);?>"> <?php echo $bill['name']?> </a></p></div>
-			  <div class="card-header" style="background:#EEFAF9"><h6>Tag(s)</h6><p><?php if ($bill['bill_tag1']!="") {echo "<a href=".site_url('bills/tag/'.$bill['bill_tag1']).">#".$bill['bill_tag1']."</a>";} if ($bill['bill_tag2']!="") {echo "<a href=".site_url('bills/tagBills/'.$bill['bill_tag2'])."> #".$bill['bill_tag2']."</a>";} if ($bill['bill_tag3']!="") {echo "<a href=".site_url('bills/tagBills/'.$bill['bill_tag3'])."> #".$bill['bill_tag3']."</a>";}?></p></div>
+               <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Sponsor</h6><p><a href ="<?php echo site_url('bills/legistlatorBills/'.$bill['bill_sponsor']);?>"> <?php echo $bill['name']?> </a></p></div>
+			  <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Tag(s)</h6><p><?php if ($bill['bill_tag1']!="") {echo "<a href=".site_url('bills/tag/'.$bill['bill_tag1']).">#".$bill['bill_tag1']."</a>";} if ($bill['bill_tag2']!="") {echo "<a href=".site_url('bills/tagBills/'.$bill['bill_tag2'])."> #".$bill['bill_tag2']."</a>";} if ($bill['bill_tag3']!="") {echo "<a href=".site_url('bills/tagBills/'.$bill['bill_tag3'])."> #".$bill['bill_tag3']."</a>";}?></p></div>
 			  
-			  <div class="card-header" style="background:#EEFAF9"><h6>Summary</h6><p><?php echo $bill['bill_summary']?></p></div>
+			  <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Summary</h6><p><?php echo $bill['bill_summary']?></p></div>
 			  
-			  <div class="card-header" style="background:#EEFAF9"><h6>Full Text of Bill</h6><p>Click <a href="<?php echo $bill['bill_fulltext']?>" target="_blank">here</a> to view the full bill text</p></div>
+			  <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Full Text of Bill</h6><p>Click <a href="<?php echo $bill['bill_fulltext']?>" target="_blank">here</a> to view the full bill text</p></div>
 			  
-               <?php if($bill['bill_additionalinfo']!=""){echo'<div class="card-header" style="background:#EEFAF9"><h6>Additional Information</h6><p>'.$bill['bill_additionalinfo'].'</p></div>';}?>
-			   <?php if($bill['bill_impact']!=""){echo'<div class="card-header" style="background:#EEFAF9"><h6>Impact</h6><p>'.$bill['bill_impact'].'</p></div>';}?>
-               <?php if($bill['bill_news']!=""){echo'<div class="card-header" style="background:#EEFAF9"><h6>News</h6><p>'.$bill['bill_news'].'</p></div>';}?>
+               <?php if($bill['bill_additionalinfo']!=""){echo'<div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Additional Information</h6><p>'.$bill['bill_additionalinfo'].'</p></div>';}?>
+			   <?php if($bill['bill_impact']!=""){echo'<div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Impact</h6><p>'.$bill['bill_impact'].'</p></div>';}?>
+               <?php if($bill['bill_news']!=""){echo'<div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>News</h6><p>'.$bill['bill_news'].'</p></div>';}?>
                
               </div>	</div>
 </div>
 	<div class="col-md-4" style="margin-left: auto; padding:0 30px 0 30px" >
         <div class="row">
            <div class="card shadow-sm p-3 mb-5 bg-white rounded nopadding" style="width:100%">
-			  <div class="card-header text-white" style="text-align:center; background:#4ecdc4;"><h5>Bill Progress</h5></div>
-			  <div class="card-header" style="background:#EEFAF9"><h6>Status</h6><p><?php echo $bill['bill_status']?></p></div>
+			  <div class="card-header text-white" style="text-align:center; background:<?php echo $theme; ?>"><h5>Bill Progress</h5></div>
+			  <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Status</h6><p><?php echo $bill['bill_status']?></p></div>
 			  
-			  <div class="card-header" style="background:#EEFAF9"><h6>First Reading</h6><p><?php $date = date_create($bill['bill_firstreading']); if ($date < date_create('01/01/1960')){echo 'Awaiting';} else echo date_format($date,"d/m/Y");?></p></div>
+			  <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>First Reading</h6><p><?php $date = date_create($bill['bill_firstreading']); if ($date < date_create('01/01/1960')){echo 'Awaiting';} else echo date_format($date,"d/m/Y");?></p></div>
 			  
-			  <div class="card-header" style="background:#EEFAF9"><h6>Second Reading</h6><p><?php $date = date_create($bill['bill_secondreading']); if ($date < date_create('01/01/1960')){echo 'Awaiting';} else echo date_format($date,"d/m/Y");?></p></div>
+			  <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Second Reading</h6><p><?php $date = date_create($bill['bill_secondreading']); if ($date < date_create('01/01/1960')){echo 'Awaiting';} else echo date_format($date,"d/m/Y");?></p></div>
 			  
-			  <div class="card-header" style="background:#EEFAF9"><h6>Committee Reffered</h6><p><?php if ($bill['com_name']==""){echo "Awaiting";} else{echo $bill['com_name'];}?></p></div>
+			  <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Committee Reffered</h6><p><?php if ($bill['com_name']==""){echo "Awaiting";} else{echo $bill['com_name'];}?></p></div>
 			  
-			  <div class="card-header" style="background:#EEFAF9"><h6>Reported out of Committee</h6><p><?php $date = date_create($bill['bill_committeereport']); if ($date < date_create('01/01/1960')){echo 'Awaiting';} else echo date_format($date,"d/m/Y");?></p></div>
+			  <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Reported out of Committee</h6><p><?php $date = date_create($bill['bill_committeereport']); if ($date < date_create('01/01/1960')){echo 'Awaiting';} else echo date_format($date,"d/m/Y");?></p></div>
 			  
-			  <div class="card-header" style="background:#EEFAF9"><h6>Third Reading</h6><p><?php $date = date_create($bill['bill_thirdreading']); if ($date < date_create('01/01/1960')){echo 'Awaiting';} else echo date_format($date,"d/m/Y");?></p></div>
+			  <div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Third Reading</h6><p><?php $date = date_create($bill['bill_thirdreading']); if ($date < date_create('01/01/1960')){echo 'Awaiting';} else echo date_format($date,"d/m/Y");?></p></div>
 			  
-               <?php if($bill['bill_remarks']!=""){echo'<div class="card-header" style="background:#EEFAF9"><h6>Remarks</h6><p>'.$bill['bill_remarks'].'</p></div>';}?>
+               <?php if($bill['bill_remarks']!=""){echo'<div class="card-header" style="background:<?php echo $sub_theme; ?>"><h6>Remarks</h6><p>'.$bill['bill_remarks'].'</p></div>';}?>
             </div>
         </div>
         </div>

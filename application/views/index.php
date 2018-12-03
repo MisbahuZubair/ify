@@ -122,7 +122,9 @@ else{$page_title="Assemblify";}
     </div>
 
 <?php if($page=="legistlator bills"){
-    echo '<div class="container"><div class="row"><div class="col-md-6" style="margin:auto"><div class="nopadding card shadow-sm p-3 mb-5 rounded" style="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:#F5FCFB"><div class="card-header" style="padding:0; background:#ffffff"><h5>'.$legistlator['name'].'</h5></div ><div class="card-body">Representing '.$legistlator['constituency'].', '.$legistlator['state'].' State</div></div></div></div></div>';
+    $sub_theme="#EEFAF9"; 
+    if ($legistlator['chamber']=="senate"){$sub_theme="#F9F7EF";} 
+    echo '<div class="container"><div class="row"><div class="col-md-6" style="margin:auto"><div class="nopadding card shadow-sm p-3 mb-5 rounded" style="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:'.$sub_theme.'"><div class="card-header" style="padding:0; background:#ffffff"><h5>'.$legistlator['name'].'</h5></div ><div class="card-body">Representing '.$legistlator['constituency'].', '.$legistlator['state'].' State</div></div></div></div></div>';
 }?>
 <div class="container">
     <div id="load_data"></div>
@@ -130,7 +132,7 @@ else{$page_title="Assemblify";}
 </div>	  
 
 	
-<footer class="footer" style="bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;text-align:center">
+<footer class="footer" style="position:fixed; bottom:0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;text-align:center; width:100%">
       <div class="container">
         <P class="text-muted" style="float:center">© 2018 Assemblify. Powered by Tinqe</p>
       </div>
@@ -179,7 +181,7 @@ else{$page_title="Assemblify";}
         {
           if(data == '')
           {
-            $('#load_data_message').html('<h3>No More Result Found</h3>');
+            $('#load_data_message').html('<h6 style="text-align:center">you\'ve run out of bills</h6>');
             action = 'active';
           }
           else

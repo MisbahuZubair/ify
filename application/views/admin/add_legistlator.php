@@ -34,24 +34,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="collapse navbar-collapse float-right" id="navbarsExample05">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
+            <a class="nav-link" href="<?php echo site_url('admin/dashboard');?>"> Manage Bills</a>
+          </li>
+            <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url('admin/dashboard/addBill');?>">Add Bill</a>
           </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Manage Bills</a>
-          </li>
               <li class="nav-item">
-            <a class="nav-link" href="#">Add Legistlator</a>
+            <a class="nav-link" style="<?php if(isset($legistlator)){}else{echo 'color:white';}?>" href="<?php echo site_url('admin/dashboard/addLegistlator');?>">Add Legistlator</a>
           </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Manage Legistlators</a>
-          </li><li class="nav-item">
-            <a class="nav-link" href="#">Manage Users</a>
-          </li>
-         
+            <a class="nav-link"  style="<?php if(isset($legistlator)){echo 'color:white';}?>" href="<?php echo site_url('admin/dashboard/manageLegistlators');?>">Manage Legistlators</a>
+          </li>         
         </ul>
-        <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search">
-        </form>
       </div>
 </nav>
 </div>

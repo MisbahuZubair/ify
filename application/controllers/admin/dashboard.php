@@ -39,8 +39,11 @@ class Dashboard extends CI_Controller {
         if($row->bill_status=="Passed"){$status.='Passed <i class="fas fa-check-circle" style="color:green;"></i> on '.$row->bill_thirdreading;}
         else if($row->bill_status=="In consideration"){$status.='In Consideration <i class="fa fa-clock" style="color:orange;"></i>';}
         else if($row->bill_status=="Thrown out"){$status.='Thrown out <i class="fa fa-ban" style="color:red;"></i>';}
+        
+        $pub_text="Publish";
+        if($row->publish==1){$pub_text = "Unpublish";}
                     
-        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;"><div class="card-header" style="padding:0; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0;">'.$row->bill_number.', introduced on '.$row->bill_firstreading.'</div><hr/><div>'.$tags.'</div><hr/><div>'.$status.'</div><hr/><div class="row btn-group"><div class="col-sm-3"><a class=" btn bg-secondary " style="color:white" href="'.site_url('bills/display/').$row->id.'" role="button">View</a></div><div class="col-sm-3"><a class="btn bg-info" style=" color:white" href="'.site_url('admin/dashboard/editBill/').$row->id.'" role="button">Edit</a></div><div class="col-sm-3"><a class="btn bg-danger" style="color:white" href="'.site_url('admin/dashboard/deleteBill/').$row->id.'" role="button">Delete</a></div><div class="col-sm-3"><a class="btn bg-success" style=" color:white" href="'.site_url('admin/dashboard/publishBill/').$row->id.'" role="button">Publish</a></div></div></div></div>';
+        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;"><div class="card-header" style="padding:2px; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0;">'.$row->bill_number.', introduced on '.$row->bill_firstreading.'</div><hr/><div>'.$tags.'</div><hr/><div>'.$status.'</div><hr/><div>Created:'.$row->bill_createdon.' Edited:'.$row->bill_lasteditedon.'</div><hr/><div class="row btn-group"><div class="col-sm-3"><a class=" btn bg-secondary " style="color:white" href="'.site_url('bills/display/').$row->id.'" role="button">View</a></div><div class="col-sm-3"><a class="btn bg-info" style=" color:white" href="'.site_url('admin/dashboard/editBill/').$row->id.'" role="button">Edit</a></div><div class="col-sm-3"><a class="btn bg-danger" style="color:white" href="'.site_url('admin/dashboard/deleteBill/').$row->id.'/'.$row->bill_imagename.'" role="button">Delete</a></div><div class="col-sm-3"><a class="btn bg-success" style=" color:white" href="'.site_url('admin/dashboard/publishBill/').$row->id.'/'.$row->publish.'" role="button">'.$pub_text.'</a></div></div></div></div>';
        }
                  $output .='</div>';
             }
@@ -48,8 +51,8 @@ class Dashboard extends CI_Controller {
         echo $output;
     }
     
-    public function deleteBill($id, $name){
-        $this->dashboard_Model->delete($id, $name);
+    public function deleteBill($id, $picFileName){
+        $this->dashboard_Model->delete($id, $picFileName);
     }
     
     public function publishBill($id, $initial){
@@ -115,6 +118,8 @@ class Dashboard extends CI_Controller {
             $new_data['bill_committee'] = $this->input->post('billCommittee');
             $new_data['bill_remarks'] = $this->input->post('billRemarks');
             $new_data['bill_question'] = $this->input->post('billQuestion');
+            $new_data['bill_createdon'] = date('Y/m/d H:i:s');
+            $new_data['bill_lasteditedon'] = date('Y/m/d H:i:s');
             
             if($image)
             {
@@ -281,6 +286,8 @@ class Dashboard extends CI_Controller {
             $new_data['bill_committee'] = $this->input->post('billCommittee');
             $new_data['bill_remarks'] = $this->input->post('billRemarks');
             $new_data['bill_question'] = $this->input->post('billQuestion');
+            $new_data['bill_lasteditedon'] = date('Y/m/d H:i:s');
+
             
             $this->dashboard_Model->update($id, $new_data);       
         }

@@ -8,13 +8,16 @@ class Dashboard_Model extends CI_Model
     }
     
     
-    public function delete($id, $name){
-        unlink('./application/uploads/'.$name.'.jpg');
+    public function delete($id, $picFileName){
+        unlink('./application/uploads/'.$picFileName.'.jpg');
         $sql = "DELETE from bills 
                 WHERE bills.id=".$id."";
         $query = $this->db->query($sql);
         
         redirect('/admin/dashboard', 'refresh');
+        echo '<script language="javascript">';
+            echo 'alert("Bill successfully deleted")';
+            echo '</script>';
     }
     
     public function deleteLegistlator($id){

@@ -13,47 +13,50 @@ class Bills extends CI_Controller {
         $this->load->view('index', $data);                    
 	}
     
-    public function display($bill_ID)
-    {   
+    public function details($bill_ID="")
+    {   if($bill_ID==""){redirect('', 'refresh');}
         $data['bill'] = $this->bills_Model->getBill($bill_ID);         //get bill info through Bill model
         $this->load->view('bill_detail',$data);             //display bill detail in bill detail view
     }
     
-    public function getBills($chamber, $filter)
+    public function get($chamber="", $filter="")
     {   
+        if($chamber==""){redirect('', 'refresh');}
         $data['page'] = "".$chamber."-".$filter."";         //get bill info through Bill model
         $data['source'] = "".$chamber."";
         $data['filter'] = "".$filter."";
         $this->load->view('index',$data);             //display bill detail in bill detail view
     }
     
-    public function legistlatorBills($id){
-        $this->load->model('legistlatorbills_Model');
-        $data['legistlator'] = $this->legistlatorbills_Model->getLegistlator($id);
+    public function legistlator($id=""){
+        if($id==""){redirect('', 'refresh');}
+        $this->load->model('legistlators_Model');
+        $data['legistlator'] = $this->legistlator_Model->fecth_Legistlator($id);
         $data['page'] = "legistlator bills";
         $data['source'] = "legistlator bills";
         $data['filter'] = $id;
         $this->load->view('index',$data);             //display bill detail in bill detail view
     }
     
-    public function tag($tag){
+    public function tag($tag=""){
+        if($tag==""){redirect('', 'refresh');}
         $tag = urldecode($tag);
         $data['tag'] = $tag;
         $data['page'] = 'tag';
         $data['source'] = "tag";
-         $data['filter'] = $tag;
+        $data['filter'] = $tag;
         $this->load->view('index',$data);
     }
     
-    function displayBill($data){
+    function DisplayBill($data){
         $output="";
         if($data->num_rows() > 0)
-      {
+        {
             foreach(array_chunk($data->result(), 2) as $pair) {
                 $output .='<div class="row">';
                 foreach ($pair as $row)
-       {
-         $tags="";
+        {
+        $tags="";
         if($row->bill_tag1!=""){$tags.="<a href='".site_url('bills/tag/'.$row->bill_tag1)."'>#".$row->bill_tag1."</a> ";}
         if($row->bill_tag2!=""){$tags.="<a href='".site_url('bills/tag/'.$row->bill_tag2)."'>#".$row->bill_tag2."</a> ";}
         if($row->bill_tag3!=""){$tags.="<a href='".site_url('bills/tag/'.$row->bill_tag3)."'>#".$row->bill_tag3."</a> ";}
@@ -66,41 +69,38 @@ class Bills extends CI_Controller {
         $theme ="#437F97";
         if($row->bill_origin=="Senate"){$theme ="#F6511D";}
                     
-        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:"><div class="card-header" style="padding:2px; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0; background-color:">'.$status.' '.$row->bill_number.', introduced on '.$row->bill_firstreading.'<hr style="max-width:70%; margin:0 auto;background:'.$theme.';"/></div><div>'.$tags.'</div><hr/><a class=" btn" style="background:'.$theme.'; color:white" href="'.site_url('bills/display/').$row->id.'" role="button">View Details</a></div></div>';
-       }
+        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:"><div class="card-header" style="padding:2px; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0; background-color:">'.$status.' '.$row->bill_number.', introduced on '.$row->bill_firstreading.'<hr style="max-width:70%; margin:0 auto;background:'.$theme.';"/></div><div>'.$tags.'</div><hr/><a class=" btn" style="background:'.$theme.'; color:white" href="'.site_url('bills/details/').$row->id.'" role="button">View Details</a></div></div>';
+            }
                  $output .='</div>';
             }
-      }
-        return $output;
-        
+        }
+        return $output; 
     }
     
-      public function fetchByTag($tag)
+      public function BillsByTag($tag)
     {
         $output = '';
         $this->load->model('bills_Model');
-        $data = $this->bills_Model->fetch_data($this->input->post('limit'), $this->input->post('start'), urldecode($tag));
-        $output = $this->displayBill($data);
+        $data = $this->bills_Model->fetch_BillsByTag($this->input->post('limit'), $this->input->post('start'), urldecode($tag));
+        $output = $this->DisplayBill($data);
         echo $output;
     }  
     
-    public function fetchByLegistlator($id)
+    public function BillsByLegistlator($id)
     {
         $output = '';
-        $this->load->model('legistlatorbills_Model');
-        $data = $this->legistlatorbills_Model->fetch_data($this->input->post('limit'), $this->input->post('start'), $id);
-        $output = $this->displayBill($data);
+        $this->load->model('bills_Model');
+        $data = $this->bills_Model->fetch_BillsByLegistlator($this->input->post('limit'), $this->input->post('start'), $id);
+        $output = $this->DisplayBill($data);
         echo $output;
     }
         
-    
-    
-    public function fetchDefault($source, $filter)
+    public function AllBills($source="all", $filter="all")
     {
         $output = '';
-        $this->load->model('scroll_pagination_model');
-        $data = $this->scroll_pagination_model->fetch_homedata($this->input->post('limit'), $this->input->post('start'), $source, $filter);
-        $output = $this->displayBill($data);
+        $this->load->model('bills_Model');
+        $data = $this->bills_Model->fetch_AllBills($this->input->post('limit'), $this->input->post('start'), $source, $filter);
+        $output = $this->DisplayBill($data);
         echo $output;
     }
 

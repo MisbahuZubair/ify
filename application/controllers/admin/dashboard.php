@@ -19,11 +19,11 @@ class Dashboard extends CI_Controller {
         $this->load->view('admin/dashboard', $data); 
 	}
     
-     public function fetchbills()
+     public function AllBills()
 	{
         $output = '';
-        $this->load->model('scroll_pagination_model');
-        $data = $this->scroll_pagination_model->fetch_data($this->input->post('limit'), $this->input->post('start'), 'all', 'all');
+        $this->load->model('dashboard_Model');
+        $data = $this->dashboard_Model->fetch_AllBills($this->input->post('limit'), $this->input->post('start'), 'all', 'all');
         if($data->num_rows() > 0)
       {
             foreach(array_chunk($data->result(), 2) as $pair) {

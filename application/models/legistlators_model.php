@@ -1,25 +1,22 @@
 <?php
-class legistlators_model extends CI_Model
+class legistlators_Model extends CI_Model
 {
+    public function fetch_Legistlator($id)
+    {
+        $this->db->select("*");
+        $this->db->from("legistlators");
+        $this->db->where("id=".$id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
     
- function getLegistlator($id)
- {
-
-  $this->db->select("*");
-  $this->db->from("legistlators");
-  $this->db->where("id=".$id);
-  $query = $this->db->get();
-  return $query;
- }
-
-public function fetch_legistlators_model($limit, $start, $filter)
+    public function fetch_AllLegistlators($limit, $start, $filter)
     {
         $this->db->select("*");
         $this->db->from("legistlators");
         if($filter!="all"){
             $this->db->where("chamber ='".$filter."'");
         }
-        //$this->db->where("publish=0");
         $this->db->order_by("id", "ASC");
         $this->db->limit($limit, $start);
         $query = $this->db->get();

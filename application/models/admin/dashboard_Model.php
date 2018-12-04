@@ -1,5 +1,5 @@
 <?php
-class Dashboard_Model extends CI_Model
+class dashboard_Model extends CI_Model
 {
     public function __construct()
     {
@@ -7,6 +7,21 @@ class Dashboard_Model extends CI_Model
         $this->db = $this->load->database('default', TRUE);
     }
     
+    function fetch_AllBills($limit, $start, $source, $filter)
+    {
+        $this->db->select("*");
+        $this->db->from("bills");
+        if($source!="all"){
+            $this->db->where("bill_origin ='".$source."'");
+        }
+        if($filter!="all"){
+        $this->db->where("bill_status ='".urldecode($filter)."'");
+        }
+        $this->db->order_by("id", "ASC");
+        $this->db->limit($limit, $start);
+        $query = $this->db->get();
+        return $query;
+    }
     
     public function delete($id, $picFileName){
         unlink('./application/uploads/'.$picFileName.'.jpg');
@@ -157,10 +172,10 @@ class Dashboard_Model extends CI_Model
     }
     
     public function getCommittees() { 
-         $sql = "SELECT id, com_name 
+        $sql = "SELECT id, com_name 
            FROM committees
            ORDER by com_name";
-    $query = $this->db->query($sql)->result_array(); ;
+        $query = $this->db->query($sql)->result_array(); ;
         return $query; 
     }
 
@@ -180,22 +195,17 @@ class Dashboard_Model extends CI_Model
     }
     
      public function publishBill($id,$inital)
-    {
-        
+    {    
         $this->db->where(['id' => $id]);
         $this->db->update('bills', $new_data);
         redirect('/admin/dashboard', 'refresh');
     }
     
-     public function addComment($new_data, $id)
-    {
-        $this->db->insert('Bill_'.$id.'_Comments', $new_data);
-     }
     
      public function add($new_data)
     {
         $this->db->insert('bills', $new_data);
-         echo "<script>alert('Bill created');</script>";
+        echo "<script>alert('Bill created');</script>";
         redirect('/admin/dashboard', 'refresh');
     }
     

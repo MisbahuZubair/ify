@@ -7,6 +7,47 @@ class Bills_Model extends CI_Model
         $this->db = $this->load->database('default', TRUE);
     }
     
+    function fetch_AllBills($limit, $start, $source, $filter)
+    {
+        $this->db->select("*");
+        $this->db->from("bills");
+        if($source!="all"){
+            $this->db->where("bill_origin ='".$source."'");
+        }
+        if($filter!="all"){
+        $this->db->where("bill_status ='".urldecode($filter)."'");
+        }
+        $this->db->where("publish=1");
+        $this->db->order_by("id", "ASC");
+        $this->db->limit($limit, $start);
+        $query = $this->db->get();
+        return $query;
+    }
+    
+    function fetch_BillsByLegistlator($limit, $start, $id)
+     {
+        $this->db->select("*");
+        $this->db->from("bills");
+        $this->db->where("bill_sponsor = ".$id);
+        $this->db->where("publish=1");
+        $this->db->order_by("id", "DESC");
+        $this->db->limit($limit, $start);
+        $query = $this->db->get();
+        return $query;
+     }
+    
+    function fetch_BillsByTag($limit, $start, $tag)
+    {
+        $this->db->select("*");
+        $this->db->from("bills");
+        $this->db->where("bill_tag1='".$tag."' OR bill_tag2='".$tag."' OR bill_tag3='".$tag."'");
+        $this->db->where("publish=1");
+        $this->db->order_by("id", "ASC");
+        $this->db->limit($limit, $start);
+        $query = $this->db->get();
+        return $query;
+    }
+
      public function getBill($bill_ID)
     {
         $sql= "SELECT * FROM bills
@@ -26,38 +67,5 @@ class Bills_Model extends CI_Model
         $this->db->update('bills', $new_data);
         echo "<script>alert('Bill updated');</script>";
     }
-    
-    public function getLegistlatorBills($id){
-         $sql= "SELECT * FROM bills
-                WHERE bill_sponsor =".$id."
-                INNER JOIN bills.bill_sponsor=legistlators.id;";
-         
-       $query = $this->db->query($sql);
-        return $query->result_array();
-        
-    }
-    
-    public function allBills()
-    {
-        $result_set =$this->db->get('bills');
-        return $result_set->result_array(); 
-    }
-     public function addComment($new_data, $id)
-    {
-        $this->db->insert('Bill_'.$id.'_Comments', $new_data);
-     }
-    
-    
- function fetch_data($limit, $start, $tag)
- {
-
-  $this->db->select("*");
-  $this->db->from("bills");
-  $this->db->where("bill_tag1='".$tag."' OR bill_tag2='".$tag."' OR bill_tag3='".$tag."'");
-  $this->db->order_by("id", "ASC");
-  $this->db->limit($limit, $start);
-  $query = $this->db->get();
-  return $query;
- }
 
 }

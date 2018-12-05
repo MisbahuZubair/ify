@@ -39,7 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <nav class="navbar navbar-expand-xl navbar-dark shadow-sm p-3 mb-5 bg-secondary rounded">
     <a class="navbar-left" href="#">
-        <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.png'); ?>" style="max-height:32px;"alt=""></a>
+        <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg'); ?>" style="max-height:32px;max-width:32px"alt=""></a>
   </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -68,14 +68,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </nav>
     </div>
     
-    
     <div class="container">
     <div id="load_data"></div>
     <div id="load_data_message"></div>
+    </div>
     
-
-
-  
+    <div class="container" style="padding-bottom:50px; text-align:center">
+        <button id="load" type="button" class="btn-md btn-light">Load More</button>
     </div>
     
     <footer class="footer" style="position:fixed; width:100%; bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;">
@@ -85,11 +84,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
 </footer>
 </body>
-    <script>
-        
-
     
+<script>
         
+    function deleteBill(id, picName){
+        var r = confirm("You will not be able to recover bill if you choose to proceed !!!");
+        if (r == true) {
+            $.ajax({
+                url:'<?php echo base_url(); ?>admin/dashboard/deleteBill/',
+                method:"POST",
+                data:{id:id, picName:picName},
+                cache: false,
+                success:function(data){
+                    alert("Bill successfully deleted");
+                    location.reload();
+                }
+            })
+        } 
+        }
+               
   $(document).ready(function(){
     var start = 0;
     var action = 'inactive';
@@ -125,6 +138,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           if(data == '')
           {
             $('#load_data_message').html('<h6 style="text-align:center">you\'ve run out of bills</h6>');
+            $("#load").hide();
             action = 'active';
           }
           else
@@ -143,8 +157,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       load_data(limit, start);
     }
 
-    $(window).scroll(function(){
-      if($(window).scrollTop() + $(window).height() > $("#load_data").height() && action == 'inactive')
+    
+      
+    $("#load").click(function(e) {
       {
         lazzy_loader(limit);
         action = 'active';

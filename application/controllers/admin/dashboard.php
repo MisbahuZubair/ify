@@ -43,7 +43,7 @@ class Dashboard extends CI_Controller {
         $pub_text="Publish";
         if($row->publish==1){$pub_text = "Unpublish";}
                     
-        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;"><div class="card-header" style="padding:2px; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0;">'.$row->bill_number.', introduced on '.$row->bill_firstreading.'</div><hr/><div>'.$tags.'</div><hr/><div>'.$status.'</div><hr/><div>Created:'.$row->bill_createdon.' Edited:'.$row->bill_lasteditedon.'</div><hr/><div class="row btn-group"><div class="col-sm-3"><a class=" btn bg-secondary " style="color:white" href="'.site_url('bills/display/').$row->id.'" role="button">View</a></div><div class="col-sm-3"><a class="btn bg-info" style=" color:white" href="'.site_url('admin/dashboard/editBill/').$row->id.'" role="button">Edit</a></div><div class="col-sm-3"><a class="btn bg-danger" style="color:white" href="'.site_url('admin/dashboard/deleteBill/').$row->id.'/'.$row->bill_imagename.'" role="button">Delete</a></div><div class="col-sm-3"><a class="btn bg-success" style=" color:white" href="'.site_url('admin/dashboard/publishBill/').$row->id.'/'.$row->publish.'" role="button">'.$pub_text.'</a></div></div></div></div>';
+        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;"><div class="card-header" style="padding:2px; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0;">'.$row->bill_number.', introduced on '.$row->bill_firstreading.'</div><hr/><div>'.$tags.'</div><hr/><div>'.$status.'</div><hr/><div>Created:'.$row->bill_createdon.' Edited:'.$row->bill_lasteditedon.'</div><hr/><div class="row btn-group"><div class="col-sm-3"><a class=" btn bg-secondary " style="color:white" href="'.site_url('bills/display/').$row->id.'" role="button">View</a></div><div class="col-sm-3"><a class="btn bg-info" style=" color:white" href="'.site_url('admin/dashboard/editBill/').$row->id.'" role="button">Edit</a></div><div class="col-sm-3"><a class="btn bg-danger" style="color:white" onclick="deleteBill('.$row->id.',\''.$row->bill_img.'\')" role="button">Delete</a></div><div class="col-sm-3"><a class="btn bg-success" style=" color:white" href="'.site_url('admin/dashboard/publishBill/').$row->id.'/'.$row->publish.'" role="button">'.$pub_text.'</a></div></div></div></div>';
        }
                  $output .='</div>';
             }
@@ -51,7 +51,9 @@ class Dashboard extends CI_Controller {
         echo $output;
     }
     
-    public function deleteBill($id, $picFileName){
+    public function deleteBill(){
+        $id = $this->input->post('id');
+        $picFileName = $this->input->post('picName');
         $this->dashboard_Model->delete($id, $picFileName);
     }
     
@@ -60,8 +62,10 @@ class Dashboard extends CI_Controller {
         $this->dashboard_Model->update($id, $new_data);
     }
     
-    public function deleteLegistlator($id){
-        $this->dashboard_Model->deleteLegistlator($id);
+    public function deleteLegistlator(){
+        $id = $this->input->post('id');
+        $result=$this->dashboard_Model->deleteLegistlator($id);
+        echo $result;
     }
     
     public function addLegistlator(){

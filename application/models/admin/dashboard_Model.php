@@ -37,23 +37,18 @@ class dashboard_Model extends CI_Model
     
     public function deleteLegistlator($id){
         $sql = "SELECT *
-           FROM bills
-           WHERE bill_sponsor = ".$id."";
+        FROM bills
+        WHERE bill_sponsor = ".$id."";
         $query = $this->db->query($sql)->row_array();
         if(empty($query)){
             $sql = "DELETE from legistlators 
-                WHERE id=".$id."";
+             WHERE id=".$id."";
             $query = $this->db->query($sql);
-            echo '<script language="javascript">';
-            echo 'alert("Successfully deleted")';
-            echo '</script>';
+            return true;
         }        
         else{
-            echo '<script language="javascript">';
-            echo 'alert("Cannot delete a legistlator attached as a sponsor to at least one bill")';
-            echo '</script>';
+            return false;
         }
-        redirect('/admin/dashboard/manageLegistlators', 'refresh');
     }
     
      public function getLegistlator($bill_ID)

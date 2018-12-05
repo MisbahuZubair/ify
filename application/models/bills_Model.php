@@ -50,14 +50,12 @@ class Bills_Model extends CI_Model
 
      public function getBill($bill_ID)
     {
-        $sql= "SELECT * FROM bills
-                INNER JOIN legistlators
-                ON bills.bill_sponsor=legistlators.id
-                INNER JOIN committees
-                ON bills.bill_committee=committees.id
-                WHERE bills.id =".$bill_ID." ;";
-         
-        $query = $this->db->query($sql);
+        $this->db->select("*");
+        $this->db->from("bills");
+        $this->db->join('legistlators', 'bills.bill_sponsor = legistlators.id', 'inner');
+        $this->db->join('committees', 'bills.bill_committee = committees.id', 'inner');
+        $this->db->where("bills.id =".$bill_ID);
+        $query = $this->db->get();
         return $query->row_array();
     }
     

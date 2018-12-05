@@ -15,7 +15,14 @@ class Bills extends CI_Controller {
     
     public function details($bill_ID="")
     {   if($bill_ID==""){redirect('', 'refresh');}
-        $data['bill'] = $this->bills_Model->getBill($bill_ID);         //get bill info through Bill model
+        
+     try{
+        $data['bill'] = $this->bills_Model->getBill($bill_ID);         //get bill info through Bill model 
+     }
+     catch(UserException $error){
+         redirect('', 'refresh');
+     }
+        
         $this->load->view('bill_detail',$data);             //display bill detail in bill detail view
     }
     
@@ -31,7 +38,7 @@ class Bills extends CI_Controller {
     public function legistlator($id=""){
         if($id==""){redirect('', 'refresh');}
         $this->load->model('legistlators_Model');
-        $data['legistlator'] = $this->legistlator_Model->fecth_Legistlator($id);
+        $data['legistlator'] = $this->legistlators_Model->fetch_Legistlator($id);
         $data['page'] = "legistlator bills";
         $data['source'] = "legistlator bills";
         $data['filter'] = $id;
@@ -68,8 +75,10 @@ class Bills extends CI_Controller {
         
         $theme ="#437F97";
         if($row->bill_origin=="Senate"){$theme ="#F6511D";}
+        
+        $date = date_create($row->bill_firstreading);
                     
-        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:"><div class="card-header" style="padding:2px; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0; background-color:">'.$status.' '.$row->bill_number.', introduced on '.$row->bill_firstreading.'<hr style="max-width:70%; margin:0 auto;background:'.$theme.';"/></div><div>'.$tags.'</div><hr/><a class=" btn" style="background:'.$theme.'; color:white" href="'.site_url('bills/details/').$row->id.'" role="button">View Details</a></div></div>';
+        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:"><div class="card-header" style="padding:2px; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0; background-color:">'.$status.' '.$row->bill_number.', introduced on '.date_format($date,"d/m/Y").'<hr style="max-width:70%; margin:0 auto;background:'.$theme.';"/></div><div>'.$tags.'</div><hr/><a class=" btn" style="background:'.$theme.'; color:white" href="'.site_url('bills/details/').$row->id.'" role="button">View Details</a></div></div>';
             }
                  $output .='</div>';
             }

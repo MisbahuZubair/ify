@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
         <div>
             <a href ="<?php echo site_url('admin/dashboard/editLegistlator/'.$item['id']);?>" class ="btn btn-secondary" role="button">Edit</a>
-            <a href ="<?php echo site_url('admin/dashboard/deleteLegistlator/'.$item['id']);?>" class ="btn btn-danger float-right" role="button">Delete</a>
+            <a onclick="deleteLegistlator(<?php echo $item['id']; ?>)" class ="btn btn-danger white-text float-right" role="button">Delete</a>
         </div>
 
     
@@ -81,4 +81,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
 </footer>
 </body>
+<script>
+    function deleteLegistlator(id){ 
+        var r = confirm("You will not be able to recover legistlator if you choose to proceed !!!");
+        if (r == true) {
+            $.ajax({
+                url:'<?php echo base_url(); ?>admin/dashboard/deleteLegistlator/',
+                method:"POST",
+                data:{id:id},
+                cache: false,
+                success:function(data){
+                    if(data==true){
+                       alert("Legistlator successfully deleted");
+                        location.reload(); 
+                    }
+                    else{
+                        alert("Legistlator cannot deleted");
+                        location.reload(); 
+                    }
+                    
+                }
+            })
+        } 
+        }
+    
+</script>
 </html>

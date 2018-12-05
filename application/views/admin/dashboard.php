@@ -61,10 +61,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </li>
          
         </ul>
-        <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search">
-        </form>
       </div>
+    <a href="<?php echo site_url('auth/logout');?>" class="btn btn-light">Logout</a>
 </nav>
     </div>
     
@@ -85,8 +83,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </footer>
 </body>
     
-<script>
-        
+<script>    
     function deleteBill(id, picName){
         var r = confirm("You will not be able to recover bill if you choose to proceed !!!");
         if (r == true) {
@@ -96,11 +93,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 data:{id:id, picName:picName},
                 cache: false,
                 success:function(data){
-                    alert("Bill successfully deleted");
-                    location.reload();
+                    if(data==true){
+                       alert("Bill successfully deleted");
+                        location.reload(); 
+                    }
+                    else{alert("Unauthorzed action");
+                    location.reload();}
                 }
             })
-        } 
+            } 
         }
                
   $(document).ready(function(){

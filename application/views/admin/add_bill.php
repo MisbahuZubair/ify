@@ -318,6 +318,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         readURL(this);
     });
         $(document).ready(function() {
+
+        //$('form *').prop('disabled', true); disable all forms
         updateChamber();
             updateTrans();
             updateTags();

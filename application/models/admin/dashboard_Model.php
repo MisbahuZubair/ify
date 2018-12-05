@@ -189,11 +189,17 @@ class dashboard_Model extends CI_Model
         redirect('/admin/dashboard', 'refresh');
     }
     
-     public function publishBill($id,$inital)
-    {    
+     public function publishBill($id,$new_data)
+    {     
+         if ($this->ion_auth->in_group("admin")||$this->ion_auth->in_group("data")){
         $this->db->where(['id' => $id]);
         $this->db->update('bills', $new_data);
         redirect('/admin/dashboard', 'refresh');
+    }
+          else{
+                echo "<script> alert('Unauthorized action');</script>";
+              redirect('/admin/dashboard', 'refresh');
+            }
     }
     
     

@@ -31,8 +31,8 @@ class dashboard_Model extends CI_Model
         
         redirect('/admin/dashboard', 'refresh');
         echo '<script language="javascript">';
-            echo 'alert("Bill successfully deleted")';
-            echo '</script>';
+        echo 'alert("Bill successfully deleted")';
+        echo '</script>';
     }
     
     public function deleteLegistlator($id){
@@ -99,14 +99,13 @@ class dashboard_Model extends CI_Model
         return $myArray;
     } 
 
-    public function getTags($tag_column) { 
-         $sql = "SELECT *
-           FROM info
-           WHERE id= 0";
-           //ORDER by name";
+    public function getFromInfo($column) { 
+        $this->db->select("*");
+        $this->db->from("info");
+        $this->db->where(['id=0']);
         
-        $result = $this->db->query($sql)->row_array();
-        $myString = $result[$tag_column];
+        $result = $this->db->get()->row_array();
+        $myString = $result[$column];
         $myArray = explode(',', $myString);
         print_r($myArray);
         return $myArray;

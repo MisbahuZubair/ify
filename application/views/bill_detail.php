@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
     <nav class="navbar navbar-expand-xl navbar-light shadow-sm p-3 mb-5 bg-white rounded">
     <a class="navbar-left" href="#">
-        <a href="<?php echo site_url('bills/get/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg'); ?>" style="max-height:32px;max-width:32px"alt=""></a>
+        <a href="<?php echo site_url('bills/get/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg'); ?>" class="logo" alt="assemblify logo"></a>
     </a>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
     <div class="card-deck" style ="text-align:center">
         <div class="card shadow-sm p-3 mb-4 bg-white rounded nopadding">
-            <div class="card-body" style="padding:0"> <img src ="<?php echo site_url('application/uploads/').$bill['bill_img']?>" /></div>
+            <div class="card-body" style="padding:0"> <img src ="<?php echo site_url('application/uploads/').$bill['bill_img']?>"/></div>
             <div class="card-body" style="padding:0"><h4><?php echo $bill['bill_question']?></h4></div>
         </div>
 	</div>

@@ -11,27 +11,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo  site_url('application/views')?>/styles.css">
   
-  <style>
-  img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  padding:0;
-	}
-</style>
 </head>
 <body> 
 <div class="container">
 <nav class="navbar navbar-expand-xl navbar-dark shadow-sm p-3 mb-5 bg-secondary rounded">
     <a class="navbar-left" href="#">
-        <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.png'); ?>" style="max-height:32px;"alt=""></a>
+        <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg'); ?>" class="logo" alt=""></a>
   </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse float-right" id="navbarsExample05">
+      <div class="collapse navbar-collapse float-right" id="navbars">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url('admin/dashboard');?>"> Manage Bills</a>
@@ -47,6 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </li>         
         </ul>
       </div>
+    <a href="<?php echo site_url('auth/logout');?>" class="btn btn-light">Logout</a>
 </nav>
 </div>
     
@@ -94,7 +88,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-md-3">
             <div class="form-group">
                 <label><b>Party</b></label>
-                <input type = "text" class ="form-control" name="party" <?php if(isset($legistlator)){echo "value='".$legistlator['party']."'";}?> required/>
+                <select class ="form-control" name="party" id="party" required ></select>
             </div>
         </div>
     </div>
@@ -119,10 +113,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <input class="btn btn-secondary" type="submit" value="Save"/>
 
   </div>
-    <footer class="footer" style="position: fixed;left: 0;bottom: 0;height: 45px;background: #fafafa; padding: 10px; border-top: solid 1px #eee;">
+    <footer class="footer">
       <div class="container">
         <span class="text-muted">© 2018 Copyright: Assemblify.</span>
-		<span class="text-muted" style="float:right">Powered by Tinqe</span>
       </div>
 </footer>
 
@@ -130,6 +123,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     $(document).ready(function() {
         updateChamber();
         getStates();
+        getParties();
     });
     
     $("#s").click(function(){
@@ -138,6 +132,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
        $("#h").click(function(){
     updateCons();
 });
+    
+    function getParties(){
+        var column ="party";
+        var party =""+<?php if (isset($legistlator)){echo '"'.$legistlator['party'].'"';} else echo '""'?>;
+        console.log(party);
+        $.ajax({
+        url:"<?php echo base_url(); ?>admin/dashboard/getOptionsFromInfo/",
+        method:"POST",
+        data:{selected: party, column:column},
+        cache: false,
+        success:function(data){
+             $('#party').html("");
+             $('#party').append(data);
+            action = 'inactive';}
+        })
+    }
     
     function getStates()
     {
@@ -150,7 +160,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         success:function(data){
             if(data == '')
           {
-            $('#load_data_message').html('<h3>No More Result Found</h3>');
+            $('#load_data_message').html('<h3>None</h3>');
             action = 'active';
           }
           else
@@ -186,7 +196,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         success:function(data){
             if(data == '')
           {
-            $('#load_data_message').html('<h3>No More Result Found</h3>');
+            $('#load_data_message').html('<h3>None</h3>');
             action = 'active';
           }
           else

@@ -4,67 +4,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Assemblify</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  
-  <style>
-.nopadding {
-   padding: 0 !important;
-    margin:0;}
-    
-      hr{
-          padding:0;
-          margin:0;
-          background:white;
-      }
-.btn {
-    min-width: 80px !important;
-    max-width: 80px !important;
-}
-  img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  padding:0;
-	}
-</style>
+    <title>Assemblify</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo  site_url('application/views')?>/styles.css">
 </head>
 <body> 
+    
 <div class="container">
-
-<nav class="navbar navbar-expand-xl navbar-dark shadow-sm p-3 mb-5 bg-secondary rounded">
-    <a class="navbar-left" href="#">
-        <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg'); ?>" style="max-height:32px;max-width:32px"alt=""></a>
-  </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse float-right" id="navbarsExample05">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-            <a class="nav-link" style="color:white" href="<?php echo site_url('admin/dashboard');?>">Manage Bills</a>
-          </li>
-            <li class="nav-item">
-            <a class="nav-link" href="<?php echo site_url('admin/dashboard/addBill');?>">Add Bill</a>
-          </li>
-              <li class="nav-item">
-            <a class="nav-link" href="<?php echo site_url('admin/dashboard/addLegistlator');?>">Add Legistlator</a>
-          </li>
-            <li class="nav-item">
-            <a class="nav-link" href="<?php echo site_url('admin/dashboard/manageLegistlators');?>">Manage Legistlators</a>
-          </li>
-         
-        </ul>
-      </div>
-    <a href="<?php echo site_url('auth/logout');?>" class="btn btn-light">Logout</a>
-</nav>
-    </div>
+    <nav class="navbar navbar-expand-xl navbar-dark shadow-sm p-3 mb-5 bg-secondary rounded">
+        <a class="navbar-left" href="#">
+            <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg'); ?>" class="logo" alt=""></a>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse float-right" id="navbarsExample05">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="<?php echo site_url('admin/dashboard');?>">Manage Bills</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo site_url('admin/dashboard/addBill');?>">Add Bill</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo site_url('admin/dashboard/addLegistlator');?>">Add Legistlator</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo site_url('admin/dashboard/manageLegistlators');?>">Manage Legistlators</a>
+                </li>
+            </ul>
+        </div>
+        <a href="<?php echo site_url('auth/logout');?>" class="btn btn-light">Logout</a>
+    </nav>
+</div>
     
     <div class="container">
     <div id="load_data"></div>

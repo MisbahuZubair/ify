@@ -81,3 +81,30 @@ footer{
     text-align:center; 
     width:100%;
 }
+
+.bill-header{
+    padding:2px;
+    background-color:#ffffff;
+}
+
+.btn-group{
+    padding:5px 0 5px 0;
+}
+
+.fa-clock{
+    color:orange;
+}
+
+.fa-ban{
+    color:red;
+}
+
+.fa-check-circle{
+    color:green;
+}
+
+.hr_billcard{
+    width:70%;
+    margin: 0 auto;
+    padding:0;
+}

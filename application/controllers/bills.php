@@ -69,16 +69,16 @@ class Bills extends CI_Controller {
         if($row->bill_tag3!=""){$tags.="<a href='".site_url('bills/tag/'.$row->bill_tag3)."'>#".$row->bill_tag3."</a> ";}
         
         $status="";
-        if($row->bill_status=="Passed"){$status.='<i class="fas fa-check-circle" style="color:green;"></i>';}
-        else if($row->bill_status=="In consideration"){$status.='<i class="fa fa-clock" style="color:orange;"></i>';}
-        else if($row->bill_status=="Thrown out"){$status.='<i class="fa fa-ban" style="color:red;"></i>';}
+        if($row->bill_status=="Passed"){$status.='<i class="fas fa-check-circle"></i>';}
+        else if($row->bill_status=="In consideration"){$status.='<i class="fa fa-clock"></i>';}
+        else if($row->bill_status=="Thrown out"){$status.='<i class="fa fa-ban"></i>';}
         
-        $theme ="#437F97";
-        if($row->bill_origin=="Senate"){$theme ="#F6511D";}
+        $theme="house_maintheme";
+        if ($row->bill_origin=="Senate"){$theme = "senate_maintheme";}
         
         $date = date_create($row->bill_firstreading);
                     
-        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-5 rounded " style ="text-align:center;margin-bottom: 20px; padding:0px 0px 0px 0px;background-color:"><div class="card-header" style="padding:2px; background:#ffffff"><h5>'.$row->bill_question.'</h5></div><div class="card-body" style="padding:0"> <img src ="'.site_url('application/uploads/').$row->bill_img.'/><div class="card-header" style="padding:0; background-color:">'.$status.' '.$row->bill_number.', introduced on '.date_format($date,"d/m/Y").'<hr style="max-width:70%; margin:0 auto;background:'.$theme.';"/></div><div>'.$tags.'</div><hr/><a class=" btn" style="background:'.$theme.'; color:white" href="'.site_url('bills/details/').$row->id.'" role="button">View Details</a></div></div>';
+        $output .= '<div class="col-lg-6 text-center"><div class="nopadding card shadow p-3 mb-5 rounded"><div class="card-header bill-header"><h5>'.$row->bill_question.'</h5></div><div class="card-body nopadding"> <img src ="'.site_url('application/uploads/').$row->bill_img.'"/></div><div class="nopadding">'.$status.' '.$row->bill_number.', introduced on '.date_format($date,"d/m/Y").'<hr class="'.$theme.' hr_billcard"/></div><div class="nopadding">'.$tags.'</div><a class="btn '.$theme.' text-white" href="'.site_url('bills/details/').$row->id.'" role="button">View Details</a></div></div>';
             }
                  $output .='</div>';
             }

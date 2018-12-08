@@ -76,6 +76,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             </div>
         </div>
+         <input type="hidden" id="billImagename" name="billImagename" value="<?php if($page==1) {echo $bill['bill_imagename'];}?>">
+         
         <div class ="col-md-4">
             <div class="form-group">
                 <label><b>Assembly</b></label>
@@ -213,7 +215,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="form-group">
         <label><b>Bill Image</b></label><br/>
         <input type="file" name="billimage" id="billimage"/>
-        <img id="image_upload_preview" src="<?php if($page==1){echo site_url('application/uploads/').$bill['bill_img'];}else{echo 'http://placehold.it/100x100';}?>" alt="your image" /> 
+        <img id="image_upload_preview" src="<?php if($page==1){echo site_url('application/uploads/').$bill['bill_img'].'?dummy=8484744';}else{echo 'http://placehold.it/100x100';}?>" alt="your image" /> 
     </div>    
         
 <input class="btn btn-secondary" name="save" id="save" class="form-control" type="submit" value="Save"/>
@@ -322,6 +324,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             console.log("inside");
             $('#billimage').prop('disabled', false);
             $('#save').prop('disabled', false);
+            $('#billImagename').prop('disabled', false);
         }
         
         updateChamber();

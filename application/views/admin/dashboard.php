@@ -63,7 +63,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </body>
     
 <script>    
-    function deleteBill(id, picName){
+    function deleteBill(id, picName, pub){
+        if(pub==0){
         var r = confirm("You will not be able to recover bill if you choose to proceed !!!");
         if (r == true) {
             $.ajax({
@@ -72,15 +73,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 data:{id:id, picName:picName},
                 cache: false,
                 success:function(data){
-                    if(data==true){
-                       alert("Bill successfully deleted");
+                    console.log(data);
+                    if(data==false){
+                        alert("Unauthorzed action");
                         location.reload(); 
                     }
-                    else{alert("Unauthorzed action");
-                    location.reload();}
+                    else{
+                        alert("Bill successfully deleted");
+                        location.reload();}
                 }
             })
-            } 
+            }}
+        else{
+            alert("Published bills cannot be deleted");
+            
+        }
         }
                
   $(document).ready(function(){

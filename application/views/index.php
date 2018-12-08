@@ -1,5 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Methods: GET, OPTIONS");
+
 $page_ = urldecode($page);
 if ($page_=='index'){$page_title="Assemblify | All bills";}
 else if($page_=='all-all'){$page_title="Assemblify | All bills";}
@@ -128,9 +131,9 @@ else{$page_title="Assemblify";}
     var fetch_url=""
     var source = '<?php echo $source;?>';
     if(source=="legistlators"){fetch_url ="<?php echo base_url(); ?>legistlators/fetch/<?php echo $source.'/'.$filter?>" ; var limit = 16;}
-    else if(source=="legistlator bills"){fetch_url ="<?php echo base_url(); ?>bills/BillsByLegistlator/<?php echo $filter?>" ; var limit = 8;}
-    else if(source=="tag"){fetch_url ="<?php echo base_url(); ?>bills/BillsByTag/<?php echo $filter?>" ; var limit = 8;}
-    else{ fetch_url ="<?php echo base_url(); ?>bills/AllBills/<?php echo $source.'/'.$filter;?>"; var limit = 8;}
+    else if(source=="legistlator bills"){fetch_url ="<?php echo base_url(); ?>Bills/BillsByLegistlator/<?php echo $filter?>" ; var limit = 8;}
+    else if(source=="tag"){fetch_url ="<?php echo base_url(); ?>Bills/BillsByTag/<?php echo $filter?>" ; var limit = 8;}
+    else{ fetch_url ="<?php echo base_url(); ?>Bills/AllBills/<?php echo $source.'/'.$filter;?>"; var limit = 8;}
     
    
 

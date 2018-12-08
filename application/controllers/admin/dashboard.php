@@ -45,7 +45,7 @@ class Dashboard extends CI_Controller {
         $sub_theme="house_subtheme";
         if($row->bill_origin=="Senate"){$sub_theme="senate_subtheme";}
                     
-        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-4 rounded text-center"><div class="card-header bill-header"><h5>'.$row->bill_question.'</h5></div><div class="card-body nopadding"> <img src ="'.site_url('application/uploads/').$row->bill_img.'"/></div><div class="'.$sub_theme.'"> '.$status.' '.$row->bill_number.', introduced on '.$row->bill_firstreading.'</div><hr/><div class="'.$sub_theme.'">'.$tags.'</div><hr/><div class="'.$sub_theme.'">Created:'.date('d/m/y H:i:s',strtotime($row->bill_createdon)).' Edited:'.date('d/m/y H:i:s',strtotime($row->bill_lasteditedon)).'</div><hr/><div class="row btn-group"><div class="col-sm-3"><a class=" btn bg-secondary text-white" href="'.site_url('bills/details/').$row->id.'" role="button">View</a></div><div class="col-sm-3"><a class="btn bg-info text-white" href="'.site_url('admin/dashboard/editBill/').$row->id.'" role="button">Edit</a></div><div class="col-sm-3"><a class="btn bg-success text-white" href="'.site_url('admin/dashboard/publishBill/').$row->id.'/'.$row->publish.'" role="button">'.$pub_text.'</a></div><div class="col-sm-3"><a class="btn bg-danger text-white" name="delete" onclick="deleteBill('.$row->id.',\''.$row->bill_img.'\')" role="button">Delete</a></div></div></div></div>';
+        $output .= '<div class="col-lg-6"><div class="nopadding card shadow p-3 mb-4 rounded text-center"><div class="card-header bill-header"><h5>'.$row->bill_question.'</h5></div><div class="card-body nopadding"> <img src ="'.site_url('application/uploads/').$row->bill_img.'?dummy=8484744"/></div><div class="'.$sub_theme.'"> '.$status.' '.$row->bill_number.', introduced on '.$row->bill_firstreading.'</div><hr/><div class="'.$sub_theme.'">'.$tags.'</div><hr/><div class="'.$sub_theme.'">Created:'.date('d/m/y H:i:s',strtotime($row->bill_createdon)).' Edited:'.date('d/m/y H:i:s',strtotime($row->bill_lasteditedon)).'</div><hr/><div class="row btn-group"><div class="col-sm-3"><a class=" btn bg-secondary text-white" href="'.site_url('bills/details/').$row->id.'" role="button">View</a></div><div class="col-sm-3"><a class="btn bg-info text-white" href="'.site_url('admin/dashboard/editBill/').$row->id.'" role="button">Edit</a></div><div class="col-sm-3"><a class="btn bg-success text-white" href="'.site_url('admin/dashboard/publishBill/').$row->id.'/'.$row->publish.'" role="button">'.$pub_text.'</a></div><div class="col-sm-3"><a class="btn bg-danger text-white" name="delete" onclick="deleteBill('.$row->id.',\''.$row->bill_img.'\','.$row->publish.')" role="button">Delete</a></div></div></div></div>';
        }
                  $output .='</div>';
             }
@@ -59,16 +59,21 @@ class Dashboard extends CI_Controller {
 			$id = $this->input->post('id');
             $picFileName = $this->input->post('picName');
             $this->dashboard_Model->delete($id, $picFileName);
-            return true;
+            echo "<script>console.log('controller')</script>";
+             echo true;
 		}
-        
-        return false;
+        else{
+            echo false;
+        }
     }
     
     public function publishBill($id, $initial){
        
             if($initial == 1){$new_data['publish'] =0;} else {$new_data['publish'] =1;}
-            $this->dashboard_Model->publishBill($id, $new_data); 
+                $response = $this->dashboard_Model->publishBill($id, $new_data);
+                if ($response==false){
+                    echo "<script>alert('Unauthorized')</script>";
+                }
     }
     
     public function deleteLegistlator(){
@@ -78,8 +83,8 @@ class Dashboard extends CI_Controller {
             $result=$this->dashboard_Model->deleteLegistlator($id);
             echo $result;
         }
-        
-        echo false;
+        else{
+        echo false;}
     }
     
     public function addLegistlator(){
@@ -304,16 +309,19 @@ class Dashboard extends CI_Controller {
                 
             }
             else{
-                 $image = FALSE;
+                $img_name = "bill".time();
+                $image = FALSE;
                 if($_FILES)
                 {
-                    $image = $this->do_upload($this->input->post('billImagename'));
+                    $image = $this->do_upload($img_name);
                 }
-                 
+                
                 if($image)
                 {
+                    unlink('./application/uploads/'.$this->input->post('billImagename').'.jpg');
                     $new_data['bill_img'] = $image;
                 }
+                $new_data['bill_imagename'] =$img_name;
             }
             
             if($access=="all"){

@@ -24,15 +24,11 @@ class dashboard_Model extends CI_Model
     }
     
     public function delete($id, $picFileName){
-        unlink('./application/uploads/'.$picFileName.'.jpg');
+        unlink('./application/uploads/'.$picFileName);
         $sql = "DELETE from bills 
                 WHERE bills.id=".$id."";
         $query = $this->db->query($sql);
-        
-        redirect('/admin/dashboard', 'refresh');
-        echo '<script language="javascript">';
-        echo 'alert("Bill successfully deleted")';
-        echo '</script>';
+        echo "<script>console.log('model')</script>";
     }
     
     public function deleteLegistlator($id){
@@ -185,19 +181,19 @@ class dashboard_Model extends CI_Model
         $this->db->where(['id' => $id]);
         $this->db->update('bills', $new_data);
         echo "<script>alert('Bill updated');</script>";
-        redirect('/admin/dashboard', 'refresh');
+        //redirect('/admin/dashboard', 'refresh');
     }
     
      public function publishBill($id,$new_data)
     {     
-         if ($this->ion_auth->in_group("admin")||$this->ion_auth->in_group("data")){
+        if ($this->ion_auth->in_group("admin")||$this->ion_auth->in_group("data")){
         $this->db->where(['id' => $id]);
         $this->db->update('bills', $new_data);
         redirect('/admin/dashboard', 'refresh');
     }
           else{
-                echo "<script> alert('Unauthorized action');</script>";
               redirect('/admin/dashboard', 'refresh');
+               return false;
             }
     }
     
@@ -205,7 +201,7 @@ class dashboard_Model extends CI_Model
      public function add($new_data)
     {
         $this->db->insert('bills', $new_data);
-        echo "<script>alert('Bill created');</script>";
+        //echo "<script>alert('Bill created');</script>";
         redirect('/admin/dashboard', 'refresh');
     }
     
@@ -230,4 +226,4 @@ class dashboard_Model extends CI_Model
         $result_set =$this->db->get('legistlators');
         return $result_set->result_array(); 
     }
-}
+}?>

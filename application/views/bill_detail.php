@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b8c4e19f365de0011fdf5a3&product=inline-share-buttons' async='async'></script>
+   <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5c0b18fa423bba0012ec3318&product='inline-share-buttons' async='async'></script>
+   
     <title><?php echo $bill['bill_question']?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -148,15 +149,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
+
 var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+this.page.url = <?php echo '"'.site_url('bills/details/').$bill['bill_number'].'"'; ?>;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = <?php echo '"'.$bill['bill_number'].'"'; ?>; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
-*/
+
 (function() { // DON'T EDIT BELOW THIS LINE
 var d = document, s = d.createElement('script');
-s.src = 'https://assemblify-ng.disqus.com/embed.js';
+s.src = 'https://assemblify-ng-1.disqus.com/embed.js';
 s.setAttribute('data-timestamp', +new Date());
 (d.head || d.body).appendChild(s);
 })();

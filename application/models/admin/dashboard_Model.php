@@ -60,7 +60,7 @@ class dashboard_Model extends CI_Model
          $sql = "SELECT id, name 
            FROM legistlators 
            ORDER by name";
-    $query = $this->db->query($sql)->result_array(); 
+        $query = $this->db->query($sql)->result_array(); 
         return $query; 
     } 
     
@@ -91,6 +91,7 @@ class dashboard_Model extends CI_Model
         $result = $this->db->query($sql)->row_array();
         $myString = $result[$chamber_cons];
         $myArray = explode(',', $myString);
+        sort($myArray);
         print_r($myArray);
         return $myArray;
     } 
@@ -122,7 +123,7 @@ class dashboard_Model extends CI_Model
         echo "<script>alert('Legistlator data updated');</script>";
         //redirect('/admin/dashboard/manageLegistlators', 'refresh');
     }
-        
+     
     public function addLegistlator($new_data)
     {
         $this->db->insert('legistlators', $new_data);
@@ -223,6 +224,8 @@ class dashboard_Model extends CI_Model
     
     public function allLegistlators()
     {
+        $this->db->get('legistlators');
+        $this->db->order_by("state", "ASC");
         $result_set =$this->db->get('legistlators');
         return $result_set->result_array(); 
     }

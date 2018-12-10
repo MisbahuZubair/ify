@@ -28,11 +28,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <a class="navbar-left" href="#">
         <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg'); ?>" class="logo" alt=""></a>
   </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse float-right" id="navbarsExample05">
+      <div class="collapse navbar-collapse float-right" id="navbars">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url('admin/dashboard');?>"> Manage Bills</a>

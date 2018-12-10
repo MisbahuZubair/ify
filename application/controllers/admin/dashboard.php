@@ -99,7 +99,6 @@ class Dashboard extends CI_Controller {
             $new_data['state']= ($this->input->post('state'));
             $new_data['constituency']= ($this->input->post('constituency'));
             $new_data['term'] = $this->input->post('legistlator_term');
-             
             $this->dashboard_Model->addLegistlator($new_data);       
         }
         $data['info'] = $this->dashboard_Model->getInfo();

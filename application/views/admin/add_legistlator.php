@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class='col'>
              <div class="form-group">
                 <label><b>Chamber</b></label>
-                <div class="radio" name="chamber" onload ="" onchange="updateCommittee()">
+                <div class="radio" name="chamber">
                     <label><input type="radio" name="chamber" id="h" value="house" 
                                   <?php if(isset($legistlator)){if ($legistlator['chamber']=="house"){echo "checked";}}?>>
                                   House</label>

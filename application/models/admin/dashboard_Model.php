@@ -128,7 +128,7 @@ class dashboard_Model extends CI_Model
     {
         $this->db->insert('legistlators', $new_data);
         echo "<script>alert('Legistlator created');</script>";
-        redirect('/admin/dashboard/manageLegistlators', 'refresh'); 
+       // redirect('/admin/dashboard/manageLegistlators', 'refresh'); 
     }
     
     public function getSenateCommittees() { 

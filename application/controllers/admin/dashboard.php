@@ -105,7 +105,6 @@ class Dashboard extends CI_Controller {
         $this->load->view('admin/add_legistlator',$data);}
         
         else{
-            echo "<script>alert('Unauthorized action');</script>";
             redirect('admin/dashboard', 'refresh');
         }
     }
@@ -203,7 +202,6 @@ class Dashboard extends CI_Controller {
         $this->load->view('admin/add_legistlator',$data);
         }
     else{
-            echo "<script>alert('Unauthorized action');</script>";
          redirect('admin/dashboard', 'refresh');
         }
     }

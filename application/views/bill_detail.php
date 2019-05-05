@@ -105,11 +105,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  <div class="card-header <?php echo $sub_theme; ?>"> <h6>Chamber</h6><p><?php echo $bill['bill_origin']?></p></div>
 			  
                <div class="card-header <?php echo $sub_theme; ?>"><h6>Title</h6><p><?php echo $bill['bill_title']?></p></div>
+
+               <div class="card-header <?php echo $sub_theme; ?>"><h6>Type</h6><p><?php echo $bill['bill_type']?></p></div>
 			
-               <div class="card-header <?php echo $sub_theme; ?>"><h6>Sponsor</h6><p><a href ="<?php echo site_url('bills/legistlator/'.$bill['bill_sponsor']);?>"> <?php echo $bill['name']?> </a></p></div>
+               <div class="card-header <?php echo $sub_theme; ?>"><h6>Sponsor</h6><p><?php if($bill['bill_sponsor']!=""){ echo "<a href ='".site_url('bills/legistlator/'.$bill['bill_sponsor'])."'>".$bill['name']."</a>"; } else {echo "N/A";} ?></p></div>
 			  <div class="card-header <?php echo $sub_theme; ?>"><h6>Tag(s)</h6><p><?php if ($bill['bill_tag1']!="") {echo "<a href=".site_url('bills/tag/'.$bill['bill_tag1']).">#".$bill['bill_tag1']."</a>";} if ($bill['bill_tag2']!="") {echo "<a href=".site_url('bills/tag/'.$bill['bill_tag2'])."> #".$bill['bill_tag2']."</a>";} if ($bill['bill_tag3']!="") {echo "<a href=".site_url('bills/tag/'.$bill['bill_tag3'])."> #".$bill['bill_tag3']."</a>";}?></p></div>
 			  
-			  <div class="card-header <?php echo $sub_theme; ?>"><h6>Summary</h6><p><?php echo  ltrim($bill['bill_summary'])?></p></div>
+			  <div class="card-header <?php echo $sub_theme; ?>"><h6>Official Summary</h6><p><?php echo  ltrim($bill['bill_summary'])?></p></div>
+
+        <div class="card-header <?php echo $sub_theme; ?>"><h6>Key Points</h6><p><?php echo  ltrim($bill['bill_key_points'])?></p></div>
 			  
 			  <div class="card-header <?php echo $sub_theme; ?>"><h6>Full Text of Bill</h6><p>Click <a href="<?php echo $bill['bill_fulltext']?>" target="_blank">here</a> to view the full bill text</p></div>
 			  

@@ -132,9 +132,11 @@ class Dashboard extends CI_Controller {
             $new_data['bill_title'] = $this->input->post('billTitle');
             $new_data['bill_sponsor']= $this->input->post('billSponsor');
             $new_data['bill_summary']= $this->input->post('billSummary');
+            $new_data['bill_key_points']= $this->input->post('key_points');
             $new_data['bill_additionalinfo']= $this->input->post('billAdditionalinfo');
             $new_data['bill_origin']= $this->input->post('origin');
             $new_data['bill_trans'] = $this->input->post('trans');
+            $new_data['bill_type'] = $this->input->post('type');
             $new_data['bill_sponsor'] = $this->input->post('billSponsor');
             $new_data['bill_fulltext'] = $this->input->post('billFulltext');
             $new_data['bill_impact'] = $this->input->post('billImpact');
@@ -207,9 +209,10 @@ class Dashboard extends CI_Controller {
     }
     
     public function getTermLegistlators(){
-        $options='';
+        $options='<option disabled selected value> -- no sponsor -- </option>';
             $legistlators=$this->dashboard_Model->getTermLegistlators($this->input->post('term'),$this->input->post('chamber'));
             $sponsor = $this->input->post('sponsor');
+
             foreach($legistlators as $rep):
                 
                 if($rep['id']==$sponsor){
@@ -336,6 +339,7 @@ class Dashboard extends CI_Controller {
             
             if($access=="all"){
                 $new_data['bill_summary']= $this->input->post('billSummary');
+                $new_data['bill_key_points']= $this->input->post('key_points');
                 $new_data['bill_number'] = $this->input->post('billNumber');
                 $new_data['bill_term'] = $this->input->post('billTerm');
                 $new_data['bill_title'] = $this->input->post('billTitle');
@@ -345,6 +349,7 @@ class Dashboard extends CI_Controller {
                 $new_data['bill_sponsor'] = $this->input->post('billSponsor');
                 $new_data['bill_fulltext'] = $this->input->post('billFulltext');
                 $new_data['bill_impact'] = $this->input->post('billImpact');
+                $new_data['bill_type'] = $this->input->post('type');
                 $new_data['bill_tag1'] = $this->input->post('billTag1');
                 $new_data['bill_tag2'] = $this->input->post('billTag2');
                 $new_data['bill_tag3'] = $this->input->post('billTag3');
@@ -364,7 +369,8 @@ class Dashboard extends CI_Controller {
         $data['access'] = $access;
         $data['info'] = $this->dashboard_Model->getInfo();
         $data['page'] = 1;
-        $data['bill'] = $this->bills_Model->getBill($id);
+        $bill_type = $this->bills_Model->checkSponsor($id);
+        $data['bill'] = $this->bills_Model->getBill($id, $bill_type);
         $data['committees'] = $this->dashboard_Model->getCommittees();
         $data['legistlators'] = $this->dashboard_Model->getLegistlators();
         $this->load->view('admin/add_bill',$data);

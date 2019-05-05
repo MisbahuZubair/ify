@@ -48,11 +48,20 @@ class Bills_Model extends CI_Model
         return $query;
     }
 
-     public function getBill($bill_ID)
+    public function checkSponsor($bill_ID){
+        $this->db->select("bill_sponsor");
+        $this->db->from("bills");
+        $this->db->where("bills.id =".$bill_ID);
+        $result = $this->db->get()->row();
+        return $result->bill_sponsor;
+    }
+
+     public function getBill($bill_ID, $bill_sponsor)
     {
         $this->db->select("*");
         $this->db->from("bills");
-        $this->db->join('legistlators', 'bills.bill_sponsor = legistlators.id', 'inner');
+        if($bill_sponsor!=""){
+        $this->db->join('legistlators', 'bills.bill_sponsor = legistlators.id', 'inner');}
         $this->db->join('committees', 'bills.bill_committee = committees.id', 'inner');
         $this->db->where("bills.id =".$bill_ID);
         $query = $this->db->get();

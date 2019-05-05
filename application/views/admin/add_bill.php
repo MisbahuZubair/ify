@@ -48,34 +48,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!--<form method ="post"> -->
 <?php echo form_open_multipart(''); ?>
     <div class ="row">
-        <div class ="col-md-3">
+    <div class ="col-md-2">
             <div class="form-group">
                 <label><b>Chamber</b></label>
-                <div class="radio" name="origin" onchange="getTermLegistlators()" >
-                    <label><input type="radio" name="origin" id="h" value="house" 
-                                  <?php if($page==1){if($bill['bill_origin']=='House') {echo 'checked' ;}} ?>>
-                                  House</label>
-
-                    <label><input type="radio"name="origin" id="s" value="senate"
-                        <?php if($page==1){if($bill['bill_origin']=='Senate') {echo 'checked' ;}}?>>
-                        Senate</label>
-                </div>
+                 <select class ="form-control" name="origin" id="origin">
+                     <option value="House" <?php if($page==1){if($bill['bill_origin']=='House') {echo 'selected' ;}} ?>>House</option>
+                      <option value="Senate" <?php if($page==1){if($bill['bill_origin']=='Senate') {echo 'selected' ;}} ?>>Senate</option>
+                </select>
             </div>
         </div>
+
+        <div class ="col-md-2">
+            <div class="form-group">
+                <label><b>Type</b></label>
+                 <select class ="form-control" name="type" id="type">
+                     <option value="Member" <?php if($page==1){if($bill['bill_type']=='Member') {echo 'selected' ;}} ?>>Member</option>
+                      <option value="Private" <?php if($page==1){if($bill['bill_type']=='Private') {echo 'selected' ;}} ?>>Private</option>
+                     <option value="Executive" <?php if($page==1){if($bill['bill_type']=='Executive') {echo 'selected' ;}} ?>>Executive</option>
+                </select>
+            </div>
+        </div>
+
         <div class ="col-md-2">
             <div class="form-group">
                 <label><b>Transmitted</b></label>
-                <div class="radio" name="trans" >
-                    <label><input type="radio" name="trans" id="trans_false" value=false
-                       <?php if($page==1){if($bill['bill_trans']==false) {echo 'checked' ;}}?>>
-                        False</label>
-                    
-                    <label><input type="radio" name="trans" id ="trans_true" value=true
-                                  <?php if($page==1){if($bill['bill_trans']==true) {echo 'checked' ;}}?>>
-                                  True</label>
-                </div>
+                 <select class ="form-control" name="trans" id="trans">
+                     <option value="False" <?php if($page==1){if($bill['bill_trans']=='false') {echo 'selected' ;}} ?>>False</option>
+                      <option value="True" <?php if($page==1){if($bill['bill_trans']=='true') {echo 'selected' ;}} ?>>True</option>
+                </select>
             </div>
         </div>
+
          <input type="hidden" id="billImagename" name="billImagename" value="<?php if($page==1) {echo $bill['bill_imagename'];}?>">
          
         <div class ="col-md-4">
@@ -90,13 +93,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </select>
             </div>
         </div>
-        <div class ="col-md-3">
+        <div class ="col-md-2">
             <div class="form-group">
                 <label><b>Status</b></label>
                  <select class ="form-control" name="billStatus" id="billStatus">
-                     <option value="in consideration">In Consideration</option>
-                      <option value="passed">Passed</option>
-                     <option value="thrown out">Thrown Out</option>
+                     <option value="In consideration">In Consideration</option>
+                      <option value="Passed">Passed</option>
+                     <option value="Thrown out">Thrown Out</option>
                 </select>
             </div>
         </div>
@@ -159,8 +162,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     <div class="row">
         <div class="col-md-12 form-group">
-            <label><b>Summary</b></label>
+            <label><b>Official Summary</b></label>
             <textarea class ="form-control" name="billSummary" id="summary" rows='6' value="" required> <?php if($page==1){echo $bill['bill_summary'] ;}?></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label><b>Key Points</b></label>
+                
+            <textarea class ="form-control" name="key_points" id="key_points" rows='6' value=""> <?php if($page==1){echo $bill['bill_key_points'] ;}?></textarea>
+            </div>
         </div>
     </div>
     
@@ -268,9 +280,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         term= $.trim(term);
         var sponsor =""+<?php if ($page==1){echo '"'.$bill['bill_sponsor'].'"';} else echo '""'?>;
         var chamber ="";
-        
-        if($('#s').is(':checked')){console.log("inside");  chamber="senate";}
-        else if ($('#h').is(':checked')){chamber="house";}
+        var e = document.getElementById("origin");
+        chamber = e.options[e.selectedIndex].value;
         
         console.log("its:"+chamber);
         

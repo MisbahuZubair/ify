@@ -21,19 +21,21 @@ class Bills extends CI_Controller {
 	}
     
     public function details($bill_ID="")
-    {   if($bill_ID==""){redirect('', 'refresh');}
+    {
+        if($bill_ID==""){redirect('', 'refresh');}
         
-     try{
-        $data['bill'] = $this->bills_Model->getBill($bill_ID);         //get bill info through Bill model 
-     }
-     catch(UserException $error){
-         redirect('', 'refresh');
-     }
-        
+        try{
+            $bill_type = $this->bills_Model->checkSponsor($bill_ID); 
+            $data['bill'] = $this->bills_Model->getBill($bill_ID, $bill_type);         //get bill info through Bill model 
+        }
+        catch(UserException $error){
+            redirect('', 'refresh');
+        }
+            
         $this->load->view('bill_detail',$data);             //display bill detail in bill detail view
     }
     
-    public function get($chamber="", $filter="")
+    public function display($chamber="", $filter="")
     {   
         if($chamber==""){redirect('', 'refresh');}
         $data['page'] = "".$chamber."-".$filter."";         //get bill info through Bill model

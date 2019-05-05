@@ -18,8 +18,8 @@ else if($page_=='House-Passed'){$page_title="Assemblify | Passed house bills";}
 else if($page_=='House-In consideration'){$page_title="Assemblify | House bills in consideration";}
 else if($page_=='House-Thrown out'){$page_title="Assemblify | House thrown out bills";}
 else if($page_=='legistlators-all'){$page_title="Assemblify | All legistlators";}
-else if($page_=='legistlators-House'){$page_title="Assemblify | House Members";}
-else if($page_=='legistlators-Senate'){$page_title="Assemblify | House Senate";}
+else if($page_=='legistlators-House'){$page_title="Assemblify | House members";}
+else if($page_=='legistlators-Senate'){$page_title="Assemblify | Senate members";}
 else if($page_=='tag'){$page_title="Assemblify | #".$tag;}
 else{$page_title="Assemblify";}
 ?>
@@ -42,7 +42,7 @@ else{$page_title="Assemblify";}
     <div class="container">
         <nav class="navbar navbar-expand-xl navbar-light shadow-sm p-3 mb-5 bg-white rounded">
             <a class="navbar-left" href="#">
-                <a href="<?php echo site_url('bills/get/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg');?>"  class="logo" alt="assemblify logo"></a>
+                <a href="<?php echo site_url('bills/display/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg');?>"  class="logo" alt="assemblify logo"></a>
             </a>
             
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,49 +54,46 @@ else{$page_title="Assemblify";}
                   <li class="nav-item <?php if ($page_[0]=='a'){echo "active";}?> dropdown">
                     <a class="nav-link  dropdown-toggle" href="#" id="dropdownBills" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bills<span class="sr-only"></span></a>
                       <div class="dropdown-menu" aria-labelledby="dropdownBills">
-                      <a class="dropdown-item" href="<?php echo site_url('bills/get/all'); ?>">All</a>
-                      <a class="dropdown-item" href="<?php echo site_url('bills/get/all/Passed'); ?>">Passed</a>
-                      <a class="dropdown-item" href="<?php echo site_url('bills/get/all/In consideration'); ?>">In Consideration</a>
-                        <a class="dropdown-item" href="<?php echo site_url('bills/get/all/Thrown out'); ?>">Thrown Out</a>
+                      <a class="dropdown-item" href="<?php echo site_url('bills/display/all'); ?>">All</a>
+                      <a class="dropdown-item" href="<?php echo site_url('bills/display/all/Passed'); ?>">Passed</a>
+                      <a class="dropdown-item" href="<?php echo site_url('bills/display/all/In consideration'); ?>">In Consideration</a>
+                        <a class="dropdown-item" href="<?php echo site_url('bills/display/all/Thrown out'); ?>">Thrown Out</a>
                     </div>
                   </li>
 
                   <li class="nav-item <?php if ($page_[0]=='S'){echo "active";}?> dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownSen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Senate Bills</a>
                        <div class="dropdown-menu" aria-labelledby="dropdownSen">
-                      <a class="dropdown-item" href="<?php echo site_url('bills/get/Senate'); ?>">All</a>
-                      <a class="dropdown-item" href="<?php echo site_url('bills/get/Senate/Passed'); ?>">Passed</a>
-                      <a class="dropdown-item" href="<?php echo site_url('bills/get/Senate/In consideration'); ?>">In Consideration</a>
-                        <a class="dropdown-item" href="<?php echo site_url('bills/get/Senate/Thrown out'); ?>">Thrown Out</a>
+                      <a class="dropdown-item" href="<?php echo site_url('bills/display/Senate'); ?>">All</a>
+                      <a class="dropdown-item" href="<?php echo site_url('bills/display/Senate/Passed'); ?>">Passed</a>
+                      <a class="dropdown-item" href="<?php echo site_url('bills/display/Senate/In consideration'); ?>">In Consideration</a>
+                        <a class="dropdown-item" href="<?php echo site_url('bills/display/Senate/Thrown out'); ?>">Thrown Out</a>
                     </div>
                   </li>
 
                   <li class="nav-item <?php if ($page_[0]=='H'){echo "active";}?> dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownHouse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">House Bills</a>
                        <div class="dropdown-menu" aria-labelledby="dropdownHouse">
-                        <a class="dropdown-item" href="<?php echo site_url('bills/get/House'); ?>">All</a>
-                      <a class="dropdown-item" href="<?php echo site_url('bills/get/House/Passed'); ?>">Passed</a>
-                      <a class="dropdown-item" href="<?php echo site_url('bills/get/House/In consideration'); ?>">In Consideration</a>
-                    <a class="dropdown-item" href="<?php echo site_url('bills/get/House/Thrown out'); ?>">Thrown Out</a>
+                        <a class="dropdown-item" href="<?php echo site_url('bills/display/House'); ?>">All</a>
+                      <a class="dropdown-item" href="<?php echo site_url('bills/display/House/Passed'); ?>">Passed</a>
+                      <a class="dropdown-item" href="<?php echo site_url('bills/display/House/In consideration'); ?>">In Consideration</a>
+                    <a class="dropdown-item" href="<?php echo site_url('bills/display/House/Thrown out'); ?>">Thrown Out</a>
                     </div>
                   </li>
                 <li class="nav-item <?php if ($page_[0]=='l'){echo "active";}?> dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownLeg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Legistlators</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownLeg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Legislators</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownLeg">
-                      <a class="dropdown-item" href="<?php echo site_url('legistlators/get/legistlators/all'); ?>">All</a>
-                      <a class="dropdown-item" href="<?php echo site_url('legistlators/get/legistlators/House'); ?>">House</a>
-                      <a class="dropdown-item" href="<?php echo site_url('legistlators/get/legistlators/Senate'); ?>">Senate</a>
+                      <a class="dropdown-item" href="<?php echo site_url('legistlators/display/legistlators/all'); ?>">All</a>
+                      <a class="dropdown-item" href="<?php echo site_url('legistlators/display/legistlators/House'); ?>">House</a>
+                      <a class="dropdown-item" href="<?php echo site_url('legistlators/display/legistlators/Senate'); ?>">Senate</a>
                     </div>
                   </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">Legistlative Process</a>
+                    <a class="nav-link" href="#">My Legislators</a>
                   </li>
                     <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                   </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
-                  </li> 
                 </ul>
                 <form class="form-inline my-2 my-md-0">
                   <input class="form-control" type="text" placeholder="Search">
@@ -164,7 +161,7 @@ else{$page_title="Assemblify";}
         {
           if(data == '')
           {
-            $('#load_data_message').html('<h6 style="text-align:center">you\'ve run out of bills</h6>');
+            $('#load_data_message').html('<h6 style="text-align:center">no bills</h6>');
               $("#load").hide();
             action = 'active';
           }

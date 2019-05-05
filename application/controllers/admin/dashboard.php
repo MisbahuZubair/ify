@@ -97,7 +97,8 @@ class Dashboard extends CI_Controller {
             $new_data['chamber'] = $this->input->post('chamber');
             $new_data['party']= $this->input->post('party');
             $new_data['state']= ($this->input->post('state'));
-            $new_data['constituency']= ($this->input->post('constituency'));
+            $new_data['constituency']= ($this->input->post('cons_name'));
+            $new_data['cons']= ($this->input->post('cons_id'));
             $new_data['term'] = $this->input->post('legistlator_term');
             $this->dashboard_Model->addLegistlator($new_data);       
         }
@@ -177,6 +178,7 @@ class Dashboard extends CI_Controller {
     public function manageLegistlators(){
         $this->load->helper('url');
 		$data['legistlators'] = $this->dashboard_Model->allLegistlators();
+        //print_r($data);
         $this->load->view('admin/manage_legistlators', $data);
     }
     
@@ -184,21 +186,19 @@ class Dashboard extends CI_Controller {
     if ($this->ion_auth->in_group("admin")||$this->ion_auth->in_group("data")){
         $this->load->helper('url');
         $this->load->helper('form');
-         if($_POST)
-        {        
-            
+        if($_POST)
+        {         
             $new_data['name'] = $this->input->post('name');
             $new_data['chamber'] = $this->input->post('chamber');
             $new_data['party']= $this->input->post('party');
             $new_data['state']= ($this->input->post('state'));
-            $new_data['constituency']= ($this->input->post('constituency'));
-             $new_data['term'] = $this->input->post('legistlator_term');
-             
+            $new_data['constituency']= ($this->input->post('cons_name'));
+            $new_data['cons']= ($this->input->post('cons_id'));
+            $new_data['term'] = $this->input->post('legistlator_term');            
             $this->dashboard_Model->updateLegistlator($id, $new_data);       
         }
-        
         $data['legistlator'] = $this->dashboard_Model->editLegistlator($id);
-         $data['info'] = $this->dashboard_Model->getInfo();
+        $data['info'] = $this->dashboard_Model->getInfo();
         $this->load->view('admin/add_legistlator',$data);
         }
     else{
@@ -239,20 +239,33 @@ class Dashboard extends CI_Controller {
 
     }
     
+    public function correctCons(){
+        $this->dashboard_Model->correctCons();
+    }
+    
+    public function getLeg(){
+        $this->dashboard_Model->getLeg();
+    }
+    
+    /*
+    public function createConsTable(){
+        $conss=$this->dashboard_Model->createConsTable();
+    }*/
+    
     public function getCons(){
             $options='';
             $state = $this->input->post('state');
             $chamber_cons = $this->input->post('chamber_cons');
             $conss=$this->dashboard_Model->getCons($state, $chamber_cons);
+            print_r($conss);
             echo "<script> console.log('".$state."'); </script>";
             $cons = $this->input->post('cons');
             foreach($conss as $rep):
-                
-                if($rep==$cons){
-                    $options.= "<option value='".$rep."' selected>".$rep." </option>";
+                if($rep['id']==$cons){
+                    $options.= "<option value='".$rep['id']."' selected>".$rep['constituency']." </option>";
                 }
         else{
-            $options.= "<option value='".$rep."'>".$rep." </option>";
+            $options.= "<option value='".$rep['id']."'>".$rep['constituency']." </option>";
         }
             endforeach;
         echo ($options);

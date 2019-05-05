@@ -49,19 +49,28 @@ class dashboard_Model extends CI_Model
     
      public function getLegistlator($bill_ID)
     {
-        
-        $sql= "SELECT * FROM legistlators";
-         
+        $sql= "SELECT * FROM legistlators";         
         $query = $this->db->query($sql);
         return $query->row_array();
     }
     
-    public function getLegistlators() { 
-         $sql = "SELECT id, name 
-           FROM legistlators 
-           ORDER by name";
-        $query = $this->db->query($sql)->result_array(); 
-        return $query; 
+    public function getLegistlators() {
+        $sql = "SELECT id, name 
+        FROM legistlators 
+        ORDER by name";
+     $query = $this->db->query($sql)->result_array(); 
+     return $query; 
+    } 
+    
+    public function getLeg() {
+        $this->db->select("*");
+        $this->db->from("legistlators");
+        $this->db->order_by("name", "ASC");
+        $this->db->join('cons');
+        $query = $this->db->get()->result_array(); 
+        
+        print_r($query);
+        //return $query; 
     } 
     
     public function getTermLegistlators($term,$chamber) { 
@@ -83,19 +92,77 @@ class dashboard_Model extends CI_Model
     } 
     
     public function getCons($state, $chamber_cons) { 
-         $sql = "SELECT *
-           FROM constituencies
-           WHERE state= '".$state."'";
-           //ORDER by name";
-        
+        $this->db->select("*");
+        $this->db->from("cons");
+        $this->db->where("state ='".$state."' AND chamber ='".$chamber_cons."'");
+        $this->db->order_by("constituency", "asc");
+        return $this->db->get()->result_array();
+    } 
+    
+    /*public function createConsTable() {
+        $x=0;
+        for ($i=40; $i<=77; $i++)
+        {
+            $text="";
+            $sql = "SELECT *
+            FROM constituencies
+            Where id =".$i."";
+            $result = $this->db->query($sql)->row_array();
+            
+            $myString = $result["senate_constituencies"];
+            $myArray = explode(',', $myString);
+            sort($myArray);
+            for ($j =0; $j<sizeof($myArray); $j++)
+            {
+                $text.="('".$x."', '".$myArray[$j]."', '".$result["state"]."', 'Senate'),";
+                $x+=1;
+            }
+            
+            $myString = $result["house_constituencies"];
+            $myArray = explode(',', $myString);
+            sort($myArray);
+            for ($k =0; $k<sizeof($myArray); $k++)
+            {
+                $text.="('".$x."', '".$myArray[$k]."', '".$result["state"]."', 'House'),";
+                $x+=1;
+            }
+            
+            echo $text;
+        }
+         
         $result = $this->db->query($sql)->row_array();
         $myString = $result[$chamber_cons];
         $myArray = explode(',', $myString);
         sort($myArray);
         print_r($myArray);
-        return $myArray;
-    } 
+        return $myArray;}**/
 
+    public function correctCons(){
+        $this->db->select("*");
+        $this->db->from("legistlators");
+        $result = $this->db->get()->result_array();
+        foreach($result as $leg){
+            try {
+                $cons_name = $leg['constituency'];
+                $this->db->select("*");
+                $this->db->from("cons");
+                $this->db->where("constituency='".$cons_name."'");
+                $result2 = $this->db->get()->row_array();
+                $cons_id = $result2["id"];
+                $new_data['cons'] = $cons_id;
+                
+                $this->db->where(['id' => $leg['id']]);
+                $this->db->update('legistlators', $new_data);
+                
+                echo $cons_id."-".$cons_name.", "; }
+            catch (Exception $e) {
+                    echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+            
+        }
+    }
+    
+    
     public function getFromInfo($column) { 
         $this->db->select("*");
         $this->db->from("info");
@@ -128,7 +195,7 @@ class dashboard_Model extends CI_Model
     {
         $this->db->insert('legistlators', $new_data);
         echo "<script>alert('Legistlator created');</script>";
-       // redirect('/admin/dashboard/manageLegistlators', 'refresh'); 
+        // redirect('/admin/dashboard/manageLegistlators', 'refresh'); 
     }
     
     public function getSenateCommittees() { 
@@ -224,8 +291,8 @@ class dashboard_Model extends CI_Model
     
     public function allLegistlators()
     {
-        $this->db->get('legistlators');
-        $this->db->order_by("state", "ASC");
+        $this->db->select('*');
+        $this->db->order_by("state", "asc");
         $result_set =$this->db->get('legistlators');
         return $result_set->result_array(); 
     }

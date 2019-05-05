@@ -73,7 +73,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class='col-md-4'>
             <div class="form-group">
                 <label><b>Constituency</b></label>
-                <select class ="form-control" name="constituency" id="constituency" value= "Kano-South"> </select>
+                <select class ="form-control" name="cons_id" id="cons_id" value= ""> </select>
+                <input type="hidden" id="cons_name" name="cons_name" value="">
             </div>
         </div>
     </div>
@@ -109,21 +110,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     </div>
 
-    
-    <input class="btn btn-secondary" type="submit" value="Save"/>
-
+<input class="btn btn-secondary" type="submit" value="Save"/>```
   </div>
     <footer class="footer">
       <div class="container">
         <span class="text-muted">© 2018 Copyright: Assemblify.</span>
       </div>
-</footer>
+    </footer>
 
 <script type="text/javascript">
     $(document).ready(function() {
         updateChamber();
         getStates();
         getParties();
+        updateConsName();
     });
     
     $("#s").click(function(){
@@ -131,6 +131,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 });
        $("#h").click(function(){
     updateCons();
+});
+    function updateConsName(){
+        $('#cons_name').val($("#cons_id option:selected").text());
+    }
+    
+    $('#cons_id').on('change', function() {
+        updateConsName();
 });
     
     function getParties(){
@@ -179,7 +186,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
     
     function getSelectedChamber(){
-        if($('#h').is(':checked')){return 'house_constituencies'} else return 'senate_constituencies';
+        if($('#h').is(':checked')){return 'house'} else return 'senate';
     }
     
     
@@ -187,7 +194,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         if(state){}else{var state =$("#state option:selected").val();}
         var chamber_cons = getSelectedChamber();
         console.log($("#state option:selected").text());
-        var cons =""+<?php if (isset($legistlator)){echo '"'.$legistlator['constituency'].'"';} else echo '""'?>;
+        var cons =""+<?php if (isset($legistlator)){echo '"'.$legistlator['cons'].'"';} else echo '""'?>;
         $.ajax({
         url:"<?php echo base_url(); ?>admin/dashboard/getCons/",
         method:"POST",
@@ -203,12 +210,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           {
             console.log(data);
             console.log('data');
-            $('#constituency').html("");
-            $('#constituency').append(data);
+            $('#cons_id').html("");
+            $('#cons_id').append(data);
             action = 'inactive';}
         }})
     }
-        function updateTerms(){
+    
+    function updateTerms(){
         var termString='';
        var terms = document.getElementsByName("term");
         if (terms[0].checked == true){termString +=terms[0].value + ',';}

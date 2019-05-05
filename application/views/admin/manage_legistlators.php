@@ -53,6 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <div class="container">
+    
     <?php foreach($legistlators as $item) { ?>
     <div class="card" style="margin-bottom: 20px">
         <div class="bg-light">

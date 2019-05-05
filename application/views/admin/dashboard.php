@@ -124,7 +124,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         {
           if(data == '')
           {
-            $('#load_data_message').html('<h6 style="text-align:center">you\'ve run out of bills</h6>');
+            $('#load_data_message').html('<h6 style="text-align:center">there is nothing to load</h6>');
             $("#load").hide();
             action = 'active';
           }

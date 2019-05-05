@@ -133,7 +133,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         {
           if(data == '')
           {
-            $('#load_data_message').html('<h3>No More Result Found</h3>');
+            $('#load_data_message').html('<h3>there is nothing to load</h3>');
             action = 'active';
           }
           else

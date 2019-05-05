@@ -17,6 +17,7 @@ class legistlators_Model extends CI_Model
         if($filter!="all"){
             $this->db->where("chamber ='".$filter."'");
         }
+        $this->db->where("term ='9th National Assembly (2019 - 2023)'");
         $this->db->order_by("id", "ASC");
         $this->db->limit($limit, $start);
         $query = $this->db->get();

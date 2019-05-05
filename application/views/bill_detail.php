@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
     <nav class="navbar navbar-expand-xl navbar-light shadow-sm p-3 mb-5 bg-white rounded">
     <a class="navbar-left" href="#">
-        <a href="<?php echo site_url('bills/get/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg'); ?>" class="logo" alt="assemblify logo"></a>
+        <a href="<?php echo site_url('bills/display/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg'); ?>" class="logo" alt="assemblify logo"></a>
     </a>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,30 +32,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <li class="nav-item active dropdown">
             <a class="nav-link  dropdown-toggle" href="#" id="dropdownBills" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bills <span class="sr-only">(current)</span></a>
               <div class="dropdown-menu" aria-labelledby="dropdownBills">
-              <a class="dropdown-item" href="<?php echo site_url('bills/get/all/all'); ?>">All</a>
-              <a class="dropdown-item" href="<?php echo site_url('bills/get/all/Passed'); ?>">Passed</a>
-              <a class="dropdown-item" href="<?php echo site_url('bills/get/all/In consideration'); ?>">In Consideration</a>
-                <a class="dropdown-item" href="<?php echo site_url('bills/get/all/Thrown out'); ?>">Thrown Out</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/display/all/all'); ?>">All</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/display/all/Passed'); ?>">Passed</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/display/all/In consideration'); ?>">In Consideration</a>
+                <a class="dropdown-item" href="<?php echo site_url('bills/display/all/Thrown out'); ?>">Thrown Out</a>
             </div>
           </li>
             
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdownSen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Senate Bills</a>
                <div class="dropdown-menu" aria-labelledby="dropdownSen">
-              <a class="dropdown-item" href="<?php echo site_url('bills/get/Senate/all'); ?>">All</a>
-              <a class="dropdown-item" href="<?php echo site_url('bills/get/Senate/Passed'); ?>">Passed</a>
-              <a class="dropdown-item" href="<?php echo site_url('bills/get/Senate/In consideration'); ?>">In Consideration</a>
-                <a class="dropdown-item" href="<?php echo site_url('bills/get/Senate/Thrown out'); ?>">Thrown Out</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/display/Senate/all'); ?>">All</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/display/Senate/Passed'); ?>">Passed</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/display/Senate/In consideration'); ?>">In Consideration</a>
+                <a class="dropdown-item" href="<?php echo site_url('bills/display/Senate/Thrown out'); ?>">Thrown Out</a>
             </div>
           </li>
             
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdownHouse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">House Bills</a>
                <div class="dropdown-menu" aria-labelledby="dropdownHouse">
-                <a class="dropdown-item" href="<?php echo site_url('bills/get/House/all'); ?>">All</a>
-              <a class="dropdown-item" href="<?php echo site_url('bills/get/House/Passed'); ?>">Passed</a>
-              <a class="dropdown-item" href="<?php echo site_url('bills/get/House/In consideration'); ?>">In Consideration</a>
-            <a class="dropdown-item" href="<?php echo site_url('bills/get/House/Thrown out'); ?>">Thrown Out</a>
+                <a class="dropdown-item" href="<?php echo site_url('bills/display/House/all'); ?>">All</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/display/House/Passed'); ?>">Passed</a>
+              <a class="dropdown-item" href="<?php echo site_url('bills/display/House/In consideration'); ?>">In Consideration</a>
+            <a class="dropdown-item" href="<?php echo site_url('bills/display/House/Thrown out'); ?>">Thrown Out</a>
             </div>
           </li>
         <li class="nav-item dropdown">
@@ -66,9 +66,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <a class="dropdown-item" href="<?php echo site_url('legistlators/get/legistlators/Senate'); ?>">Senate</a>
             </div>
           </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Legistlative Process</a>
-          </li>
+          <li class="nav-item">
+                    <a class="nav-link" href="#">My Legislators</a>
+                  </li>
             <li class="nav-item">
             <a class="nav-link" href="#">About</a>
           </li>

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class legistlators extends CI_Controller {
 
-	public function get($source="legistlators", $filter="all")
+	public function display($source="legistlators", $filter="all")
 	{
         $this->load->helper('url');
         $data['page']="".$source."-".$filter.""; 

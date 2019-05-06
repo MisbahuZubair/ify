@@ -17,7 +17,6 @@ class legislators extends CI_Controller {
         $output = '';
         $this->load->model('legislators_Model');
         $data = $this->legislators_Model->fetch_AllLegislators($this->input->post('limit'), $this->input->post('start'), $filter);
-        print_r($data);
         if($data->num_rows() > 0)   
         {
             foreach(array_chunk($data->result(), 2) as $pair) {

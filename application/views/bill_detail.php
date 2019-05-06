@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5c0b18fa423bba0012ec3318&product='inline-share-buttons' async='async'></script>
    
-    <title><?php echo $bill['bill_question']?></title>
+    <title>Assemblify | <?php echo $bill['bill_question']?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">

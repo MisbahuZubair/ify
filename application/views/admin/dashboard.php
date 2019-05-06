@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <a class="nav-link" href="<?php echo site_url('admin/dashboard/addLegistlator');?>">Add Legistlator</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo site_url('admin/dashboard/manageLegistlators');?>">Manage Legistlators</a>
+                    <a class="nav-link" href="<?php echo site_url('admin/dashboard/managelegislators');?>">Manage legislators</a>
                 </li>
             </ul>
         </div>
@@ -96,7 +96,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     var fetch_url=""
     var page = '<?php echo $page;?>';
     if(page=="manage_bills"){fetch_url ="<?php echo base_url(); ?>admin/dashboard/AllBills/" ; var limit = 20;}
-    else if(page=="manage_legistlators"){fetch_url ="<?php echo base_url(); ?>bills/BillsByLegistlator/" ; var limit = 20;}   
+    else if(page=="manage_legislators"){fetch_url ="<?php echo base_url(); ?>bills/BillsByLegistlator/" ; var limit = 20;}   
       
           function lazzy_loader(limit)
     {

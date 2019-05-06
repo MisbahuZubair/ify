@@ -167,7 +167,7 @@ class Dashboard extends CI_Controller {
         $data['info'] = $this->dashboard_Model->getInfo();
         $data['page'] = 0;
         $data['committees'] = $this->dashboard_Model->getCommittees(); 
-        $data['legistlators'] = $this->dashboard_Model->getLegistlators(); 
+        $data['legislators'] = $this->dashboard_Model->getlegislators(); 
         $this->load->view('admin/add_bill', $data);}
     }
     
@@ -177,11 +177,11 @@ class Dashboard extends CI_Controller {
         $this->load->view('show',$data);
     }
     
-    public function manageLegistlators(){
+    public function managelegislators(){
         $this->load->helper('url');
-		$data['legistlators'] = $this->dashboard_Model->allLegistlators();
+		$data['legislators'] = $this->dashboard_Model->alllegislators();
         //print_r($data);
-        $this->load->view('admin/manage_legistlators', $data);
+        $this->load->view('admin/manage_legislators', $data);
     }
     
     public function editLegistlator($id){
@@ -208,12 +208,12 @@ class Dashboard extends CI_Controller {
         }
     }
     
-    public function getTermLegistlators(){
+    public function getTermlegislators(){
         $options='<option disabled selected value> -- no sponsor -- </option>';
-            $legistlators=$this->dashboard_Model->getTermLegistlators($this->input->post('term'),$this->input->post('chamber'));
+            $legislators=$this->dashboard_Model->getTermlegislators($this->input->post('term'),$this->input->post('chamber'));
             $sponsor = $this->input->post('sponsor');
 
-            foreach($legistlators as $rep):
+            foreach($legislators as $rep):
                 
                 if($rep['id']==$sponsor){
                     $options.= "<option value='".$rep['id']."' selected>".$rep['name']."</option>";
@@ -372,7 +372,7 @@ class Dashboard extends CI_Controller {
         $bill_type = $this->bills_Model->checkSponsor($id);
         $data['bill'] = $this->bills_Model->getBill($id, $bill_type);
         $data['committees'] = $this->dashboard_Model->getCommittees();
-        $data['legistlators'] = $this->dashboard_Model->getLegistlators();
+        $data['legislators'] = $this->dashboard_Model->getlegislators();
         $this->load->view('admin/add_bill',$data);
     }
     

@@ -67,11 +67,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
           </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdownLeg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Legistlators</a>
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownLeg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">legislators</a>
             <div class="dropdown-menu" aria-labelledby="dropdownLeg">
-              <a class="dropdown-item" href="<?php echo site_url('legistlators/getLegistlators/legistlators/all'); ?>">All</a>
-              <a class="dropdown-item" href="<?php echo site_url('legistlators/getLegistlators/legistlators/House'); ?>">House</a>
-              <a class="dropdown-item" href="<?php echo site_url('legistlators/getLegistlators/legistlators/Senate'); ?>">Senate</a>
+              <a class="dropdown-item" href="<?php echo site_url('legislators/getlegislators/legislators/all'); ?>">All</a>
+              <a class="dropdown-item" href="<?php echo site_url('legislators/getlegislators/legislators/House'); ?>">House</a>
+              <a class="dropdown-item" href="<?php echo site_url('legislators/getlegislators/legislators/Senate'); ?>">Senate</a>
             </div>
           </li>
             <li class="nav-item">

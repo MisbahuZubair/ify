@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <a class="nav-link" style="<?php if(isset($legistlator)){}else{echo 'color:white';}?>" href="<?php echo site_url('admin/dashboard/addLegistlator');?>">Add Legistlator</a>
           </li>
             <li class="nav-item">
-            <a class="nav-link"  style="<?php if(isset($legistlator)){echo 'color:white';}?>" href="<?php echo site_url('admin/dashboard/manageLegistlators');?>">Manage Legistlators</a>
+            <a class="nav-link"  style="<?php if(isset($legistlator)){echo 'color:white';}?>" href="<?php echo site_url('admin/dashboard/managelegislators');?>">Manage legislators</a>
           </li>         
         </ul>
       </div>

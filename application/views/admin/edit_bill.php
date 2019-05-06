@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <a class="nav-link" href="#">Add Legistlator</a>
           </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Manage Legistlators</a>
+            <a class="nav-link" href="#">Manage legislators</a>
           </li><li class="nav-item">
             <a class="nav-link" href="#">Manage Users</a>
           </li>
@@ -99,7 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         
         <select class ="form-control" name="billSponsor" id="billSponsor" >
 <option disabled selected value> </option>
-          <?php foreach($legistlators as $rep):  ?>
+          <?php foreach($legislators as $rep):  ?>
            
               <option value="<?php echo $rep['id']?>" <?php if ($bill['bill_sponsor']==$rep['id']) echo "selected" ?>>
                   <?php echo $rep['name']?>

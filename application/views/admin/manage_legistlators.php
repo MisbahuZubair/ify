@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <a class="nav-link" href="<?php echo site_url('admin/dashboard/addLegistlator');?>">Add Legistlator</a>
           </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:white" href="<?php echo site_url('admin/dashboard/manageLegistlators');?>">Manage Legistlators</a>
+            <a class="nav-link" style="color:white" href="<?php echo site_url('admin/dashboard/managelegislators');?>">Manage legislators</a>
           </li>         
         </ul>
       </div>
@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="container">
     
-    <?php foreach($legistlators as $item) { ?>
+    <?php foreach($legislators as $item) { ?>
     <div class="card" style="margin-bottom: 20px">
         <div class="bg-light">
             <p><?php echo $item['name']?></p>

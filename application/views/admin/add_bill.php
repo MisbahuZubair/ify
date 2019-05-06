@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" type="text/css" href="<?php echo  site_url('application/views')?>/styles.css">
 
 </head>
-<body onload ="getTermLegistlators()"> 
+<body onload ="getTermlegislators()"> 
 <div class="container">
 <nav class="navbar navbar-expand-xl navbar-dark shadow-sm p-3 mb-5 bg-secondary rounded">
     <a class="navbar-left" href="#">
@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <a class="nav-link" href="<?php echo site_url('admin/dashboard/addLegistlator');?>">Add Legistlator</a>
           </li>
             <li class="nav-item">
-            <a class="nav-link" href="<?php echo site_url('admin/dashboard/manageLEgistlators');?>">Manage Legistlators</a>
+            <a class="nav-link" href="<?php echo site_url('admin/dashboard/managelegislators');?>">Manage legislators</a>
           </li>         
         </ul>
       </div>
@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class ="col-md-2">
             <div class="form-group">
                 <label><b>Chamber</b></label>
-                 <select class ="form-control" name="origin" id="origin">
+                 <select class ="form-control" name="origin" id="origin" onchange="getTermlegislators()">
                      <option value="House" <?php if($page==1){if($bill['bill_origin']=='House') {echo 'selected' ;}} ?>>House</option>
                       <option value="Senate" <?php if($page==1){if($bill['bill_origin']=='Senate') {echo 'selected' ;}} ?>>Senate</option>
                 </select>
@@ -84,7 +84,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class ="col-md-4">
             <div class="form-group">
                 <label><b>Assembly</b></label>
-                <select class ="form-control" name="billTerm" id="billTerm"  onchange="getTermLegistlators()">
+                <select class ="form-control" name="billTerm" id="billTerm"  onchange="getTermlegislators()">
                 <?php  foreach($info as $rep):?>
                       <option value="<?php echo $rep?>" <?php if($page==1){if($bill['bill_term']==$rep) {echo 'selected' ;}}?>>
                           <?php echo $rep?>
@@ -274,7 +274,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }})}
         
         
-    function getTermLegistlators()
+    function getTermlegislators()
     {
         var term = $("#billTerm option:selected" ).text();
         term= $.trim(term);
@@ -286,7 +286,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         console.log("its:"+chamber);
         
         $.ajax({
-        url:"<?php echo base_url(); ?>admin/dashboard/getTermLegistlators/",
+        url:"<?php echo base_url(); ?>admin/dashboard/getTermlegislators/",
         method:"POST",
         data:{term: term, sponsor: sponsor, chamber:chamber},
         cache: false,

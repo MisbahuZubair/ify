@@ -24,7 +24,7 @@ class Bills_Model extends CI_Model
         return $query;
     }
     
-    function fetch_BillsByLegistlator($limit, $start, $id)
+    function fetch_BillsByLegislator($limit, $start, $id)
      {
         $this->db->select("*");
         $this->db->from("bills");
@@ -61,7 +61,7 @@ class Bills_Model extends CI_Model
         $this->db->select("*");
         $this->db->from("bills");
         if($bill_sponsor!=""){
-        $this->db->join('legistlators', 'bills.bill_sponsor = legistlators.id', 'inner');}
+        $this->db->join('legislators', 'bills.bill_sponsor = legislators.id', 'inner');}
         $this->db->join('committees', 'bills.bill_committee = committees.id', 'inner');
         $this->db->where("bills.id =".$bill_ID);
         $query = $this->db->get();

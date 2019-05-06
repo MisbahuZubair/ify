@@ -44,12 +44,12 @@ class Bills extends CI_Controller {
         $this->load->view('index',$data);             //display bill detail in bill detail view
     }
     
-    public function legistlator($id=""){
+    public function legislator($id=""){
         if($id==""){redirect('', 'refresh');}
-        $this->load->model('legistlators_Model');
-        $data['legistlator'] = $this->legistlators_Model->fetch_Legistlator($id);
-        $data['page'] = "legistlator bills";
-        $data['source'] = "legistlator bills";
+        $this->load->model('legislators_Model');
+        $data['legislator'] = $this->legislators_Model->fetch_Legislator($id);
+        $data['page'] = "legislator bills";
+        $data['source'] = "legislator bills";
         $data['filter'] = $id;
         $this->load->view('index',$data);             //display bill detail in bill detail view
     }
@@ -104,11 +104,11 @@ class Bills extends CI_Controller {
         echo $output;
     }  
     
-    public function BillsByLegistlator($id)
+    public function BillsByLegislator($id)
     {
         $output = '';
         $this->load->model('bills_Model');
-        $data = $this->bills_Model->fetch_BillsByLegistlator($this->input->post('limit'), $this->input->post('start'), $id);
+        $data = $this->bills_Model->fetch_BillsByLegislator($this->input->post('limit'), $this->input->post('start'), $id);
         $output = $this->DisplayBill($data);
         echo $output;
     }

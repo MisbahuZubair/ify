@@ -37,7 +37,7 @@ class dashboard_Model extends CI_Model
         WHERE bill_sponsor = ".$id."";
         $query = $this->db->query($sql)->row_array();
         if(empty($query)){
-            $sql = "DELETE from legistlators 
+            $sql = "DELETE from legislators 
              WHERE id=".$id."";
             $query = $this->db->query($sql);
             return true;
@@ -49,14 +49,14 @@ class dashboard_Model extends CI_Model
     
      public function getLegistlator($bill_ID)
     {
-        $sql= "SELECT * FROM legistlators";         
+        $sql= "SELECT * FROM legislators";         
         $query = $this->db->query($sql);
         return $query->row_array();
     }
     
-    public function getLegistlators() {
+    public function getlegislators() {
         $sql = "SELECT id, name 
-        FROM legistlators 
+        FROM legislators 
         ORDER by name";
      $query = $this->db->query($sql)->result_array(); 
      return $query; 
@@ -64,7 +64,7 @@ class dashboard_Model extends CI_Model
     
     public function getLeg() {
         $this->db->select("*");
-        $this->db->from("legistlators");
+        $this->db->from("legislators");
         $this->db->order_by("name", "ASC");
         $this->db->join('cons');
         $query = $this->db->get()->result_array(); 
@@ -73,9 +73,9 @@ class dashboard_Model extends CI_Model
         //return $query; 
     } 
     
-    public function getTermLegistlators($term,$chamber) { 
+    public function getTermlegislators($term,$chamber) { 
          $sql = "SELECT id, name 
-           FROM legistlators
+           FROM legislators
            WHERE FIND_IN_SET('".$term."',term)>0
            AND chamber ='".$chamber."'";
            //ORDER by name";
@@ -139,7 +139,7 @@ class dashboard_Model extends CI_Model
 
     public function correctCons(){
         $this->db->select("*");
-        $this->db->from("legistlators");
+        $this->db->from("legislators");
         $result = $this->db->get()->result_array();
         foreach($result as $leg){
             try {
@@ -152,7 +152,7 @@ class dashboard_Model extends CI_Model
                 $new_data['cons'] = $cons_id;
                 
                 $this->db->where(['id' => $leg['id']]);
-                $this->db->update('legistlators', $new_data);
+                $this->db->update('legislators', $new_data);
                 
                 echo $cons_id."-".$cons_name.", "; }
             catch (Exception $e) {
@@ -177,7 +177,7 @@ class dashboard_Model extends CI_Model
     
     public function editLegistlator($id) { 
          $sql = "SELECT * 
-           FROM legistlators
+           FROM legislators
            WHERE id =".$id."
            ORDER by name";
     $query = $this->db->query($sql)->row_array(); ;
@@ -186,16 +186,16 @@ class dashboard_Model extends CI_Model
     
     public function updateLegistlator($id, $new_data) { 
         $this->db->where(['id' => $id]);
-        $this->db->update('legistlators', $new_data);
+        $this->db->update('legislators', $new_data);
         echo "<script>alert('Legistlator data updated');</script>";
-        //redirect('/admin/dashboard/manageLegistlators', 'refresh');
+        //redirect('/admin/dashboard/managelegislators', 'refresh');
     }
      
     public function addLegistlator($new_data)
     {
-        $this->db->insert('legistlators', $new_data);
+        $this->db->insert('legislators', $new_data);
         echo "<script>alert('Legistlator created');</script>";
-        // redirect('/admin/dashboard/manageLegistlators', 'refresh'); 
+        // redirect('/admin/dashboard/managelegislators', 'refresh'); 
     }
     
     public function getSenateCommittees() { 
@@ -289,11 +289,11 @@ class dashboard_Model extends CI_Model
         return $result_set->result_array(); 
     }
     
-    public function allLegistlators()
+    public function alllegislators()
     {
         $this->db->select('*');
         $this->db->order_by("state", "asc");
-        $result_set =$this->db->get('legistlators');
+        $result_set =$this->db->get('legislators');
         return $result_set->result_array(); 
     }
 }?>

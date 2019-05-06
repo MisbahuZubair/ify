@@ -17,9 +17,9 @@ else if($page_=='House-all'){$page_title="Assemblify | All house bills";}
 else if($page_=='House-Passed'){$page_title="Assemblify | Passed house bills";}
 else if($page_=='House-In consideration'){$page_title="Assemblify | House bills in consideration";}
 else if($page_=='House-Thrown out'){$page_title="Assemblify | House thrown out bills";}
-else if($page_=='legistlators-all'){$page_title="Assemblify | All legistlators";}
-else if($page_=='legistlators-House'){$page_title="Assemblify | House members";}
-else if($page_=='legistlators-Senate'){$page_title="Assemblify | Senate members";}
+else if($page_=='legislators-all'){$page_title="Assemblify | All legislators";}
+else if($page_=='legislators-House'){$page_title="Assemblify | House members";}
+else if($page_=='legislators-Senate'){$page_title="Assemblify | Senate members";}
 else if($page_=='tag'){$page_title="Assemblify | #".$tag;}
 else{$page_title="Assemblify";}
 ?>
@@ -83,9 +83,9 @@ else{$page_title="Assemblify";}
                 <li class="nav-item <?php if ($page_[0]=='l'){echo "active";}?> dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownLeg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Legislators</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownLeg">
-                      <a class="dropdown-item" href="<?php echo site_url('legistlators/display/legistlators/all'); ?>">All</a>
-                      <a class="dropdown-item" href="<?php echo site_url('legistlators/display/legistlators/House'); ?>">House</a>
-                      <a class="dropdown-item" href="<?php echo site_url('legistlators/display/legistlators/Senate'); ?>">Senate</a>
+                      <a class="dropdown-item" href="<?php echo site_url('legislators/display/legislators/all'); ?>">All</a>
+                      <a class="dropdown-item" href="<?php echo site_url('legislators/display/legislators/House'); ?>">House</a>
+                      <a class="dropdown-item" href="<?php echo site_url('legislators/display/legislators/Senate'); ?>">Senate</a>
                     </div>
                   </li>
                     <li class="nav-item">
@@ -102,8 +102,8 @@ else{$page_title="Assemblify";}
         </nav>
     </div>
 
-    <?php if($page=="legistlator bills"){$sub_theme="house_subtheme";if ($legistlator['chamber']=="senate"){$sub_theme="senate_subtheme";}
-    echo '<div class="container"><div class="row"><div class="col-md-6" style="margin:auto"><div class="nopadding card shadow-sm p-3 mb-4 rounded text-center '.$sub_theme.'"> <div class="card-header nopadding bg-white"><h5>'.$legistlator['name'].'</h5></div ><div class="card-body">Representing '.$legistlator['constituency'].', '.$legistlator['state'].' State</div></div></div></div></div>';}?>
+    <?php if($page=="legislator bills"){$sub_theme="house_subtheme";if ($legislator['chamber']=="senate"){$sub_theme="senate_subtheme";}
+    echo '<div class="container"><div class="row"><div class="col-md-6" style="margin:auto"><div class="nopadding card shadow-sm p-3 mb-4 rounded text-center '.$sub_theme.'"> <div class="card-header nopadding bg-white"><h5>'.$legislator['name'].'</h5></div ><div class="card-body">Representing '.$legislator['constituency'].', '.$legislator['state'].' State</div></div></div></div></div>';}?>
     
     <div class="container">
         <div id="load_data"></div>
@@ -127,8 +127,8 @@ else{$page_title="Assemblify";}
     var action = 'inactive';
     var fetch_url=""
     var source = '<?php echo $source;?>';
-    if(source=="legistlators"){fetch_url ="<?php echo base_url(); ?>legistlators/fetch/<?php echo $source.'/'.$filter?>" ; var limit = 16;}
-    else if(source=="legistlator bills"){fetch_url ="<?php echo base_url(); ?>Bills/BillsByLegistlator/<?php echo $filter?>" ; var limit = 8;}
+    if(source=="legislators"){fetch_url ="<?php echo base_url(); ?>legislators/fetch/<?php echo $source.'/'.$filter?>" ; var limit = 16;}
+    else if(source=="legislator bills"){fetch_url ="<?php echo base_url(); ?>Bills/BillsBylegislator/<?php echo $filter?>" ; var limit = 8;}
     else if(source=="tag"){fetch_url ="<?php echo base_url(); ?>Bills/BillsByTag/<?php echo $filter?>" ; var limit = 8;}
     else{ fetch_url ="<?php echo base_url(); ?>Bills/AllBills/<?php echo $source.'/'.$filter;?>"; var limit = 8;}
     

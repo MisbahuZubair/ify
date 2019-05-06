@@ -264,7 +264,7 @@ class Dashboard extends CI_Controller {
             echo "<script> console.log('".$state."'); </script>";
             $cons = $this->input->post('cons');
             foreach($conss as $rep):
-                if($rep['id']==$cons){
+                if($rep['cons_id']==$cons){
                     $options.= "<option value='".$rep['id']."' selected>".$rep['constituency']." </option>";
                 }
         else{

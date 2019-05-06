@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
 <nav class="navbar navbar-expand-xl navbar-dark shadow-sm p-3 mb-5 bg-secondary rounded">
     <a class="navbar-left" href="#">
-        <a href="<?php echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg'); ?>" class="logo" alt=""></a>
+        <a href="<?php  echo site_url('bills/getBills/all/all'); ?>"><img src="<?php echo site_url('application/views/logo.svg'); ?>" class="logo" alt=""></a>
   </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -110,7 +110,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     </div>
 
-<input class="btn btn-secondary" type="submit" value="Save"/>```
+<input class="btn btn-secondary" type="submit" value="Save"/>
   </div>
     <footer class="footer">
       <div class="container">

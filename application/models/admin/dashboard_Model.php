@@ -175,13 +175,12 @@ class dashboard_Model extends CI_Model
         return $myArray;
     } 
     
-    public function editLegistlator($id) { 
-         $sql = "SELECT * 
-           FROM legislators
-           WHERE id =".$id."
-           ORDER by name";
-    $query = $this->db->query($sql)->row_array(); ;
-        return $query; 
+    public function editLegistlator($id) {
+        $this->db->select("*");
+        $this->db->from("legislators");
+        $this->db->where(['id' => $id]);
+        $query = $this->db->get();
+        return $query->row_array();
     }
     
     public function updateLegistlator($id, $new_data) { 
@@ -291,9 +290,11 @@ class dashboard_Model extends CI_Model
     
     public function alllegislators()
     {
-        $this->db->select('*');
-        $this->db->order_by("state", "asc");
-        $result_set =$this->db->get('legislators');
-        return $result_set->result_array(); 
+        $this->db->select("*");
+        $this->db->from("legislators");
+        $this->db->join('cons', 'cons.cons_id = legislators.cons');
+        $this->db->order_by("legislators.state", "ASC");
+        $query = $this->db->get();
+        return $query->result_array();
     }
 }?>

@@ -124,6 +124,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         getStates();
         getParties();
         updateConsName();
+        var checkIf = <?php if (isset($legistlator)){echo "1";} else {echo "0" ;} ?> ;
+        if(checkIf){
+            updateTerms();
+        }
     });
     
     $("#s").click(function(){

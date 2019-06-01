@@ -87,24 +87,31 @@ class Dashboard extends CI_Controller {
         echo false;}
     }
     
+    /****************************************************************
+     Opens an empty form for collecting details for a new legislator 
+     and submit the details entered into the form. It collects and 
+     submits a name (string), chamber (string), party (string), state (string),
+     cons_id(int) , legislator_term (string of comma separated terms).
+
+     ACCESS TO: admin, data
+     *****************************************************************/
     public function addLegistlator(){
         if ($this->ion_auth->in_group("admin")||$this->ion_auth->in_group("data")){
         $this->load->helper('url');
         $this->load->helper('form');
         if($_POST)
-        {        
+        {       
             $new_data['name'] = $this->input->post('name');
             $new_data['chamber'] = $this->input->post('chamber');
             $new_data['party']= $this->input->post('party');
             $new_data['state']= ($this->input->post('state'));
-            $new_data['constituency']= ($this->input->post('cons_name'));
             $new_data['cons']= ($this->input->post('cons_id'));
             $new_data['term'] = $this->input->post('legistlator_term');
             $this->dashboard_Model->addLegistlator($new_data);       
         }
         $data['info'] = $this->dashboard_Model->getInfo();
         $this->load->view('admin/add_legistlator',$data);}
-        
+
         else{
             redirect('admin/dashboard', 'refresh');
         }
@@ -176,11 +183,15 @@ class Dashboard extends CI_Controller {
         $data['id'] = $id;
         $this->load->view('show',$data);
     }
-    
+
+    /***************************************************************************
+     Requests name, state, constituency for all legislators from 
+     dashboard_Model->alllegislators() and displays as a list in the manage legislators
+     page
+     **************************************************************************/
     public function managelegislators(){
         $this->load->helper('url');
 		$data['legislators'] = $this->dashboard_Model->alllegislators();
-        //print_r($data);
         $this->load->view('admin/manage_legislators', $data);
     }
     
@@ -194,7 +205,6 @@ class Dashboard extends CI_Controller {
             $new_data['chamber'] = $this->input->post('chamber');
             $new_data['party']= $this->input->post('party');
             $new_data['state']= ($this->input->post('state'));
-            $new_data['constituency']= ($this->input->post('cons_name'));
             $new_data['cons']= ($this->input->post('cons_id'));
             $new_data['term'] = $this->input->post('legistlator_term');            
             $this->dashboard_Model->updateLegistlator($id, $new_data);       
@@ -261,16 +271,18 @@ class Dashboard extends CI_Controller {
             $chamber_cons = $this->input->post('chamber_cons');
             $conss=$this->dashboard_Model->getCons($state, $chamber_cons);
             print_r($conss);
-            echo "<script> console.log('".$state."'); </script>";
             $cons = $this->input->post('cons');
+            echo "<script> console.log(\"cons: '".$cons."'\"); </script>";
             foreach($conss as $rep):
                 if($rep['cons_id']==$cons){
-                    $options.= "<option value='".$rep['id']."' selected>".$rep['constituency']." </option>";
+                    $options.= "<option value='".$rep['cons_id']."' selected>".$rep['constituency']." </option>";
                 }
         else{
-            $options.= "<option value='".$rep['id']."'>".$rep['constituency']." </option>";
+            $options.= "<option value='".$rep['cons_id']."'>".$rep['constituency']." </option>";
+            
         }
             endforeach;
+            
         echo ($options);
         
     }

@@ -3,6 +3,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 
+$statefilter = "
+<div class='row' id='filter'>
+<div class='col-lg-4'>
+<label for='state-filter'><h5>Filter by State</h5></label>
+<select class ='form-control .col-sm-*' id='filter-state' id ='filter-state' onchange='filterLegByState()'>
+<option value=''></option>
+<option value='Abia'>Abia</option>
+<option value='Adamawa'>Adamawa</option>
+<option value='Akwa Ibom'>Akwa Ibom</option>
+<option value='Anambra'>Anambra</option>
+<option value='Bauchi'>Bauchi</option>
+<option value='Bayelsa'>Bayelsa</option>
+<option value='Benue'>Benue</option>
+<option value='Borno'>Borno</option>
+<option value='Cross River'>Cross River</option>
+<option value='Delta'>Delta</option>
+<option value='Ebonyi'>Ebonyi</option>
+<option value='Edo'>Edo</option>
+<option value='Ekiti'>Ekiti</option>
+<option value='Enugu'>Enugu</option>
+<option value='Federal Capital Territory'>Federal Capital Territory</option>
+<option value='Gombe'>Gombe</option>
+<option value='Imo'>Imo</option>
+<option value='Jigawa'>Jigawa</option>
+<option value='Kaduna'>Kaduna</option>
+<option value='Kano'>Kano</option>
+<option value='Katsina'>Katsina</option>
+<option value='Kebbi'>Kebbi</option>
+<option value='Kogi'>Kogi</option>
+<option value='Kwara'>Kwara</option>
+<option value='Lagos'>Lagos</option>
+<option value='Nasarawa'>Nasarawa</option>
+<option value='Niger'>Niger</option>
+<option value='Ogun'>Ogun</option>
+<option value='Ondo'>Ondo</option>
+<option value='Osun'>Osun</option>
+<option value='Oyo'>Oyo</option>
+<option value='Plateau'>Plateau</option>
+<option value='Rivers'>Rivers</option>
+<option value='Sokoto'>Sokoto</option>
+<option value='Taraba'>Taraba</option>
+<option value='Yobe'>Yobe</option>
+<option value='Zamfara'>Zamfara</option>
+</select>
+</div>
+</div>";
+
 $page_ = urldecode($page);
 if ($page_=='index'){$page_title="Assemblify | All bills";}
 else if($page_=='all-all'){$page_title="Assemblify | All bills";}
@@ -106,6 +153,7 @@ else{$page_title="Assemblify";}
     echo '<div class="container"><div class="row"><div class="col-md-6" style="margin:auto"><div class="nopadding card shadow-sm p-3 mb-4 rounded text-center '.$sub_theme.'"> <div class="card-header nopadding bg-white"><h5>'.$legislator['name'].'</h5></div ><div class="card-body">Representing '.$legislator['constituency'].', '.$legislator['state'].' State</div></div></div></div></div>';}?>
     
     <div class="container">
+    <?php if($page=="legislators-all"||$page=="legislators-House"||$page=="legislators-Senate"){echo $statefilter;} ?>
         <div id="load_data"></div>
         <div id="load_data_message"></div>
     </div>
@@ -122,12 +170,18 @@ else{$page_title="Assemblify";}
 
 </body>
 <script>
+  var filter_state ='';
+  var fetch_url=""
+  function filterLegByState(){
+    filter_state =$("#filter-state option:selected").val();
+    fetch_url ="<?php echo base_url(); ?>legislators/fetch/<?php echo $source.'/'.$filter.'/'?>"+filter_state ;
+  }
+
   $(document).ready(function(){
     var start = 0;
     var action = 'inactive';
-    var fetch_url=""
     var source = '<?php echo $source;?>';
-    if(source=="legislators"){fetch_url ="<?php echo base_url(); ?>legislators/fetch/<?php echo $source.'/'.$filter?>" ; var limit = 16;}
+    if(source=="legislators"){fetch_url ="<?php echo base_url(); ?>legislators/fetch/<?php echo $source.'/'.$filter.'/'?>"+filter_state ; var limit = 16; console.log(fetch_url)}
     else if(source=="legislator bills"){fetch_url ="<?php echo base_url(); ?>Bills/BillsBylegislator/<?php echo $filter?>" ; var limit = 8;}
     else if(source=="tag"){fetch_url ="<?php echo base_url(); ?>Bills/BillsByTag/<?php echo $filter?>" ; var limit = 8;}
     else{ fetch_url ="<?php echo base_url(); ?>Bills/AllBills/<?php echo $source.'/'.$filter;?>"; var limit = 8;}
@@ -187,6 +241,19 @@ else{$page_title="Assemblify";}
         lazzy_loader(limit);
         action = 'active';
         start = start + limit;
+        setTimeout(function(){
+          load_data(limit, start);
+        }, 1000);
+      }
+    });
+
+    $("#filter-state").click(function(e) {
+      {
+        filterLegByState()
+        $('#load_data').innerHTML ="";
+        lazzy_loader(limit);
+        action = 'active';
+        start = 0;
         setTimeout(function(){
           load_data(limit, start);
         }, 1000);

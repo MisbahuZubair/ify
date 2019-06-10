@@ -7,6 +7,9 @@ body {
     font-weight: bold;
 }
 
+#filter{
+margin-bottom:2em;
+}
 a, h6{
     font-weight: bold;
 }

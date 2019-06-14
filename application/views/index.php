@@ -8,7 +8,7 @@ $statefilter = "
 <div class='col-lg-4'>
 <label for='state-filter'><h5>Filter by State</h5></label>
 <select class ='form-control .col-sm-*' id='filter-state' id ='filter-state'>
-<option value=''></option>
+<option value=''>All</option>
 <option value='Abia'>Abia</option>
 <option value='Adamawa'>Adamawa</option>
 <option value='Akwa Ibom'>Akwa Ibom</option>
@@ -252,6 +252,7 @@ else{$page_title="Assemblify";}
 
     //when a state is chosen as a filter in the view leislators page
     $("#filter-state").change(function(e) {
+      $("#load-more").show();
       filter_state =$("#filter-state option:selected").val();
       fetch_url ="<?php echo base_url(); ?>legislators/fetch/<?php echo $source.'/'.$filter.'/'?>"+filter_state ;
       $('#load_data').html('');

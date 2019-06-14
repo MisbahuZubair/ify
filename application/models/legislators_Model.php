@@ -27,7 +27,7 @@ class legislators_Model extends CI_Model
         if($filter!="all"){
             $this->db->where("legislators.chamber ='".$filter."'");
         }
-        if($state!=""){
+        if($state!="" && $state!="All"){
             $this->db->where("legislators.state ='".$state."'");
         }
         $this->db->where("FIND_IN_SET('9th National Assembly (2019 - 2023)',legislators.term)");   //this should be removed in the future, and a filter should be added to let users choose whether they wish to iew current or past legislators

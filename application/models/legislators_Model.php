@@ -33,8 +33,7 @@ class legislators_Model extends CI_Model
         $this->db->where("FIND_IN_SET('9th National Assembly (2019 - 2023)',legislators.term)");   //this should be removed in the future, and a filter should be added to let users choose whether they wish to iew current or past legislators
         $this->db->order_by("legislators.state", "ASC");
         $this->db->order_by("legislators.chamber", "ASC");
-        if($state==""){
-        $this->db->limit($limit, $start);}
+        $this->db->limit($limit, $start);
         $query = $this->db->get();
         return $query;
     }

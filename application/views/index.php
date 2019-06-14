@@ -7,7 +7,7 @@ $statefilter = "
 <div class='row' id='filter'>
 <div class='col-lg-4'>
 <label for='state-filter'><h5>Filter by State</h5></label>
-<select class ='form-control .col-sm-*' id='filter-state' id ='filter-state' onchange='filterLegByState()'>
+<select class ='form-control .col-sm-*' id='filter-state' id ='filter-state'>
 <option value=''></option>
 <option value='Abia'>Abia</option>
 <option value='Adamawa'>Adamawa</option>
@@ -159,7 +159,7 @@ else{$page_title="Assemblify";}
     </div>
 
     <div class="container loadbutton text-center">
-        <button id="load" type="button" class="btn-md btn-light">Load More</button>
+        <button id="load-more" type="button" class="btn-md btn-light">Load More</button>
     </div>
 	
 <footer class="footer">
@@ -172,12 +172,10 @@ else{$page_title="Assemblify";}
 <script>
   var filter_state ='';
   var fetch_url=""
-  function filterLegByState(){
-    filter_state =$("#filter-state option:selected").val();
-    fetch_url ="<?php echo base_url(); ?>legislators/fetch/<?php echo $source.'/'.$filter.'/'?>"+filter_state ;
-  }
 
   $(document).ready(function(){
+
+    //initialising values for fetching data such aslimits and fetching url based on the link that led to the page e.g view bills or view legislators
     var start = 0;
     var action = 'inactive';
     var source = '<?php echo $source;?>';
@@ -187,7 +185,7 @@ else{$page_title="Assemblify";}
     else{ fetch_url ="<?php echo base_url(); ?>Bills/AllBills/<?php echo $source.'/'.$filter;?>"; var limit = 8;}
     
    
-
+    //creates empty space before fetched data is displayed
     function lazzy_loader(limit)
     {
       var output = '';
@@ -200,10 +198,9 @@ else{$page_title="Assemblify";}
       }
       $('#load_data_message').html(output);
     }
-
     lazzy_loader(limit);
     
-     
+    //loads the appropriate data by calling the controller with the link assigned to 'fetch_url' 
     function load_data(limit, start)
     {
       $.ajax({
@@ -216,7 +213,7 @@ else{$page_title="Assemblify";}
           if(data == '')
           {
             $('#load_data_message').html('<h6 style="text-align:center">there is nothing to load</h6>');
-              $("#load").hide();
+              $("#load-more").hide();
             action = 'active';
           }
           else
@@ -235,31 +232,31 @@ else{$page_title="Assemblify";}
       load_data(limit, start);
     }
 
-      
-    $("#load").click(function(e) {
-      {
-        lazzy_loader(limit);
-        action = 'active';
+    //calls loadData with the appropriate start and limit values, 
+    //which decide whether fresh data is loaded, or data loading is continued from a previous point.
+    function callLoad(filtered){
+      lazzy_loader(limit);
+      action = 'active';
+      if (filtered!=true){
         start = start + limit;
-        setTimeout(function(){
-          load_data(limit, start);
-        }, 1000);
       }
-    });
-
-    $("#filter-state").click(function(e) {
+      else start =0;
+      load_data(limit, start);
+    }
+      
+    //when load more button is clicked
+    $("#load-more").click(function(e) {
       {
-        filterLegByState()
-        $('#load_data').innerHTML ="";
-        lazzy_loader(limit);
-        action = 'active';
-        start = 0;
-        setTimeout(function(){
-          load_data(limit, start);
-        }, 1000);
-      }
-    });
+        callLoad(false);
+    }})
 
+    //when a state is chosen as a filter in the view leislators page
+    $("#filter-state").change(function(e) {
+      filter_state =$("#filter-state option:selected").val();
+      fetch_url ="<?php echo base_url(); ?>legislators/fetch/<?php echo $source.'/'.$filter.'/'?>"+filter_state ;
+      $('#load_data').html('');
+      callLoad(true);
+      });
   });
 </script>
 </html>

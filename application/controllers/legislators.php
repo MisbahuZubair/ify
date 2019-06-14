@@ -12,9 +12,10 @@ class legislators extends CI_Controller {
         $this->load->view('index', $data);                    
 	}
     
-    public function fetch($source, $filter,$state="")
+    public function fetch($source, $filter, $state="")
     {
         $output = '';
+        $state = urldecode($state);
         $this->load->model('legislators_Model');
         $data = $this->legislators_Model->fetch_AllLegislators($this->input->post('limit'), $this->input->post('start'), $filter,$state);
         if($data->num_rows() > 0)   
